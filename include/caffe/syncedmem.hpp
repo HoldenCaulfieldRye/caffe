@@ -1,11 +1,10 @@
-// Copyright 2014 BVLC and contributors.
-
 #ifndef CAFFE_SYNCEDMEM_HPP_
 #define CAFFE_SYNCEDMEM_HPP_
 
 #include <cstdlib>
 
 #include "caffe/common.hpp"
+#include "caffe/util/math_functions.hpp"
 
 namespace caffe {
 
@@ -32,6 +31,12 @@ inline void CaffeFreeHost(void* ptr) {
 }
 
 
+/**
+ * @brief Manages memory allocation and synchronization between the host (CPU)
+ *        and device (GPU).
+ *
+ * TODO(dox): more thorough description.
+ */
 class SyncedMemory {
  public:
   SyncedMemory()

@@ -1,20 +1,16 @@
-// Copyright 2014 BVLC and contributors.
-
 #include <algorithm>
 #include <vector>
 
 #include "caffe/layer.hpp"
-#include "caffe/vision_layers.hpp"
 #include "caffe/util/math_functions.hpp"
-
-using std::max;
+#include "caffe/vision_layers.hpp"
 
 namespace caffe {
 
 template <typename Dtype>
-void PowerLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
+void PowerLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       vector<Blob<Dtype>*>* top) {
-  NeuronLayer<Dtype>::SetUp(bottom, top);
+  NeuronLayer<Dtype>::LayerSetUp(bottom, top);
   power_ = this->layer_param_.power_param().power();
   scale_ = this->layer_param_.power_param().scale();
   shift_ = this->layer_param_.power_param().shift();
@@ -23,7 +19,7 @@ void PowerLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
 
 // Compute y = (shift + scale * x)^power
 template <typename Dtype>
-Dtype PowerLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+void PowerLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     vector<Blob<Dtype>*>* top) {
   Dtype* top_data = (*top)[0]->mutable_cpu_data();
   const int count = bottom[0]->count();
@@ -31,7 +27,7 @@ Dtype PowerLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   if (diff_scale_ == Dtype(0)) {
     Dtype value = (power_ == 0) ? Dtype(1) : pow(shift_, power_);
     caffe_set(count, value, top_data);
-    return Dtype(0);
+    return;
   }
   const Dtype* bottom_data = bottom[0]->cpu_data();
   caffe_copy(count, bottom_data, top_data);
@@ -44,14 +40,13 @@ Dtype PowerLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   if (power_ != Dtype(1)) {
     caffe_powx(count, top_data, power_, top_data);
   }
-  return Dtype(0);
 }
 
 template <typename Dtype>
 void PowerLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
-    const bool propagate_down,
+    const vector<bool>& propagate_down,
     vector<Blob<Dtype>*>* bottom) {
-  if (propagate_down) {
+  if (propagate_down[0]) {
     Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
     const int count = (*bottom)[0]->count();
     const Dtype* top_diff = top[0]->cpu_diff();
@@ -98,6 +93,10 @@ void PowerLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     }
   }
 }
+
+#ifdef CPU_ONLY
+STUB_GPU(PowerLayer);
+#endif
 
 INSTANTIATE_CLASS(PowerLayer);
 

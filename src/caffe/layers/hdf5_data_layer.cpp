@@ -1,4 +1,3 @@
-// Copyright 2014 BVLC and contributors.
 /*
 TODO:
 - load file in a separate thread ("prefetch")
@@ -7,13 +6,13 @@ TODO:
   :: don't forget to update hdf5_daa_layer.cu accordingly
 - add ability to shuffle filenames if flag is set
 */
-#include <stdint.h>
+#include <fstream>  // NOLINT(readability/streams)
 #include <string>
 #include <vector>
-#include <fstream>  // NOLINT(readability/streams)
 
 #include "hdf5.h"
 #include "hdf5_hl.h"
+#include "stdint.h"
 
 #include "caffe/layer.hpp"
 #include "caffe/util/io.hpp"
@@ -45,16 +44,14 @@ void HDF5DataLayer<Dtype>::LoadHDF5FileData(const char* filename) {
     file_id, "label", MIN_LABEL_DIM, MAX_LABEL_DIM, &label_blob_);
 
   herr_t status = H5Fclose(file_id);
+  CHECK_GE(status, 0) << "Failed to close HDF5 file " << filename;
   CHECK_EQ(data_blob_.num(), label_blob_.num());
   LOG(INFO) << "Successully loaded " << data_blob_.num() << " rows";
 }
 
 template <typename Dtype>
-void HDF5DataLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
+void HDF5DataLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       vector<Blob<Dtype>*>* top) {
-  CHECK_EQ(bottom.size(), 0) << "HDF5DataLayer takes no input blobs.";
-  CHECK_EQ(top->size(), 2) << "HDF5DataLayer takes two blobs as output.";
-
   // Read the source to parse the filenames.
   const string& source = this->layer_param_.hdf5_data_param().source();
   LOG(INFO) << "Loading filename from " << source;
@@ -78,16 +75,16 @@ void HDF5DataLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
   // Reshape blobs.
   const int batch_size = this->layer_param_.hdf5_data_param().batch_size();
   (*top)[0]->Reshape(batch_size, data_blob_.channels(),
-                     data_blob_.width(), data_blob_.height());
+                     data_blob_.height(), data_blob_.width());
   (*top)[1]->Reshape(batch_size, label_blob_.channels(),
-                     label_blob_.width(), label_blob_.height());
+                     label_blob_.height(), label_blob_.width());
   LOG(INFO) << "output data size: " << (*top)[0]->num() << ","
       << (*top)[0]->channels() << "," << (*top)[0]->height() << ","
       << (*top)[0]->width();
 }
 
 template <typename Dtype>
-Dtype HDF5DataLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+void HDF5DataLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       vector<Blob<Dtype>*>* top) {
   const int batch_size = this->layer_param_.hdf5_data_param().batch_size();
   const int data_count = (*top)[0]->count() / (*top)[0]->num();
@@ -105,20 +102,17 @@ Dtype HDF5DataLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       }
       current_row_ = 0;
     }
-    memcpy(&(*top)[0]->mutable_cpu_data()[i * data_count],
-           &data_blob_.cpu_data()[current_row_ * data_count],
-           sizeof(Dtype) * data_count);
-    memcpy(&(*top)[1]->mutable_cpu_data()[i * label_data_count],
-            &label_blob_.cpu_data()[current_row_ * label_data_count],
-            sizeof(Dtype) * label_data_count);
+    caffe_copy(data_count, &data_blob_.cpu_data()[current_row_ * data_count],
+               &(*top)[0]->mutable_cpu_data()[i * data_count]);
+    caffe_copy(label_data_count,
+               &label_blob_.cpu_data()[current_row_ * label_data_count],
+               &(*top)[1]->mutable_cpu_data()[i * label_data_count]);
   }
-  return Dtype(0.);
 }
 
-// The backward operations are dummy - they do not carry any computation.
-template <typename Dtype>
-void HDF5DataLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
-      const bool propagate_down, vector<Blob<Dtype>*>* bottom) { }
+#ifdef CPU_ONLY
+STUB_GPU_FORWARD(HDF5DataLayer, Forward);
+#endif
 
 INSTANTIATE_CLASS(HDF5DataLayer);
 

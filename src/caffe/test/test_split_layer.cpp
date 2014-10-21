@@ -1,27 +1,26 @@
-// Copyright 2014 BVLC and contributors.
-
 #include <cstring>
 #include <string>
 #include <vector>
 
-#include "cuda_runtime.h"
 #include "google/protobuf/text_format.h"
 #include "gtest/gtest.h"
+
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
 #include "caffe/filler.hpp"
-#include "caffe/vision_layers.hpp"
-#include "caffe/test/test_gradient_check_util.hpp"
+#include "caffe/proto/caffe.pb.h"
 #include "caffe/util/insert_splits.hpp"
+#include "caffe/vision_layers.hpp"
 
 #include "caffe/test/test_caffe_main.hpp"
+#include "caffe/test/test_gradient_check_util.hpp"
 
 namespace caffe {
 
-extern cudaDeviceProp CAFFE_TEST_CUDA_PROP;
+template <typename TypeParam>
+class SplitLayerTest : public MultiDeviceTest<TypeParam> {
+  typedef typename TypeParam::Dtype Dtype;
 
-template <typename Dtype>
-class SplitLayerTest : public ::testing::Test {
  protected:
   SplitLayerTest()
       : blob_bottom_(new Blob<Dtype>(2, 3, 6, 5)),
@@ -47,12 +46,12 @@ class SplitLayerTest : public ::testing::Test {
   vector<Blob<Dtype>*> blob_top_vec_;
 };
 
-typedef ::testing::Types<float, double> Dtypes;
-TYPED_TEST_CASE(SplitLayerTest, Dtypes);
+TYPED_TEST_CASE(SplitLayerTest, TestDtypesAndDevices);
 
 TYPED_TEST(SplitLayerTest, TestSetup) {
+  typedef typename TypeParam::Dtype Dtype;
   LayerParameter layer_param;
-  SplitLayer<TypeParam> layer(layer_param);
+  SplitLayer<Dtype> layer(layer_param);
   layer.SetUp(this->blob_bottom_vec_, &(this->blob_top_vec_));
   EXPECT_EQ(this->blob_top_a_->num(), 2);
   EXPECT_EQ(this->blob_top_a_->channels(), 3);
@@ -64,92 +63,24 @@ TYPED_TEST(SplitLayerTest, TestSetup) {
   EXPECT_EQ(this->blob_top_b_->width(), 5);
 }
 
-TYPED_TEST(SplitLayerTest, TestCPU) {
+TYPED_TEST(SplitLayerTest, Test) {
+  typedef typename TypeParam::Dtype Dtype;
   LayerParameter layer_param;
-  SplitLayer<TypeParam> layer(layer_param);
-  Caffe::set_mode(Caffe::CPU);
+  SplitLayer<Dtype> layer(layer_param);
   layer.SetUp(this->blob_bottom_vec_, &(this->blob_top_vec_));
   layer.Forward(this->blob_bottom_vec_, &(this->blob_top_vec_));
   for (int i = 0; i < this->blob_bottom_->count(); ++i) {
-    TypeParam bottom_value = this->blob_bottom_->cpu_data()[i];
+    Dtype bottom_value = this->blob_bottom_->cpu_data()[i];
     EXPECT_EQ(bottom_value, this->blob_top_a_->cpu_data()[i]);
     EXPECT_EQ(bottom_value, this->blob_top_b_->cpu_data()[i]);
   }
 }
 
-TYPED_TEST(SplitLayerTest, TestGPU) {
+TYPED_TEST(SplitLayerTest, TestGradient) {
+  typedef typename TypeParam::Dtype Dtype;
   LayerParameter layer_param;
-  SplitLayer<TypeParam> layer(layer_param);
-  Caffe::set_mode(Caffe::GPU);
-  layer.SetUp(this->blob_bottom_vec_, &(this->blob_top_vec_));
-  layer.Forward(this->blob_bottom_vec_, &(this->blob_top_vec_));
-  for (int i = 0; i < this->blob_bottom_->count(); ++i) {
-    TypeParam bottom_value = this->blob_bottom_->cpu_data()[i];
-    EXPECT_EQ(bottom_value, this->blob_top_a_->cpu_data()[i]);
-    EXPECT_EQ(bottom_value, this->blob_top_b_->cpu_data()[i]);
-  }
-}
-
-TYPED_TEST(SplitLayerTest, TestCPUInPlace) {
-  LayerParameter layer_param;
-  SplitLayer<TypeParam> layer(layer_param);
-  Caffe::set_mode(Caffe::CPU);
-  this->blob_top_vec_[0] = this->blob_bottom_vec_[0];
-  layer.SetUp(this->blob_bottom_vec_, &(this->blob_top_vec_));
-  layer.Forward(this->blob_bottom_vec_, &(this->blob_top_vec_));
-  for (int i = 0; i < this->blob_bottom_->count(); ++i) {
-    TypeParam bottom_value = this->blob_bottom_->cpu_data()[i];
-    EXPECT_EQ(bottom_value, this->blob_top_b_->cpu_data()[i]);
-  }
-}
-
-TYPED_TEST(SplitLayerTest, TestGPUInPlace) {
-  LayerParameter layer_param;
-  SplitLayer<TypeParam> layer(layer_param);
-  Caffe::set_mode(Caffe::GPU);
-  this->blob_top_vec_[0] = this->blob_bottom_vec_[0];
-  layer.SetUp(this->blob_bottom_vec_, &(this->blob_top_vec_));
-  layer.Forward(this->blob_bottom_vec_, &(this->blob_top_vec_));
-  for (int i = 0; i < this->blob_bottom_->count(); ++i) {
-    TypeParam bottom_value = this->blob_bottom_->cpu_data()[i];
-    EXPECT_EQ(bottom_value, this->blob_top_b_->cpu_data()[i]);
-  }
-}
-
-TYPED_TEST(SplitLayerTest, TestCPUGradient) {
-  LayerParameter layer_param;
-  Caffe::set_mode(Caffe::CPU);
-  SplitLayer<TypeParam> layer(layer_param);
-  GradientChecker<TypeParam> checker(1e-2, 1e-2);
-  checker.CheckGradientEltwise(&layer, &(this->blob_bottom_vec_),
-      &(this->blob_top_vec_));
-}
-
-TYPED_TEST(SplitLayerTest, TestGPUGradient) {
-  LayerParameter layer_param;
-  Caffe::set_mode(Caffe::GPU);
-  SplitLayer<TypeParam> layer(layer_param);
-  GradientChecker<TypeParam> checker(1e-2, 1e-2);
-  checker.CheckGradientEltwise(&layer, &(this->blob_bottom_vec_),
-      &(this->blob_top_vec_));
-}
-
-TYPED_TEST(SplitLayerTest, TestCPUGradientInPlace) {
-  LayerParameter layer_param;
-  Caffe::set_mode(Caffe::CPU);
-  SplitLayer<TypeParam> layer(layer_param);
-  GradientChecker<TypeParam> checker(1e-2, 1e-2);
-  this->blob_top_vec_[0] = this->blob_bottom_vec_[0];
-  checker.CheckGradientEltwise(&layer, &(this->blob_bottom_vec_),
-      &(this->blob_top_vec_));
-}
-
-TYPED_TEST(SplitLayerTest, TestGPUGradientInPlace) {
-  LayerParameter layer_param;
-  Caffe::set_mode(Caffe::GPU);
-  SplitLayer<TypeParam> layer(layer_param);
-  GradientChecker<TypeParam> checker(1e-2, 1e-2);
-  this->blob_top_vec_[0] = this->blob_bottom_vec_[0];
+  SplitLayer<Dtype> layer(layer_param);
+  GradientChecker<Dtype> checker(1e-2, 1e-2);
   checker.CheckGradientEltwise(&layer, &(this->blob_bottom_vec_),
       &(this->blob_top_vec_));
 }
@@ -169,11 +100,7 @@ class SplitLayerInsertionTest : public ::testing::Test {
     CHECK(google::protobuf::TextFormat::ParseFromString(
         output_param_string, &expected_output_param));
     NetParameter actual_output_param;
-<<<<<<< HEAD
     InsertSplits(input_param, &actual_output_param);
-=======
-    insert_splits(input_param, &actual_output_param);
->>>>>>> change \" in test_split_layer to ' for readability
     EXPECT_EQ(expected_output_param.DebugString(),
         actual_output_param.DebugString());
     // Also test idempotence.
@@ -188,41 +115,20 @@ TEST_F(SplitLayerInsertionTest, TestNoInsertion1) {
   const string& input_proto =
       "name: 'TestNetwork' "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data' "
       "  type: DATA "
-=======
-      "  layer { "
-      "    name: 'data' "
-      "    type: 'data' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  top: 'data' "
       "  top: 'label' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'innerprod' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'data' "
       "  top: 'innerprod' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'loss' "
       "  type: SOFTMAX_LOSS "
-=======
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'softmax_with_loss' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'innerprod' "
       "  bottom: 'label' "
       "} ";
@@ -233,60 +139,31 @@ TEST_F(SplitLayerInsertionTest, TestNoInsertion2) {
   const string& input_proto =
       "name: 'TestNetwork' "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data' "
       "  type: DATA "
-=======
-      "  layer { "
-      "    name: 'data' "
-      "    type: 'data' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  top: 'data' "
       "  top: 'label' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data_split' "
       "  type: SPLIT "
-=======
-      "  layer { "
-      "    name: 'data_split' "
-      "    type: 'split' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'data' "
       "  top: 'data_split_0' "
       "  top: 'data_split_1' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod1' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'innerprod1' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'data_split_0' "
       "  top: 'innerprod1' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod2' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'innerprod2' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'data_split_1' "
       "  top: 'innerprod2' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'loss' "
       "  type: EUCLIDEAN_LOSS "
       "  bottom: 'innerprod1' "
@@ -303,10 +180,12 @@ TEST_F(SplitLayerInsertionTest, TestNoInsertionImageNet) {
       "  type: DATA "
       "  data_param { "
       "    source: '/home/jiayq/Data/ILSVRC12/train-leveldb' "
-      "    mean_file: '/home/jiayq/Data/ILSVRC12/image_mean.binaryproto' "
       "    batch_size: 256 "
+      "  } "
+      "  transform_param { "
       "    crop_size: 227 "
       "    mirror: true "
+      "    mean_file: '/home/jiayq/Data/ILSVRC12/image_mean.binaryproto' "
       "  } "
       "  top: 'data' "
       "  top: 'label' "
@@ -612,14 +491,6 @@ TEST_F(SplitLayerInsertionTest, TestNoInsertionImageNet) {
       "  type: SOFTMAX_LOSS "
       "  bottom: 'fc8' "
       "  bottom: 'label' "
-=======
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
-      "  bottom: 'innerprod1' "
-      "  bottom: 'innerprod2' "
->>>>>>> change \" in test_split_layer to ' for readability
       "} ";
   this->RunInsertionTest(input_proto, input_proto);
 }
@@ -628,20 +499,12 @@ TEST_F(SplitLayerInsertionTest, TestNoInsertionWithInPlace) {
   const string& input_proto =
       "name: 'TestNetwork' "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data' "
       "  type: DATA "
-=======
-      "  layer { "
-      "    name: 'data' "
-      "    type: 'data' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  top: 'data' "
       "  top: 'label' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod' "
       "  type: INNER_PRODUCT "
       "  bottom: 'data' "
@@ -660,6 +523,135 @@ TEST_F(SplitLayerInsertionTest, TestNoInsertionWithInPlace) {
       "  bottom: 'label' "
       "} ";
   this->RunInsertionTest(input_proto, input_proto);
+}
+
+TEST_F(SplitLayerInsertionTest, TestLossInsertion) {
+  const string& input_proto =
+      "name: 'UnsharedWeightsNetwork' "
+      "force_backward: true "
+      "layers: { "
+      "  name: 'data' "
+      "  type: DUMMY_DATA "
+      "  dummy_data_param { "
+      "    num: 5 "
+      "    channels: 2 "
+      "    height: 3 "
+      "    width: 4 "
+      "    data_filler { "
+      "      type: 'gaussian' "
+      "      std: 0.01 "
+      "    } "
+      "  } "
+      "  top: 'data' "
+      "} "
+      "layers: { "
+      "  name: 'innerproduct1' "
+      "  type: INNER_PRODUCT "
+      "  inner_product_param { "
+      "    num_output: 10 "
+      "    bias_term: false "
+      "    weight_filler { "
+      "      type: 'gaussian' "
+      "      std: 10 "
+      "    } "
+      "  } "
+      "  param: 'unsharedweights1' "
+      "  bottom: 'data' "
+      "  top: 'innerproduct1' "
+      "  loss_weight: 2.5 "
+      "} "
+      "layers: { "
+      "  name: 'innerproduct2' "
+      "  type: INNER_PRODUCT "
+      "  inner_product_param { "
+      "    num_output: 10 "
+      "    bias_term: false "
+      "    weight_filler { "
+      "      type: 'gaussian' "
+      "      std: 10 "
+      "    } "
+      "  } "
+      "  param: 'unsharedweights2' "
+      "  bottom: 'data' "
+      "  top: 'innerproduct2' "
+      "} "
+      "layers: { "
+      "  name: 'loss' "
+      "  type: EUCLIDEAN_LOSS "
+      "  bottom: 'innerproduct1' "
+      "  bottom: 'innerproduct2' "
+      "} ";
+  const string& expected_output_proto =
+      "name: 'UnsharedWeightsNetwork' "
+      "force_backward: true "
+      "layers: { "
+      "  name: 'data' "
+      "  type: DUMMY_DATA "
+      "  dummy_data_param { "
+      "    num: 5 "
+      "    channels: 2 "
+      "    height: 3 "
+      "    width: 4 "
+      "    data_filler { "
+      "      type: 'gaussian' "
+      "      std: 0.01 "
+      "    } "
+      "  } "
+      "  top: 'data' "
+      "} "
+      "layers: { "
+      "  name: 'data_data_0_split' "
+      "  type: SPLIT "
+      "  bottom: 'data' "
+      "  top: 'data_data_0_split_0' "
+      "  top: 'data_data_0_split_1' "
+      "} "
+      "layers: { "
+      "  name: 'innerproduct1' "
+      "  type: INNER_PRODUCT "
+      "  inner_product_param { "
+      "    num_output: 10 "
+      "    bias_term: false "
+      "    weight_filler { "
+      "      type: 'gaussian' "
+      "      std: 10 "
+      "    } "
+      "  } "
+      "  param: 'unsharedweights1' "
+      "  bottom: 'data_data_0_split_0' "
+      "  top: 'innerproduct1' "
+      "} "
+      "layers: { "
+      "  name: 'innerproduct1_innerproduct1_0_split' "
+      "  type: SPLIT "
+      "  bottom: 'innerproduct1' "
+      "  top: 'innerproduct1_innerproduct1_0_split_0' "
+      "  top: 'innerproduct1_innerproduct1_0_split_1' "
+      "  loss_weight: 2.5 "
+      "  loss_weight: 0 "
+      "} "
+      "layers: { "
+      "  name: 'innerproduct2' "
+      "  type: INNER_PRODUCT "
+      "  inner_product_param { "
+      "    num_output: 10 "
+      "    bias_term: false "
+      "    weight_filler { "
+      "      type: 'gaussian' "
+      "      std: 10 "
+      "    } "
+      "  } "
+      "  param: 'unsharedweights2' "
+      "  bottom: 'data_data_0_split_1' "
+      "  top: 'innerproduct2' "
+      "} "
+      "layers: { "
+      "  name: 'loss' "
+      "  type: EUCLIDEAN_LOSS "
+      "  bottom: 'innerproduct1_innerproduct1_0_split_1' "
+      "  bottom: 'innerproduct2' "
+      "} ";
+  this->RunInsertionTest(input_proto, expected_output_proto);
 }
 
 TEST_F(SplitLayerInsertionTest, TestInsertion) {
@@ -698,95 +690,32 @@ TEST_F(SplitLayerInsertionTest, TestInsertion) {
       "layers: { "
       "  name: 'loss2' "
       "  type: EUCLIDEAN_LOSS "
-=======
-      "  layer { "
-      "    name: 'innerprod1' "
-      "    type: 'inner_product' "
-      "  } "
-      "  bottom: 'data' "
-      "  top: 'innerprod1' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'innerprod2' "
-      "    type: 'inner_product' "
-      "  } "
-      "  bottom: 'data' "
-      "  top: 'innerprod2' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'innerprod3' "
-      "    type: 'inner_product' "
-      "  } "
-      "  bottom: 'data' "
-      "  top: 'innerprod3' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
-      "  bottom: 'innerprod1' "
-      "  bottom: 'innerprod2' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'innerprod2' "
       "  bottom: 'innerprod3' "
       "} ";
   const string& expected_output_proto =
       "name: 'TestNetwork' "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data' "
       "  type: DATA "
-=======
-      "  layer { "
-      "    name: 'data' "
-      "    type: 'data' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  top: 'data' "
       "  top: 'label' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data_data_0_split' "
       "  type: SPLIT "
       "  bottom: 'data' "
-      "  top: 'data' "
+      "  top: 'data_data_0_split_0' "
       "  top: 'data_data_0_split_1' "
       "  top: 'data_data_0_split_2' "
       "} "
       "layers: { "
       "  name: 'innerprod1' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'data_split' "
-      "    type: 'split' "
-      "  } "
-      "  bottom: 'data' "
-      "  top: 'data' "
-      "  top: 'data_split_1' "
-      "  top: 'data_split_2' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'innerprod1' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
-      "  bottom: 'data' "
+      "  bottom: 'data_data_0_split_0' "
       "  top: 'innerprod1' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod2' "
       "  type: INNER_PRODUCT "
       "  bottom: 'data_data_0_split_1' "
@@ -796,7 +725,7 @@ TEST_F(SplitLayerInsertionTest, TestInsertion) {
       "  name: 'innerprod2_innerprod2_0_split' "
       "  type: SPLIT "
       "  bottom: 'innerprod2' "
-      "  top: 'innerprod2' "
+      "  top: 'innerprod2_innerprod2_0_split_0' "
       "  top: 'innerprod2_innerprod2_0_split_1' "
       "} "
       "layers: { "
@@ -808,42 +737,10 @@ TEST_F(SplitLayerInsertionTest, TestInsertion) {
       "layers: { "
       "  name: 'loss1' "
       "  type: EUCLIDEAN_LOSS "
-=======
-      "  layer { "
-      "    name: 'innerprod2' "
-      "    type: 'inner_product' "
-      "  } "
-      "  bottom: 'data_split_1' "
-      "  top: 'innerprod2' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'innerprod2_split' "
-      "    type: 'split' "
-      "  } "
-      "  bottom: 'innerprod2' "
-      "  top: 'innerprod2' "
-      "  top: 'innerprod2_split_1' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'innerprod3' "
-      "    type: 'inner_product' "
-      "  } "
-      "  bottom: 'data_split_2' "
-      "  top: 'innerprod3' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'innerprod1' "
-      "  bottom: 'innerprod2' "
+      "  bottom: 'innerprod2_innerprod2_0_split_0' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'loss2' "
       "  type: EUCLIDEAN_LOSS "
       "  bottom: 'innerprod2_innerprod2_0_split_1' "
@@ -909,26 +806,26 @@ TEST_F(SplitLayerInsertionTest, TestInsertionTwoTop) {
       "  name: 'data_data_0_split' "
       "  type: SPLIT "
       "  bottom: 'data' "
-      "  top: 'data' "
+      "  top: 'data_data_0_split_0' "
       "  top: 'data_data_0_split_1' "
       "} "
       "layers: { "
       "  name: 'label_data_1_split' "
       "  type: SPLIT "
       "  bottom: 'label' "
-      "  top: 'label' "
+      "  top: 'label_data_1_split_0' "
       "  top: 'label_data_1_split_1' "
       "} "
       "layers: { "
       "  name: 'innerprod1' "
       "  type: INNER_PRODUCT "
-      "  bottom: 'data' "
+      "  bottom: 'data_data_0_split_0' "
       "  top: 'innerprod1' "
       "} "
       "layers: { "
       "  name: 'innerprod2' "
       "  type: INNER_PRODUCT "
-      "  bottom: 'label' "
+      "  bottom: 'label_data_1_split_0' "
       "  top: 'innerprod2' "
       "} "
       "layers: { "
@@ -954,14 +851,6 @@ TEST_F(SplitLayerInsertionTest, TestInsertionTwoTop) {
       "  type: EUCLIDEAN_LOSS "
       "  bottom: 'innerprod2' "
       "  bottom: 'innerprod4' "
-=======
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
-      "  bottom: 'innerprod2_split_1' "
-      "  bottom: 'innerprod3' "
->>>>>>> change \" in test_split_layer to ' for readability
       "} ";
   this->RunInsertionTest(input_proto, expected_output_proto);
 }
@@ -975,41 +864,20 @@ TEST_F(SplitLayerInsertionTest, TestInputInsertion) {
       "input_dim: 227 "
       "input_dim: 227 "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod1' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'innerprod1' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'data' "
       "  top: 'innerprod1' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod2' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'innerprod2' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'data' "
       "  top: 'innerprod2' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'loss' "
       "  type: EUCLIDEAN_LOSS "
-=======
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'innerprod1' "
       "  bottom: 'innerprod2' "
       "} ";
@@ -1021,36 +889,19 @@ TEST_F(SplitLayerInsertionTest, TestInputInsertion) {
       "input_dim: 227 "
       "input_dim: 227 "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'data_input_0_split' "
       "  type: SPLIT "
       "  bottom: 'data' "
-      "  top: 'data' "
+      "  top: 'data_input_0_split_0' "
       "  top: 'data_input_0_split_1' "
       "} "
       "layers: { "
       "  name: 'innerprod1' "
       "  type: INNER_PRODUCT "
-=======
-      "  layer { "
-      "    name: 'data_split' "
-      "    type: 'split' "
-      "  } "
-      "  bottom: 'data' "
-      "  top: 'data' "
-      "  top: 'data_split_1' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'innerprod1' "
-      "    type: 'inner_product' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
-      "  bottom: 'data' "
+      "  bottom: 'data_input_0_split_0' "
       "  top: 'innerprod1' "
       "} "
       "layers: { "
-<<<<<<< HEAD
       "  name: 'innerprod2' "
       "  type: INNER_PRODUCT "
       "  bottom: 'data_input_0_split_1' "
@@ -1059,20 +910,6 @@ TEST_F(SplitLayerInsertionTest, TestInputInsertion) {
       "layers: { "
       "  name: 'loss' "
       "  type: EUCLIDEAN_LOSS "
-=======
-      "  layer { "
-      "    name: 'innerprod2' "
-      "    type: 'inner_product' "
-      "  } "
-      "  bottom: 'data_split_1' "
-      "  top: 'innerprod2' "
-      "} "
-      "layers: { "
-      "  layer { "
-      "    name: 'loss' "
-      "    type: 'euclidean_loss' "
-      "  } "
->>>>>>> change \" in test_split_layer to ' for readability
       "  bottom: 'innerprod1' "
       "  bottom: 'innerprod2' "
       "} ";
@@ -1130,13 +967,13 @@ TEST_F(SplitLayerInsertionTest, TestWithInPlace) {
       "  name: 'data_data_0_split' "
       "  type: SPLIT "
       "  bottom: 'data' "
-      "  top: 'data' "
+      "  top: 'data_data_0_split_0' "
       "  top: 'data_data_0_split_1' "
       "} "
       "layers: { "
       "  name: 'innerprod1' "
       "  type: INNER_PRODUCT "
-      "  bottom: 'data' "
+      "  bottom: 'data_data_0_split_0' "
       "  top: 'innerprod1' "
       "} "
       "layers: { "
@@ -1149,13 +986,13 @@ TEST_F(SplitLayerInsertionTest, TestWithInPlace) {
       "  name: 'innerprod1_relu1_0_split' "
       "  type: SPLIT "
       "  bottom: 'innerprod1' "
-      "  top: 'innerprod1' "
+      "  top: 'innerprod1_relu1_0_split_0' "
       "  top: 'innerprod1_relu1_0_split_1' "
       "} "
       "layers: { "
       "  name: 'innerprod2' "
       "  type: INNER_PRODUCT "
-      "  bottom: 'innerprod1' "
+      "  bottom: 'innerprod1_relu1_0_split_0' "
       "  top: 'innerprod2' "
       "} "
       "layers: { "

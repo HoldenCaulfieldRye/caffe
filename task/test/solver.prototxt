@@ -1,0 +1,17 @@
+net: "task/test/train_val.prototxt"
+test_iter: 8
+test_interval: 5
+test_compute_loss: 1
+# lr for fine-tuning should be lower than when starting from scratch
+base_lr: 0.001
+lr_policy: "step"
+gamma: 0.9
+# stepsize should also be lower, as we're closer to being done
+stepsize: 50
+display: 1
+max_iter: 1
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 200
+snapshot_prefix: "task/test/woops"
+solver_mode: GPU

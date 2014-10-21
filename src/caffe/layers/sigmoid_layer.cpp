@@ -1,5 +1,3 @@
-// Copyright 2014 BVLC and contributors.
-
 #include <algorithm>
 #include <cmath>
 #include <vector>
@@ -15,7 +13,7 @@ inline Dtype sigmoid(Dtype x) {
 }
 
 template <typename Dtype>
-Dtype SigmoidLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+void SigmoidLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     vector<Blob<Dtype>*>* top) {
   const Dtype* bottom_data = bottom[0]->cpu_data();
   Dtype* top_data = (*top)[0]->mutable_cpu_data();
@@ -23,14 +21,13 @@ Dtype SigmoidLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   for (int i = 0; i < count; ++i) {
     top_data[i] = sigmoid(bottom_data[i]);
   }
-  return Dtype(0);
 }
 
 template <typename Dtype>
 void SigmoidLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
-    const bool propagate_down,
+    const vector<bool>& propagate_down,
     vector<Blob<Dtype>*>* bottom) {
-  if (propagate_down) {
+  if (propagate_down[0]) {
     const Dtype* top_data = top[0]->cpu_data();
     const Dtype* top_diff = top[0]->cpu_diff();
     Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
@@ -41,6 +38,10 @@ void SigmoidLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     }
   }
 }
+
+#ifdef CPU_ONLY
+STUB_GPU(SigmoidLayer);
+#endif
 
 INSTANTIATE_CLASS(SigmoidLayer);
 

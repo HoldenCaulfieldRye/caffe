@@ -1,10 +1,8 @@
-// Copyright 2014 BVLC and contributors.
-
 #include <vector>
 
 #include "caffe/layer.hpp"
-#include "caffe/vision_layers.hpp"
 #include "caffe/util/math_functions.hpp"
+#include "caffe/vision_layers.hpp"
 
 namespace caffe {
 
@@ -56,16 +54,17 @@ __global__ void LRNFillScale(const int nthreads, const Dtype* in,
 
 
 template <typename Dtype>
-Dtype LRNLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+void LRNLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
     vector<Blob<Dtype>*>* top) {
   switch (this->layer_param_.lrn_param().norm_region()) {
   case LRNParameter_NormRegion_ACROSS_CHANNELS:
-    return CrossChannelForward_gpu(bottom, top);
+    CrossChannelForward_gpu(bottom, top);
+    break;
   case LRNParameter_NormRegion_WITHIN_CHANNEL:
-    return WithinChannelForward(bottom, top);
+    WithinChannelForward(bottom, top);
+    break;
   default:
     LOG(FATAL) << "Unknown normalization region.";
-    return Dtype(0);
   }
 }
 
@@ -79,7 +78,7 @@ __global__ void LRNComputeOutput(const int nthreads, const Dtype* in,
 }
 
 template <typename Dtype>
-Dtype LRNLayer<Dtype>::CrossChannelForward_gpu(
+void LRNLayer<Dtype>::CrossChannelForward_gpu(
     const vector<Blob<Dtype>*>& bottom, vector<Blob<Dtype>*>* top) {
   // First, compute scale
   const Dtype* bottom_data = bottom[0]->gpu_data();
@@ -98,13 +97,12 @@ Dtype LRNLayer<Dtype>::CrossChannelForward_gpu(
   LRNComputeOutput<<<CAFFE_GET_BLOCKS(n_threads), CAFFE_CUDA_NUM_THREADS>>>(
       n_threads, bottom_data, scale_data, -beta_, top_data);
   CUDA_POST_KERNEL_CHECK;
-  return Dtype(0.);
 }
 
 
 template <typename Dtype>
 void LRNLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& top,
-    const bool propagate_down, vector<Blob<Dtype>*>* bottom) {
+    const vector<bool>& propagate_down, vector<Blob<Dtype>*>* bottom) {
   switch (this->layer_param_.lrn_param().norm_region()) {
   case LRNParameter_NormRegion_ACROSS_CHANNELS:
     CrossChannelBackward_gpu(top, propagate_down, bottom);
@@ -180,7 +178,7 @@ __global__ void LRNComputeDiff(const int nthreads, const Dtype* bottom_data,
 
 template <typename Dtype>
 void LRNLayer<Dtype>::CrossChannelBackward_gpu(
-    const vector<Blob<Dtype>*>& top, const bool propagate_down,
+    const vector<Blob<Dtype>*>& top, const vector<bool>& propagate_down,
     vector<Blob<Dtype>*>* bottom) {
   int n_threads = num_ * height_ * width_;
   // NOLINT_NEXT_LINE(whitespace/operators)

@@ -1,4 +1,3 @@
-// Copyright 2014 BVLC and contributors.
 //
 // This script converts the CIFAR dataset to the leveldb format used
 // by caffe to perform classification.
@@ -7,13 +6,13 @@
 // The CIFAR dataset could be downloaded at
 //    http://www.cs.toronto.edu/~kriz/cifar.html
 
-#include <google/protobuf/text_format.h>
-#include <glog/logging.h>
-#include <leveldb/db.h>
-
-#include <stdint.h>
 #include <fstream>  // NOLINT(readability/streams)
 #include <string>
+
+#include "glog/logging.h"
+#include "google/protobuf/text_format.h"
+#include "leveldb/db.h"
+#include "stdint.h"
 
 #include "caffe/proto/caffe.pb.h"
 
@@ -49,7 +48,7 @@ void convert_dataset(const string& input_folder, const string& output_folder) {
   LOG(INFO) << "Writing Training data";
   leveldb::DB* train_db;
   leveldb::Status status;
-  status = leveldb::DB::Open(options, output_folder + "/cifar-train-leveldb",
+  status = leveldb::DB::Open(options, output_folder + "/cifar10_train_leveldb",
       &train_db);
   CHECK(status.ok()) << "Failed to open leveldb.";
   for (int fileid = 0; fileid < kCIFARTrainBatches; ++fileid) {
@@ -72,7 +71,7 @@ void convert_dataset(const string& input_folder, const string& output_folder) {
 
   LOG(INFO) << "Writing Testing data";
   leveldb::DB* test_db;
-  CHECK(leveldb::DB::Open(options, output_folder + "/cifar-test-leveldb",
+  CHECK(leveldb::DB::Open(options, output_folder + "/cifar10_test_leveldb",
       &test_db).ok()) << "Failed to open leveldb.";
   // Open files
   std::ifstream data_file((input_folder + "/test_batch.bin").c_str(),

@@ -1,14 +1,30 @@
-// Copyright 2014 BVLC and contributors.
-
 #ifndef CAFFE_COMMON_HPP_
 #define CAFFE_COMMON_HPP_
 
 #include <boost/shared_ptr.hpp>
-#include <cublas_v2.h>
-#include <cuda.h>
-#include <curand.h>
-#include <driver_types.h>  // cuda driver types
+#include <gflags/gflags.h>
 #include <glog/logging.h>
+
+#include <cmath>
+#include <fstream>  // NOLINT(readability/streams)
+#include <iostream>  // NOLINT(readability/streams)
+#include <map>
+#include <set>
+#include <sstream>
+#include <string>
+#include <utility>  // pair
+#include <vector>
+
+#include "caffe/util/device_alternate.hpp"
+
+// gflags 2.1 issue: namespace google was changed to gflags without warning.
+// Luckily we will be able to use GFLAGS_GFAGS_H_ to detect if it is version
+// 2.1. If yes , we will add a temporary solution to redirect the namespace.
+// TODO(Yangqing): Once gflags solves the problem in a more elegant way, let's
+// remove the following hack.
+#ifndef GFLAGS_GFLAGS_H_
+namespace gflags = google;
+#endif  // GFLAGS_GFLAGS_H_
 
 // Disable the copy and assignment operator for a class.
 #define DISABLE_COPY_AND_ASSIGN(classname) \
@@ -25,48 +41,29 @@ private:\
 // is executed we will see a fatal log.
 #define NOT_IMPLEMENTED LOG(FATAL) << "Not Implemented Yet"
 
-// CUDA: various checks for different function calls.
-#define CUDA_CHECK(condition) \
-  /* Code block avoids redefinition of cudaError_t error */ \
-  do { \
-    cudaError_t error = condition; \
-    CHECK_EQ(error, cudaSuccess) << " " << cudaGetErrorString(error); \
-  } while (0)
-
-#define CUBLAS_CHECK(condition) \
-  do { \
-    cublasStatus_t status = condition; \
-    CHECK_EQ(status, CUBLAS_STATUS_SUCCESS) << " " \
-      << caffe::cublasGetErrorString(status); \
-  } while (0)
-
-#define CURAND_CHECK(condition) \
-  do { \
-    curandStatus_t status = condition; \
-    CHECK_EQ(status, CURAND_STATUS_SUCCESS) << " " \
-      << caffe::curandGetErrorString(status); \
-  } while (0)
-
-// CUDA: grid stride looping
-#define CUDA_KERNEL_LOOP(i, n) \
-  for (int i = blockIdx.x * blockDim.x + threadIdx.x; \
-       i < (n); \
-       i += blockDim.x * gridDim.x)
-
-// CUDA: check for error after kernel execution and exit loudly if there is one.
-#define CUDA_POST_KERNEL_CHECK CUDA_CHECK(cudaPeekAtLastError())
-
-// Define not supported status for pre-6.0 compatibility.
-#if CUDA_VERSION < 6000
-#define CUBLAS_STATUS_NOT_SUPPORTED 831486
-#endif
-
 namespace caffe {
 
 // We will use the boost shared_ptr instead of the new C++11 one mainly
 // because cuda does not work (at least now) well with C++11 features.
 using boost::shared_ptr;
 
+// Common functions and classes from std that caffe often uses.
+using std::fstream;
+using std::ios;
+using std::isnan;
+using std::iterator;
+using std::make_pair;
+using std::map;
+using std::ostringstream;
+using std::pair;
+using std::set;
+using std::string;
+using std::stringstream;
+using std::vector;
+
+// A global initialization function that you should call in your main function.
+// Currently it initializes google flags and google logging.
+void GlobalInit(int* pargc, char*** pargv);
 
 // A singleton class to hold common caffe stuff, such as the handler that
 // caffe is going to use for cublas, curand, etc.
@@ -104,10 +101,12 @@ class Caffe {
     }
     return *(Get().random_generator_);
   }
+#ifndef CPU_ONLY
   inline static cublasHandle_t cublas_handle() { return Get().cublas_handle_; }
   inline static curandGenerator_t curand_generator() {
     return Get().curand_generator_;
   }
+#endif
 
   // Returns the mode: running on CPU or GPU.
   inline static Brew mode() { return Get().mode_; }
@@ -130,8 +129,10 @@ class Caffe {
   static void DeviceQuery();
 
  protected:
+#ifndef CPU_ONLY
   cublasHandle_t cublas_handle_;
   curandGenerator_t curand_generator_;
+#endif
   shared_ptr<RNG> random_generator_;
 
   Brew mode_;
@@ -144,25 +145,6 @@ class Caffe {
 
   DISABLE_COPY_AND_ASSIGN(Caffe);
 };
-
-// NVIDIA_CUDA-5.5_Samples/common/inc/helper_cuda.h
-const char* cublasGetErrorString(cublasStatus_t error);
-const char* curandGetErrorString(curandStatus_t error);
-
-// CUDA: thread number configuration.
-// Use 1024 threads per block, which requires cuda sm_2x or above,
-// or fall back to attempt compatibility (best of luck to you).
-#if __CUDA_ARCH__ >= 200
-    const int CAFFE_CUDA_NUM_THREADS = 1024;
-#else
-    const int CAFFE_CUDA_NUM_THREADS = 512;
-#endif
-
-// CUDA: number of blocks for threads.
-inline int CAFFE_GET_BLOCKS(const int N) {
-  return (N + CAFFE_CUDA_NUM_THREADS - 1) / CAFFE_CUDA_NUM_THREADS;
-}
-
 
 }  // namespace caffe
 

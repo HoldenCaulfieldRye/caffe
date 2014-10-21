@@ -1,0 +1,1 @@
+./setup.py --task=clamp --box=blue --learn=3-10-14
