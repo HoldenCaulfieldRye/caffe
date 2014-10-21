@@ -1,5 +1,5 @@
 net: "task/clamp/train_val.prototxt"
-test_iter: 8
+test_iter: 16
 test_interval: 1
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch

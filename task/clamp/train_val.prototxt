@@ -5,14 +5,14 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data2/clamp/train.txt"
-    batch_size: 256
+    source: "data/clamp/train.txt"
+    batch_size: 128
     new_height: 256
     new_width: 256
   }
   transform_param {
     crop_size: 227
-    mean_file: "/homes/ad6813/data2/controlpoint_mean_256-227.binaryproto"
+    mean_file: "/homes/ad6813/data/controlpoint_mean_256-227.binaryproto"
     mirror: true
   }
   include: { phase: TRAIN }
@@ -24,13 +24,13 @@ layers {
   top: "label"
   image_data_param {
     source: "data/clamp/val.txt"
-    batch_size: 251
+    batch_size: 126
     new_height: 256
     new_width: 256
   }
   transform_param {
     crop_size: 227
-    mean_file: "/homes/ad6813/data2/controlpoint_mean_256-227.binaryproto"
+    mean_file: "/homes/ad6813/data/controlpoint_mean_256-227.binaryproto"
     mirror: false
   }
   include: { phase: TEST }
