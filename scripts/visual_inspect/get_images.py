@@ -62,7 +62,7 @@ def sample_from_label(Queries, data_dir):
 if __name__ == '__main__':
   import sys
 
-  data_dir = '/data/ad6813/pipe-data/Bluebox' # None
+  data_dir = '/data2/ad6813/pipe-data/Bluebox' # None
 
   # for arg in sys.argv:
   #   if "data-dir=" in arg:

@@ -28,18 +28,18 @@
 # USE_FIRST_LOCAL_DICT=Y
 
 # # 1. & 2. get labels, choose which ones to learn, symlink dataset
-# source /data/ad6813/caffe/python/venv/bin/activate
-# if [ ! -d /data/ad6813/caffe/data_info/$BASE_NAME ]
+# source /data2/ad6813/caffe/python/venv/bin/activate
+# if [ ! -d /data2/ad6813/caffe/data_info/$BASE_NAME ]
 # then
-#     mkdir /data/ad6813/caffe/data_info/$BASE_NAME
+#     mkdir /data2/ad6813/caffe/data_info/$BASE_NAME
 # fi
-# if [ ! -d /data/ad6813/caffe/data/$BASE_NAME ]
+# if [ ! -d /data2/ad6813/caffe/data/$BASE_NAME ]
 # then
-#     mkdir /data/ad6813/caffe/data/$BASE_NAME
+#     mkdir /data2/ad6813/caffe/data/$BASE_NAME
 # fi
 # echo "main and move_to_dirs..."
 # # NUM_OUTPUT is number of classes to learn
-# NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=N)
+# NUM_OUTPUT=$(python setup_data.py data-dir=/data2/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data2/ad6813/caffe/data_info/$TASK_NAME to-dir=/data2/ad6813/caffe/data/$TASK_NAME bad-min=N)
 # echo "number of output neurons: "$NUM_OUPUT
 
 
@@ -64,7 +64,7 @@ echo "Running setup_rest with BASE_NAME:"$BASE_NAME" FULL_NAME:"$FULL_NAME" and 
 cd ../data_preparation
 
 # 1. resize images
-cd /data/ad6813/caffe/data/$BASE_NAME
+cd /data2/ad6813/caffe/data/$BASE_NAME
 CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
 if [ $CMD != "256x256" ]
 then
@@ -76,10 +76,10 @@ fi
 
 
 # 2. download alexnet
-if [ -f /data/ad6813/caffe/models/alexnet/caffe_alexnet_model ]
+if [ -f /data2/ad6813/caffe/models/alexnet/caffe_alexnet_model ]
 then echo "alexnet already downloaded"
 else
-    cd /data/ad6813/caffe/models/alexnet
+    cd /data2/ad6813/caffe/models/alexnet
     ./get_caffe_alexnet_model.sh
     echo "repeat to check correct download:"
     ./get_caffe_alexnet_model.sh
@@ -88,7 +88,7 @@ fi
 
 
 # 3. create leveldb inputs
-cd /data/ad6813/caffe/models
+cd /data2/ad6813/caffe/models
 
 # first make sure exists reference dir from which to cp and sed
 if [ -d clampdetBase ]
@@ -131,7 +131,7 @@ echo "computing mean image..."
 './make_'$BASE_NAME'_mean.sh'
 if [ ! -f '../../data/'$BASE_NAME'/'$BASE_NAME'_mean.binaryproto' ]
 then
-    scp graphic06.doc.ic.ac.uk:/data/ad6813/caffe/data/clampdet/clampdet_mean.binaryproto '../../data/'$BASE_NAME'/'$BASE_NAME'_mean.binaryproto'
+    scp graphic06.doc.ic.ac.uk:/data2/ad6813/caffe/data/clampdet/clampdet_mean.binaryproto '../../data/'$BASE_NAME'/'$BASE_NAME'_mean.binaryproto'
 fi
 
 

@@ -223,11 +223,11 @@ if __name__ == '__main__':
   if not "task" in optDict:
     raise Exception("Need to specify --task flag")
   task = optDict["task"]
-  data_info = "/data/ad6813/caffe/data/" + task
+  data_info = "/data2/ad6813/caffe/data/" + task
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nRed, Blue, RedBlue")
-  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
+  data_dir = "/data2/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")

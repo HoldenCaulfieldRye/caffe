@@ -1,36 +1,34 @@
-name: "ClampCaffeNet"
+name: "CaffeNet"
 layers {
   name: "data"
-  type: IMAGE_DATA
+  type: DATA
   top: "data"
   top: "label"
-  image_data_param {
-    source: "data2/clamp/train.txt"
+  data_param {
+    source: "examples/imagenet/ilsvrc12_train_lmdb"
+    backend: LMDB
     batch_size: 256
-    new_height: 256
-    new_width: 256
   }
   transform_param {
     crop_size: 227
-    mean_file: "/homes/ad6813/data2/controlpoint_mean_256-227.binaryproto"
+    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
     mirror: true
   }
   include: { phase: TRAIN }
 }
 layers {
   name: "data"
-  type: IMAGE_DATA
+  type: DATA
   top: "data"
   top: "label"
-  image_data_param {
-    source: "data/clamp/val.txt"
-    batch_size: 251
-    new_height: 256
-    new_width: 256
+  data_param {
+    source: "examples/imagenet/ilsvrc12_val_lmdb"
+    backend: LMDB
+    batch_size: 50
   }
   transform_param {
     crop_size: 227
-    mean_file: "/homes/ad6813/data2/controlpoint_mean_256-227.binaryproto"
+    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
     mirror: false
   }
   include: { phase: TEST }
@@ -279,7 +277,6 @@ layers {
   type: INNER_PRODUCT
   bottom: "fc6"
   top: "fc7"
-  # Note that blobs_lr can be set to 0 to disable any fine-tuning of this, and any other, layer
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -312,17 +309,16 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_clamp"
-  # blobs_lr is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  top: "fc8"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
-    num_output: 2
+    num_output: 1000
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -333,18 +329,18 @@ layers {
     }
   }
 }
-
-layers {
-  name: "loss"
-  type: MULTINOMIAL_LOGISTIC_LOSS
-  bottom: "fc8_clamp"
-  bottom: "label"
-}
 layers {
   name: "accuracy"
   type: ACCURACY
-  bottom: "fc8_clamp"
+  bottom: "fc8"
   bottom: "label"
   top: "accuracy"
   include: { phase: TEST }
+}
+layers {
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "fc8"
+  bottom: "label"
+  top: "loss"
 }
