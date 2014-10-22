@@ -186,9 +186,9 @@ def dump_to_files(Keep, data_info, task, data_dir):
   ''' This function "trusts" you. It will overwrite data lookup 
   files. '''
   dump = []
-  part = [0, 0.89, 0.94, 1] # partition into train val test
-  dump_fnames = ['train.txt','val.txt','test.txt']
-  for i in xrange(3):
+  part = [0, 0.95, 1] # partition into train val test
+  dump_fnames = ['train.txt','val.txt'] #,'test.txt']
+  for i in xrange(len(dump_fnames)):
     dump.append([])
     for [key,num] in [('Default',0),(task,1)]:
       l = len(Keep[key])

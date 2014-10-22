@@ -7,7 +7,7 @@ import cPickle as pickle
 if __name__ == '__main__':
 
   task = 'scrape'
-  avoid_flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
+  avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling']
   classification = ' 0'
   using_pickle = True
   add_num = 20000 # how many imgs to add
@@ -33,7 +33,7 @@ if __name__ == '__main__':
         content = open(oj(redbox,total[i]),'r').readlines()
         content = [line.strip() for line in content]
         if all([len(content) > 0,
-                avoid_flag not in content,
+                len([flag for flag in content if flag in avoid_flags])==0,
                 total[i] not in c_already]):
           notperf.append(redbox+total[i][:-4]+'.jpg'+classification+'\n')
 

@@ -19,6 +19,7 @@ NEXT:
          -> ONLY DONE ON GRAPHIC05!
       -> add 20k non-scraping
       -> merge unsuitable photo with no scraping
+         -> ./setup.py --task=scrape --box=blue --learn=6-14
       -> merge scrape zones with no scraping?
       
 2. train joint misaligned
