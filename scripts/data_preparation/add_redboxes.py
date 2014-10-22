@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import os, random, shutil
 from os.path import join as oj
 import cPickle as pickle
@@ -15,7 +14,7 @@ def bring_all_redbox_positives(task, flag):
   os.chdir(here)
 
 
-def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train):
+def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train, using_pickle):
 
   if os.path.isfile(oj(os.getcwd(),'redbox_vacant_'+task+'_negatives.pickle')) and using_pickle:
     print "Found pickle dump of vacant, non-perfect Redbox images without %s flag. Using it."%(task)
@@ -69,7 +68,7 @@ if __name__ == '__main__':
   data_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
   fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
 
-  bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train)
+  bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train, using_pickle)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
   bring_all_redbox_positives(task, flag)
