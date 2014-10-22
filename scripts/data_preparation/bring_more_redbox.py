@@ -4,16 +4,9 @@ import os, random, shutil
 from os.path import join as oj
 import cPickle as pickle
 
-if __name__ == '__main__':
 
-  task = 'scrape'
-  avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
-  classification = ' 0'
-  using_pickle = True
-  add_num = 7000 # how many imgs to add
-  pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-  redbox = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
-  fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
+
+def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train):
 
   if os.path.isfile(oj(os.getcwd(),'redbox_vacant_'+task+'_negatives.pickle')) and using_pickle:
     print "Found pickle dump of vacant, non-perfect Redbox images without %s flag. Using it."%(task)
@@ -21,7 +14,7 @@ if __name__ == '__main__':
 
   else:
     notperf, total = [], []
-    for fname in os.listdir(redbox):
+    for fname in os.listdir(data_dir):
       if fname.endswith('.dat'):
         total.append(fname)
 
@@ -30,12 +23,12 @@ if __name__ == '__main__':
       c_already = f_already.readlines()
       c_already = [line.split(' ')[0] for line in c_already]
       for i in range(len(total)):
-        content = open(oj(redbox,total[i]),'r').readlines()
+        content = open(oj(data_dir,total[i]),'r').readlines()
         content = [line.strip() for line in content]
         if all([len(content) > 0,
                 len([flag for flag in content if flag in avoid_flags])==0,
                 total[i] not in c_already]):
-          notperf.append(redbox+total[i][:-4]+'.jpg'+classification+'\n')
+          notperf.append(data_dir+total[i][:-4]+'.jpg'+classification+'\n')
 
     random.shuffle(notperf)
     print "Gathering completed."
@@ -52,6 +45,22 @@ if __name__ == '__main__':
   # print "writing:", c_train
   f_train.writelines(c_train)
 
+
+
+
+if __name__ == '__main__':
+  import sys
+
+  task = 'scrape'
+  avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
+  classification = ' 0'
+  using_pickle = True
+  add_num = 7000 # how many imgs to add
+  pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
+  data_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
+  fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
+
+  bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train)
 
 
 

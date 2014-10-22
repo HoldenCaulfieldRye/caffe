@@ -17,7 +17,7 @@ NEXT:
       -> change paths to Redbox when applicable
       -> rm Redboxes from data2/*/Bluebox/*
          -> ONLY DONE ON GRAPHIC05!
-      -> add 20k non-scraping
+      -> add 20k non-scraping and non-noScrapeZone
       -> merge unsuitable photo with no scraping
          -> ./setup.py --task=scrape --box=blue --learn=6-14
       -> merge scrape zones with no scraping?
