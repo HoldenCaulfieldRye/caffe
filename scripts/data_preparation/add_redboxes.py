@@ -27,7 +27,7 @@ def shuffle_file(fname):
   open(fname, 'w').writelines(contents)
 
  
-# integrate bring in positives into this?
+# integrate bring in positives into this? 
 def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train, using_pickle):
 
   if os.path.isfile(oj(os.getcwd(),'redbox_vacant_'+task+'_negatives.pickle')) and using_pickle:
