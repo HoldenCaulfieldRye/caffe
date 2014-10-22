@@ -11,14 +11,16 @@
          -> copied to graphic08 too
 
 NEXT:	 
-   -> CAREFUL!!
-      -> maybe overfitting on redbox img style
-         -> have only Bluebox in val
-	 -> hack: remove Redbox from test.txt
-	    replace val.txt with test.txt in train_val.prototxt
-	    train with -weights task/scrape/etc
-	    ASK RAZ!
-
+   -> oh no! overfitting on redbox img style
+      -> remove Blueboxes from val
+      -> append test.txt to train.txt
+      -> change paths to Redbox when applicable
+      -> rm Redboxes from data2/*/Bluebox/*
+         -> ONLY DONE ON GRAPHIC05!
+      -> add 20k non-scraping
+      -> merge unsuitable photo with no scraping
+      -> merge scrape zones with no scraping?
+      
 2. train joint misaligned
 
 
