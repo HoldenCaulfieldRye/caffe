@@ -3,7 +3,16 @@
 import os, random, shutil
 from os.path import join as oj
 import cPickle as pickle
+import subprocess
 
+
+def bring_all_redbox_positives(task, flag):
+  here = os.getcwd()
+  os.chdir('/data2/ad6813/caffe/data/'+task)
+  cmd = "find /data2/ad6813/pipe-data/Redbox/raw_data/dump/ -name "*.dat" | xargs -i grep -l '"+flag+"' {} | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
+  p = subprocess.Popen(cmd, shell=True)
+  p.wait()
+  os.chdir(here)
 
 
 def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train):
@@ -62,7 +71,8 @@ if __name__ == '__main__':
 
   bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train)
 
-
+  flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
+  bring_all_redbox_positives(task, flag)
 
 
 
