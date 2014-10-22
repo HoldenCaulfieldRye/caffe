@@ -31,6 +31,7 @@ if __name__ == '__main__':
       c_already = [line.split(' ')[0] for line in c_already]
       for i in range(len(total)):
         content = open(oj(redbox,total[i]),'r').readlines()
+        content = [line.strip() for line in content]
         if all([len(content) > 0,
                 avoid_flag not in content,
                 total[i] not in c_already]):
