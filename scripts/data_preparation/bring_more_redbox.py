@@ -11,8 +11,8 @@ if __name__ == '__main__':
   using_pickle = True
   add_num = 20000 # how many imgs to add
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-  redbox = '/data2/ad6813/pipe-data/Redbox/raw_data/temp/' #DUMP
-  fn_train = '/data2/ad6813/caffe/data/scrape/fake.txt'    #TRAIN
+  redbox = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
+  fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
 
   if os.path.isfile(oj(os.getcwd(),'redbox_vacant_'+task+'_negatives.pickle')) and using_pickle:
     print "Found pickle dump of vacant, non-perfect Redbox images without %s flag. Using it."%(task)
