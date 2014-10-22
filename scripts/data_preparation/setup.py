@@ -259,17 +259,18 @@ if __name__ == '__main__':
   avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones','UnsuitablePhoto']
   classification = ' 0'
   
-  using_pickle = True
+  using_pickle = False
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
   redbox_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
   fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
   
-  add_num = ar.same_amount_as_bluebox(redbox_dir, task, pos_class) # how many imgs to add
+  add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class) # how many imgs to add
   
-  ar.bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, redbox_dir, fn_train, using_pickle)
+  ar.bring_redbox_negatives(task, avoid_flags, classification, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
   
   # NOT RANDOM! USING TAIL
-  ar.bring_redbox_positives(task, flag, add_num)
+  print 'bringing in redbox positives...'
+  ar.bring_redbox_positives(task, flag, add_num_pos, 10)
 

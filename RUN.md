@@ -26,6 +26,7 @@ NEXT:
       -> obviously, still ton more redbox positives in train
       -> bring in redbox positives and negatives, both in same amount
          as there are of bluebox positives
+	 -> ./setup.py --task=scrape --box=blue --learn=6-14
          
       
 2. train joint misaligned
