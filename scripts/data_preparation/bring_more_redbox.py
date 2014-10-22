@@ -7,6 +7,7 @@ import cPickle as pickle
 if __name__ == '__main__':
 
   task = 'scrape'
+  avoid_flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
   classification = ' 0'
   using_pickle = True
   add_num = 20000 # how many imgs to add
@@ -30,9 +31,10 @@ if __name__ == '__main__':
       c_already = [line.split(' ')[0] for line in c_already]
       for i in range(len(total)):
         content = open(oj(redbox,total[i]),'r').readlines()
-        if len(content) > 0:
-          if total[i] not in c_already:
-            notperf.append(redbox+total[i][:-4]+'.jpg'+classification+'\n')
+        if all([len(content) > 0,
+                avoid_flag not in content,
+                total[i] not in c_already]):
+          notperf.append(redbox+total[i][:-4]+'.jpg'+classification+'\n')
 
     random.shuffle(notperf)
     print "Gathering completed."
