@@ -1,16 +1,27 @@
 
 1. train redbox positives
-   -> scrape tasks
+   -> scraping
       -> does zones help scraping?
-         -> yes if: ¬[¬zone & scrape]
 	 -> yes if: num cases [¬zone & scrape] == 0
-	    NO!
-      -> include other Redbox as well so no overfit
-         on Redbox for flag detection
-	 -> throw in 2485 others
-	    tail and not perfect ones to reduce mislab chances
-      -> throw in Bluebox/raw_data/dump
-      -> delete jpgs in CorrRedbox
+	    NO! cf sales_22-10-2014.txt
+      -> added 26,354 redbox positives
+         and 2485 redbox others to avoid overfit on redbox img
+      -> tail and not perfect ones to reduce mislab chances
+      -> threw it in Bluebox/raw_data/dump, deleted jpgs in CorrRedbox
+         -> copied to graphic08 too
+
+NEXT:	 
+   -> CAREFUL!!
+      -> maybe overfitting on redbox img style
+         -> have only Bluebox in val
+	 -> hack: remove Redbox from test.txt
+	    replace val.txt with test.txt in train_val.prototxt
+	    train with -weights task/scrape/etc
+	    ASK RAZ!
+
+2. train joint misaligned
+
+
 	 
 
 DATA ISSUES:
