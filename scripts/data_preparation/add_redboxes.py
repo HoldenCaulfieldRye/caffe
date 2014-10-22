@@ -8,7 +8,7 @@ import subprocess
 def bring_all_redbox_positives(task, flag):
   here = os.getcwd()
   os.chdir('/data2/ad6813/caffe/data/'+task)
-  cmd = "find /data2/ad6813/pipe-data/Redbox/raw_data/dump/ -name "*.dat" | xargs -i grep -l '"+flag+"' {} | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
+  cmd = "find /data2/ad6813/pipe-data/Redbox/raw_data/dump/ -name '*.dat' | xargs -i grep -l '"+flag+"' {} | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
   p = subprocess.Popen(cmd, shell=True)
   p.wait()
   os.chdir(here)
@@ -63,7 +63,7 @@ if __name__ == '__main__':
   avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
   classification = ' 0'
   using_pickle = True
-  add_num = 7000 # how many imgs to add
+  add_num = 20000 # how many imgs to add
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
   data_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
   fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
