@@ -7,7 +7,7 @@ if __name__ == '__main__':
 
   redbox = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
   fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
-  classification = ' '
+  classification = ' 0'
 
   notperf, total = [], []
   for fname in os.listdir(redbox):
