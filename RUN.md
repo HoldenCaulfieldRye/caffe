@@ -1,26 +1,32 @@
 
-backtrack what needs to be modified
-===================================
-solver.cpp
-----------
-test_score.size()
-test_score.push_back(result_vec[k])
-result_vec = result[j]->cpu_data()
-result = test_net->Forward(bottom_vec, &iter_loss)
+1. train redbox positives
+   -> scrape tasks
+      -> does zones help scraping?
+         -> yes if: ¬[¬zone & scrape]
+	 -> yes if: num cases [¬zone & scrape] == 0
+	    NO!
+      -> include other Redbox as well so no overfit
+         on Redbox for flag detection
+	 -> throw in 2485 others
+	    tail and not perfect ones to reduce mislab chances
+      -> throw in Bluebox/raw_data/dump
+      -> delete jpgs in CorrRedbox
+	 
 
-net.cpp
--------
-Forward: return ForwardPrefilled(loss)
-ForwardPrefilled: return net_output_blobs_
--- either:
-Forward: net_output_blobs_[i]->ToProto(blob_proto_vec.add_blobs())
-Forward: BlobProtoVector blob_proto_vec
--- or:
-ForwardPrefilled: ForwardFromTo(0, layers_.size() - 1)
+DATA ISSUES:
+        scrape   ¬scrape | total
+------+--------+---------|-------
+zone  | 84,163   19,857  | 104,020
+¬zone | 16,480    6,497  |  22,977
+------+--------+---------|
+total |100,643   26,354  | 126,997     
 
-
-MODIFY: 
-Net::Forward(bottom_vec, &iter_loss)
+-> need:
+        scrape   ¬scrape |
+------+--------+---------|
+zone  |                  |
+¬zone |  N/A             |
+------+--------+---------|
 
 
 
@@ -42,6 +48,5 @@ NEXT STEPS:
 5) more data augmentation
 6) final product merge test set into training set!!
    
-
 
 

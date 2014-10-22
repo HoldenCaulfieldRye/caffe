@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import os
-from os.path import join as ojoin
+from os.path import join as oj
 from PIL import Image
 from operator import itemgetter as ig
 import itertools 
@@ -9,9 +9,9 @@ from datetime import date
 from shutil import rmtree
 import random, subprocess
 
-# expected input: ./setup --task= --box= --learn= [--target-bad-min=]
+# expected input: ./setup.py --task= --box= --learn= [--target-bad-min=]
 
-# ./setup --task=clamp --box=blue --learn=3-10-14
+# ./setup.py --task=clamp --box=blue --learn=3-10-14
 
 def main(data_dir, data_info, task, pos_class,target_bad_min=None):
   ''' This is the master function. data_dir: where raw data is. data_info: where to store .txt files. '''
@@ -33,7 +33,7 @@ def get_label_dict_knowing(data_dir, task, pos_class):
   print 'generating specific dict of class:files from %s...'%(data_dir)
   for filename in os.listdir(data_dir):
     if not filename.endswith('.dat'): continue
-    with open(ojoin(data_dir, filename)) as f:
+    with open(oj(data_dir, filename)) as f:
       content = [line.strip() for line in f.readlines()]
       if any([label==line for (label,line)
               in itertools.product(pos_class,content)]):
@@ -186,7 +186,7 @@ def dump_to_files(Keep, data_info, task, data_dir):
   ''' This function "trusts" you. It will overwrite data lookup 
   files. '''
   dump = []
-  part = [0, 0.82, 0.89, 1] # partition into train val test
+  part = [0, 0.89, 0.94, 1] # partition into train val test
   dump_fnames = ['train.txt','val.txt','test.txt']
   for i in xrange(3):
     dump.append([])
@@ -196,10 +196,10 @@ def dump_to_files(Keep, data_info, task, data_dir):
                   Keep[key][int(part[i]*l):int(part[i+1]*l)]]
     # this is the important shuffle actually
     random.shuffle(dump[i])
-    if os.path.isfile(ojoin(data_info,dump_fnames[i])):
-      print "WARNING: overwriting", ojoin(data_info,dump_fnames[i])
-    with open(ojoin(data_info,dump_fnames[i]),'w') as dfile:
-      dfile.writelines(["%s %i\n" % (ojoin(data_dir,f),num)
+    if os.path.isfile(oj(data_info,dump_fnames[i])):
+      print "WARNING: overwriting", oj(data_info,dump_fnames[i])
+    with open(oj(data_info,dump_fnames[i]),'w') as dfile:
+      dfile.writelines(["%s %i\n" % (oj(data_dir,f),num)
                         for (f,num) in dump[i]])
 
     
@@ -242,7 +242,7 @@ if __name__ == '__main__':
   # write to read file how to interpret values as classes and might
   # as well save entire command
   if not os.path.isdir(data_info): os.mkdir(data_info)
-  with open(ojoin(data_info,'read.txt'), 'w') as read_file:
+  with open(oj(data_info,'setup_history.txt'), 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
