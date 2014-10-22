@@ -7,10 +7,10 @@ import cPickle as pickle
 if __name__ == '__main__':
 
   task = 'scrape'
-  avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling']
+  avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
   classification = ' 0'
   using_pickle = True
-  add_num = 20000 # how many imgs to add
+  add_num = 7000 # how many imgs to add
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
   redbox = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
   fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
