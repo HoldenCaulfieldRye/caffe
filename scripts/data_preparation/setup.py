@@ -8,6 +8,7 @@ import itertools
 from datetime import date
 from shutil import rmtree
 import random, subprocess
+import add_redboxes as ar
 
 # expected input: ./setup.py --task= --box= --learn= [--target-bad-min=]
 
@@ -212,7 +213,7 @@ def flag_lookup(labels):
         flags.append(line.split()[1])
   return flags
         
-
+  
 if __name__ == '__main__':
   import sys, getopt
 
@@ -251,3 +252,24 @@ if __name__ == '__main__':
   # still need to automate this
   # p = subprocess.Popen("./setup_rest.sh " + task + " " + str(num_output), shell=True)
   # p.wait()
+
+  # task = 'scrape' # have already
+
+  # GENERALISE THIS
+  avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones','UnsuitablePhoto']
+  classification = ' 0'
+  
+  using_pickle = True
+  pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
+  redbox_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
+  fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
+  
+  add_num = ar.same_amount_as_bluebox(redbox_dir, task, pos_class) # how many imgs to add
+  
+  ar.bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, redbox_dir, fn_train, using_pickle)
+
+  flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
+  
+  # NOT RANDOM! USING TAIL
+  ar.bring_redbox_positives(task, flag, add_num)
+

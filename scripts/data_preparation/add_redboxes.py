@@ -3,12 +3,14 @@ import os, random, shutil
 from os.path import join as oj
 import cPickle as pickle
 import subprocess
+import setup
 
 
-def bring_all_redbox_positives(task, flag):
+# NOT RANDOM! USING TAIL
+def bring_all_redbox_positives(task, flag, add_num):
   here = os.getcwd()
   os.chdir('/data2/ad6813/caffe/data/'+task)
-  cmd = "find /data2/ad6813/pipe-data/Redbox/raw_data/dump/ -name '*.dat' | xargs -i grep -l '"+flag+"' {} | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
+  cmd = "find /data2/ad6813/pipe-data/Redbox/raw_data/dump/ -name '*.dat' | xargs -i grep -l '"+flag+"' {} | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' | tail -"+str(add_num)+" >> train.txt"
   p = subprocess.Popen(cmd, shell=True)
   p.wait()
   os.chdir(here)
@@ -53,7 +55,12 @@ def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fn
   # print "writing:", c_train
   f_train.writelines(c_train)
 
+  
+def same_amount_as_bluebox(data_dir, task, pos_class):
+  d = setup.get_label_dict_knowing(data_dir, task, pos_class)
+  return len(d[task])
 
+  
 
 
 if __name__ == '__main__':
@@ -61,17 +68,18 @@ if __name__ == '__main__':
 
   task = 'scrape'
   avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
-  classification = ' 0'
   using_pickle = True
-  add_num = 20000 # how many imgs to add
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
   data_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
   fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
+  classification = ' 0'
+  
+  add_num = 20000
 
   bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train, using_pickle)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
-  bring_all_redbox_positives(task, flag)
+  bring_redbox_positives(task, flag, add_num)
 
 
 
