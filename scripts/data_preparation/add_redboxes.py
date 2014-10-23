@@ -23,7 +23,6 @@ def bring_redbox_positives(task, flag, add_num, imbalance_multiple):
 def shuffle_file(fname):
   contents = open(fname, 'r').readlines()
   random.shuffle(contents)
-  contents = [line+'\n' for line in contents]
   open(fname, 'w').writelines(contents)
 
  
