@@ -3,15 +3,15 @@ test_iter: 12
 test_interval: 100
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
-base_lr: 0.00001
+base_lr: 0.0001
 lr_policy: "step"
 gamma: 0.2
 # stepsize should also be lower, as we're closer to being done
-stepsize: 100
+stepsize: 10000
 display: 1
-max_iter: 1000
+max_iter: 20000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 100
-snapshot_prefix: "task/scrape/conv1/"
+snapshot: 2000
+snapshot_prefix: "task/scrape/fc7/"
 solver_mode: GPU
