@@ -27,6 +27,9 @@ NEXT:
       -> bring in redbox positives and negatives, both in same amount
          as there are of bluebox positives
 	 -> ./setup.py --task=scrape --box=blue --learn=6-14
+
+   -> training balance red&blue graphic05
+   -> training balance blue graphic06
          
       
 2. train joint misaligned
