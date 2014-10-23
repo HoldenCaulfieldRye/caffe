@@ -75,6 +75,14 @@ def same_amount_as_bluebox(data_dir, task, pos_class):
   d = setup.get_label_dict_knowing(data_dir, task, pos_class)
   return len(d[task]), len(d['Default'])
 
+
+def delete_some_files(fname, del_num):
+  count, new = 0, []
+  content = open(fname, 'r').readlines()
+  for line in content:
+    if line.endswith('0\n') and count < del_num: count += 1
+    else: new.append(line+'\n')
+  open(fname,'w').writelines(new)
   
 
 if __name__ == '__main__':
