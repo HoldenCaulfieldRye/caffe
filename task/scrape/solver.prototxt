@@ -13,5 +13,5 @@ max_iter: 20000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 2000
-snapshot_prefix: "task/scrape/conv2/"
+snapshot_prefix: "task/scrape/conv2_blue/"
 solver_mode: GPU
