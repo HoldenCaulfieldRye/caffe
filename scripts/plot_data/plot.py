@@ -10,10 +10,18 @@ import subprocess
 
 # Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
 
-def get_test_interval(model_dir):
-  test = open(oj(model_dir,'train_output.log.test'),'r').readlines()
-  return int(test[2].split()[0])
-  # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
+def get_test_interval(ltfname):
+  if not os.path.isfile(ltfname)):
+    print "ERROR: no file named", ltfname
+    sys.exit()
+  else:
+    test = open(ltfname,'r').readlines()
+    if len(test) == 1:
+      print "ERROR: no data in", ltfname
+      sys.exit()
+    else:  
+      return int(test[2].split()[0])
+    # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
 
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
@@ -111,9 +119,23 @@ def get_caffe_errors(model_dir, typ, idx):
 
 
 def parse_log(model_dir):
-  cmd = "./parselog.sh "+oj(model_dir,'train_output.log')
+  fnames = []
+  for fname in os.listdir(model_dir):
+    if 'train_output' in fname and fname.endswith('.log'):
+      fnames.append(oj(model_dir,fname))
+  if len(fnames) == 0:
+    print "ERROR: no file containing 'train_output' and ending in '.log' found in", model_dir
+  elif len(fnames) > 1:
+    for elem in enumerate(fnames): print elem
+    fname = oj(model_dir,fnames[int(raw_input("\nChoose index number from above: "))])
+  else: fname = oj(model_dir,fnames[0])
+  cmd = "./parselog.sh "+fname
+  print cmd
   p = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
   p.wait()
+  # return fname in case not typical 'train_output.log'; need to know
+  # filename for reading in data
+  return fname
 
 
 def print_help():
@@ -138,8 +160,8 @@ if __name__ == '__main__':
     
     model_dir = os.path.abspath(sys.argv[1])
 
-    parse_log(model_dir)
-
+    log_fname = parse_log(model_dir)
+    lfname = oj(model_dir,log_fname)
 
     start,end = -1,-1
     for arg in sys.argv:
@@ -148,8 +170,8 @@ if __name__ == '__main__':
       if arg.startswith("end-iter="):
         end = int(arg.split('=')[-1])
 
-    test_interval = get_test_interval(model_dir)
-    train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
+    test_interval = get_test_interval(lfname+'.test')
+    train, val_acc, val_loss = get_caffe_train_errors(lfname+'.train'), get_caffe_val_acc(lfname+'.test', test_interval), get_caffe_val_loss(lfname+'.test', test_interval)
     print 'train looks like %s and %s'%(train[0], train[-1])
     matplot(model_dir, train, val_acc, val_loss, start, end)
 
