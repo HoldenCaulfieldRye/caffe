@@ -48,8 +48,7 @@ def get_train_dict(ltfname):
   ''' Returns a dict of all time series columns in 
   *train_output*.log.train in model dir. '''
   if not os.path.isfile(ltfname):
-    print "ERROR: file does not exist:", ltfname
-    sys.exit()
+    raise Exception("ERROR: %s does not exist:"%(ltfname))
   train_dict = columns_to_dict(ltfname)
   return train_dict
 
@@ -59,8 +58,7 @@ def get_test_dict(ltfname):
   *train_output*.log.test in model dir. Time series stretched by 
   test interval. '''
   if not os.path.isfile(ltfname):
-    print "ERROR: file does not exist:", ltfname
-    sys.exit()
+    raise Exception("ERROR: %s does not exist:"%(ltfname))
   test_dict = columns_to_dict(ltfname)
   test_interval = get_test_interval(ltfname)
   test_dict = stretch_time_series(test_dict, test_interval)
@@ -73,8 +71,7 @@ def columns_to_dict(fname):
   stat_names = content[0].split()
   for i in range(len(content)):
     if len(content[i].split()) < len(content[0].split()):
-      print 'ERROR: line[%i] does not have data for each %s entries.'%(i,stat_names)
-      sys.exit()
+      raise Exception('ERROR: line[%i] does not have data for each %s entries.'%(i,stat_names))
   for (idx,name) in enumerate(stat_names):
     d[name] = [elem.split()[idx] for elem in content[1:]]
   return d
@@ -98,12 +95,14 @@ def stretch_time_series(test_dict, test_interval):
     
 
 if __name__ == '__main__':
-  print('')
+
+  test_fields = ['TestLoss', 'Acc_0', 'Acc_1', 'PCAcc', 'Accuracy']
+  train_fields = ['TrainLoss']
+  
   try: 
     os.environ['DISPLAY']
   except: 
-    print 'ERROR: X11 forwarding not enabled, cannot run script'
-    sys.exit()
+    raise Exception('ERROR: X11 forwarding not enabled, cannot run script')
 
   if len(sys.argv) < 2:
       print_help()
@@ -118,17 +117,17 @@ if __name__ == '__main__':
     train_dict = get_train_dict(lfname+'.train')
 
     Ys = {}
-    # SELECT WHICH TRAIN DATA based on column heading names
-    for key in ['TrainLoss']:
+    tr_te_fields = train_fields + test_fields
+    for key in train_fields:
       Ys[key] = train_dict[key]
-    # SELECT WHICH TEST DATA based on column heading names
-    for key in ['TestLoss', 'Acc_0', 'Acc_1', 'PCAcc', 'Accuracy']:
+    for key in test_fields:
       Ys[key] = test_dict[key]
 
     # assert all time series same length
     keys = Ys.keys()
-    for i in range(1,len(keys)):    
-      assert len(Ys[keys[i]]) == len(Ys[keys[0]])
+    for i in range(1,len(tr_te_fields)):
+      if len(Ys[tr_te_fields[i]]) != len(Ys[tr_te_fields[0]]):
+        raise Exception('%i %s entries vs %i %s entries'%(len(Ys[tr_te_fields[i]]),tr_te_fields[i],len(Ys[tr_te_fields[0]]),tr_te_fields[0]))
       
     start, end = 0, len(Ys['TrainLoss'])
     for arg in sys.argv:

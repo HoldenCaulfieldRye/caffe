@@ -48,8 +48,7 @@ def get_train_dict(ltfname):
   ''' Returns a dict of all time series columns in 
   *train_output*.log.train in model dir. '''
   if not os.path.isfile(ltfname):
-    print "ERROR: file does not exist:", ltfname
-    sys.exit()
+    raise Exception("ERROR: %s does not exist:"%(ltfname))
   train_dict = columns_to_dict(ltfname)
   return train_dict
 
@@ -59,8 +58,7 @@ def get_test_dict(ltfname):
   *train_output*.log.test in model dir. Time series stretched by 
   test interval. '''
   if not os.path.isfile(ltfname):
-    print "ERROR: file does not exist:", ltfname
-    sys.exit()
+    raise Exception("ERROR: %s does not exist:"%(ltfname))
   test_dict = columns_to_dict(ltfname)
   test_interval = get_test_interval(ltfname)
   test_dict = stretch_time_series(test_dict, test_interval)
@@ -73,8 +71,7 @@ def columns_to_dict(fname):
   stat_names = content[0].split()
   for i in range(len(content)):
     if len(content[i].split()) < len(content[0].split()):
-      print 'ERROR: line[%i] does not have data for each %s entries.'%(i,stat_names)
-      sys.exit()
+      raise Exception('ERROR: line[%i] does not have data for each %s entries.'%(i,stat_names))
   for (idx,name) in enumerate(stat_names):
     d[name] = [elem.split()[idx] for elem in content[1:]]
   return d
@@ -102,8 +99,7 @@ if __name__ == '__main__':
   try: 
     os.environ['DISPLAY']
   except: 
-    print 'ERROR: X11 forwarding not enabled, cannot run script'
-    sys.exit()
+    raise Exception('ERROR: X11 forwarding not enabled, cannot run script')
 
   if len(sys.argv) < 2:
       print_help()
