@@ -28,12 +28,15 @@ NEXT:
          as there are of bluebox positives
 	 -> ./setup.py --task=scrape --box=blue --learn=6-14
 
-   -> training balance red&blue graphic05
-   -> training balance blue graphic06
+   -> training balance red&blue conv2 graphic05
+      -> deeper finetune?
+   -> training balance blue conv2 graphic06
+      -> deeper finetune?
          
       
 2. train joint misaligned
 
+3. data augmentation: rotations
 
 	 
 
