@@ -26,36 +26,43 @@ def matplot(model_dir, Ys, start, end):
 
   
 def parse_log(model_dir):
-  cmd = "./parselog.sh "+oj(model_dir,'train_output.log')
+  fnames = []
+  for fname in os.listdir(model_dir):
+    if 'train_output' in fname and fname.endswith('.log'):
+      fnames.append(oj(model_dir,fname))
+  if len(fnames) == 0:
+    print "ERROR: no file containing 'train_output' and ending in '.log' found in", model_dir
+  elif len(fnames) > 1:
+    for elem in enumerate(fnames): print elem
+    fname = oj(model_dir,fnames[int(raw_input("\nChoose index number from above: "))])
+  else: fname = oj(model_dir,fnames[0])
+  cmd = "./parse_log.sh "+fname
   p = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
   p.wait()
+  # return fname in case not typical 'train_output.log'; need to know
+  # filename for reading in data
+  return fname
 
 
-def get_train_dict(model_dir):
+def get_train_dict(ltfname):
   ''' Returns a dict of all time series columns in 
   *train_output*.log.train in model dir. '''
-  data_files = []
-  for fname in os.listdir(model_dir):
-    if 'train_output' in fname and fname.endswith('.log.train'): data_files.append(fname)
-  if len(data_files) != 1:
-    print "there is not exactly 1 filename otf '*train_output*.log.train' in given directory"
+  if not os.path.isfile(ltfname):
+    print "ERROR: file does not exist:", ltfname
     sys.exit()
-  train_dict = columns_to_dict(oj(model_dir, data_files[0]))
+  train_dict = columns_to_dict(ltfname)
   return train_dict
 
 
-def get_test_dict(model_dir):
+def get_test_dict(ltfname):
   ''' Returns a dict of all time series columns in 
   *train_output*.log.test in model dir. Time series stretched by 
   test interval. '''
-  data_files = []
-  for fname in os.listdir(model_dir):
-    if 'train_output' in fname and fname.endswith('.log.test'): data_files.append(fname)
-  if len(data_files) != 1:
-    print "there is not exactly 1 filename otf '*train_output*.log.test' in given directory"
+  if not os.path.isfile(ltfname):
+    print "ERROR: file does not exist:", ltfname
     sys.exit()
-  test_dict = columns_to_dict(oj(model_dir, data_files[0]))
-  test_interval = get_test_interval(data_files[0])
+  test_dict = columns_to_dict(ltfname)
+  test_interval = get_test_interval(ltfname)
   test_dict = stretch_time_series(test_dict, test_interval)
   return test_dict
 
@@ -65,16 +72,16 @@ def columns_to_dict(fname):
   content = open(fname,'r').readlines()
   stat_names = content[0].split()
   for i in range(len(content)):
-    if len(content[i]) < len(content[0]):
-      print 'ERROR: line[%i] does not have all %s entries.'%(i,stat_names)
+    if len(content[i].split()) < len(content[0].split()):
+      print 'ERROR: line[%i] does not have data for each %s entries.'%(i,stat_names)
       sys.exit()
   for (idx,name) in enumerate(stat_names):
     d[name] = [elem.split()[idx] for elem in content[1:]]
   return d
 
     
-def get_test_interval(model_dir):
-  test = open(fname,'r').readlines()
+def get_test_interval(ltfname):
+  test = open(ltfname,'r').readlines()
   return int(test[2].split()[0])
   # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
 
@@ -104,10 +111,11 @@ if __name__ == '__main__':
     
     model_dir = os.path.abspath(sys.argv[1])
 
-    parse_log(model_dir)
+    log_fname = parse_log(model_dir)
+    lfname = oj(model_dir,log_fname)
 
-    test_dict = get_test_dict(model_dir)
-    train_dict = get_train_dict(model_dir)
+    test_dict = get_test_dict(lfname+'.test')
+    train_dict = get_train_dict(lfname+'.train')
 
     Ys = {}
     # SELECT WHICH TRAIN DATA based on column heading names

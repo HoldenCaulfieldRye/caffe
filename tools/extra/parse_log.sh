@@ -30,7 +30,7 @@ $DIR/extract_seconds.py aux1.txt aux_sec.txt # aux3.txt aux4.txt
 
 # Generating
 # echo '#Iters Seconds TestAccuracy TestLoss'> $LOG.test
-echo '#Iters Seconds      TestLoss   Acc_0         Acc_1      PCAcc      Accuracy '> $LOG.test
+echo '#Iters Seconds     TestLoss   Acc_0    Acc_1     PCAcc     Accuracy '> $LOG.test
 paste aux_iter.txt aux_sec.txt aux_tloss.txt aux_acc0.txt aux_acc1.txt aux_acc2.txt aux_acc3.txt | column -t >> $LOG.test
 rm aux.txt aux_iter.txt aux_sec.txt aux_tloss.txt aux_acc0.txt aux_acc1.txt aux_acc2.txt aux_acc3.txt
 
@@ -45,8 +45,11 @@ grep ', lr = ' $1 | awk '{print $9}' > aux2.txt
 $DIR/extract_seconds.py aux.txt aux3.txt
 
 # Generating
-echo '#Iters Seconds TrainingLoss LearningRate'> $LOG.train
+echo '#Iters Seconds    TrainLoss LearningRate'> $LOG.train
 paste aux0.txt aux3.txt aux1.txt aux2.txt | column -t >> $LOG.train
 rm aux.txt aux0.txt aux1.txt aux2.txt  aux3.txt
+PREFIX=`dirname $1`
+echo $PREFIX
+mv $LOG.{train,test} $PREFIX
 
 
