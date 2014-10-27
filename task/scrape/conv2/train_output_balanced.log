@@ -7828,6 +7828,7 @@ I1023 03:19:32.031823 30579 solver.cpp:191] Iteration 3298, loss = 0.58112
 I1023 03:19:32.031875 30579 solver.cpp:404] Iteration 3298, lr = 0.0001
 I1023 03:19:32.713484 30579 solver.cpp:191] Iteration 3299, loss = 0.623183
 I1023 03:19:32.713538 30579 solver.cpp:404] Iteration 3299, lr = 0.0001
+I1023 03:19:32.713538 30579 solver.cpp:404] Iteration 3300, loss = 0.623183
 I1023 03:19:32.719030 30579 solver.cpp:247] Iteration 3300, Testing net (#0)
 I1023 03:19:37.856588 30579 solver.cpp:286] Test loss: 0.486831
 I1023 03:19:37.856637 30579 solver.cpp:299]     Test net output #0: accuracy = 0.78002

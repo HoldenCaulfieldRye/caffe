@@ -71,6 +71,10 @@ def columns_to_dict(fname):
   stat_names = content[0].split()
   for i in range(len(content)):
     if len(content[i].split()) < len(content[0].split()):
+      # if all([content[0] == 'LearningRate',
+      #        len(content[0].split())-len(content[i].split()) == 1]):
+      #   break
+      # else:
       raise Exception('ERROR: line[%i] does not have data for each %s entries.'%(i,stat_names))
   for (idx,name) in enumerate(stat_names):
     d[name] = [elem.split()[idx] for elem in content[1:]]
@@ -86,9 +90,9 @@ def get_test_interval(ltfname):
 def stretch_time_series(test_dict, test_interval):
   for key in test_dict.keys():
     stretch = []
-    for i in range(len(test_dict[key])-1):
+    for datp in test_dict[key][:-1]:
       for k in range(test_interval):
-        stretch.append(test_dict[key][i])
+        stretch.append(datp)
     stretch.append(test_dict[key][-1])
     test_dict[key] = stretch
   return test_dict
@@ -127,8 +131,9 @@ if __name__ == '__main__':
     keys = Ys.keys()
     for i in range(1,len(tr_te_fields)):
       if len(Ys[tr_te_fields[i]]) != len(Ys[tr_te_fields[0]]):
+        print Ys[tr_te_fields[0]][0], Ys[tr_te_fields[i]][0]
         raise Exception('%i %s entries vs %i %s entries'%(len(Ys[tr_te_fields[i]]),tr_te_fields[i],len(Ys[tr_te_fields[0]]),tr_te_fields[0]))
-      
+             
     start, end = 0, len(Ys['TrainLoss'])
     for arg in sys.argv:
       if arg.startswith("start-iter="):
