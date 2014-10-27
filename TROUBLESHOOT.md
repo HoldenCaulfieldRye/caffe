@@ -2,6 +2,9 @@
 TROUBLESHOOT
 ============
 
+gradient checker: look inside caffe/test/
+
+
 cmd:
 ./build/tools/caffe train -solver models/clampdet/solver.prototxt \
 -weights models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel

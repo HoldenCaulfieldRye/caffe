@@ -1,2 +1,0 @@
-/data2/ad6813/stuff
-caffe/data/clamp

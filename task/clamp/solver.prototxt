@@ -13,5 +13,5 @@ max_iter: 30000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 5000
-snapshot_prefix: "task/scrape/conv1/resume_training"
+snapshot_prefix: "task/scrape/"
 solver_mode: GPU

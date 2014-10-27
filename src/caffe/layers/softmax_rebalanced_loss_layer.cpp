@@ -44,7 +44,7 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
-  int dim = prob_.count() / num;
+  const int dim = prob_.count() / num;
   int spatial_dim = prob_.height() * prob_.width();
   //prob_.count() := no entries in prob_data ?
   //prob_.num()   := batchsize ?
@@ -52,7 +52,8 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   //spatial_dim   := 1 ?
   assert (spatial_dim == 1);
 
-  float prior[2] = {0,0};
+  float prior[dim];
+  std::fill_n(prior, dim, 0);
   for (int i = 0; i < num; ++i) {
     for (int j = 0; j < spatial_dim; j++) {
       prior[static_cast<int>(label[i*spatial_dim+j])] += 1.0 / num;
@@ -104,11 +105,12 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     caffe_copy(prob_.count(), prob_data, bottom_diff);
     const Dtype* label = (*bottom)[1]->cpu_data();
     int num = prob_.num();         //batchSize, num imgs
-    int dim = prob_.count() / num; //num neurons, dimensionality
+    const int dim = prob_.count() / num; //num neurons
     int spatial_dim = prob_.height() * prob_.width();
 
-    //ONLY WORKS FOR BINARY CASE!
-    float prior[2] = {0,0};
+        
+    float prior[dim];
+    std::fill_n(prior, dim, 0);
     for (int i = 0; i < num; ++i) {
       for (int j = 0; j < spatial_dim; j++) {
 	prior[static_cast<int>(label[i*spatial_dim+j])] += 1.0 / num;
@@ -128,12 +130,13 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     for (int k = 0; k < dim; ++k) {
       for (int i = 0; i < num; ++i)
 	for (int j = 0; j < spatial_dim; j++) {
-	  bottom_diff[i * dim + static_cast<int>(
-		    label[i*spatial_dim + j])
-		      * spatial_dim + j] /=
-	  (static_cast<float>(prior[static_cast<int>(
-				    label[i*spatial_dim+j])])
-	   * dim);
+	  if (prior[static_cast<int>(label[i*spatial_dim+j])] > 0) {
+	    std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << std::endl;
+	    // std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << prior[static_cast<int>(label[i*spatial_dim+j]] << " * " << dim << ")" << std::endl;
+				     
+	    bottom_diff[i * dim + static_cast<int>(
+		    label[i*spatial_dim + j])* spatial_dim + j] /=		 (prior[static_cast<int>(label[i*spatial_dim+j])] * dim);
+	  }
 	}
     }
   }
