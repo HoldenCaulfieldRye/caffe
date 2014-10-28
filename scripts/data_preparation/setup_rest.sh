@@ -18,17 +18,6 @@ echo "Running setup_rest with BASE_NAME:"$BASE_NAME" FULL_NAME:"$FULL_NAME" and 
 
 cd ../data_preparation
 
-# 1. resize images
-cd /data2/ad6813/caffe/data/$BASE_NAME
-CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
-if [ $CMD != "256x256" ]
-then
-    echo "downsizing all images to 256x256..."
-    for name in */*.jpg; do convert -resize 256x256\! $name $name; done
-else
-    echo "images already downsized"
-fi
-
 
 # 2. download alexnet
 if [ -f /data2/ad6813/caffe/models/alexnet/caffe_alexnet_model ]
