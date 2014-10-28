@@ -1210,3 +1210,883 @@ I1028 03:56:52.752526  4830 solver.cpp:299]     Test net output #0: accuracy = 0
 I1028 03:56:52.752532  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
 I1028 03:56:52.752537  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
 I1028 03:56:52.752542  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:56:53.177815  4830 solver.cpp:191] Iteration 55, loss = 0.00251846
+I1028 03:56:53.177850  4830 solver.cpp:404] Iteration 55, lr = 0.0001
+I1028 03:56:53.734596  4830 solver.cpp:191] Iteration 56, loss = 0.00490011
+I1028 03:56:53.734638  4830 solver.cpp:404] Iteration 56, lr = 0.0001
+I1028 03:56:54.291996  4830 solver.cpp:191] Iteration 57, loss = 0.0027198
+I1028 03:56:54.292039  4830 solver.cpp:404] Iteration 57, lr = 0.0001
+I1028 03:56:54.850059  4830 solver.cpp:191] Iteration 58, loss = 0.00201672
+I1028 03:56:54.850091  4830 solver.cpp:404] Iteration 58, lr = 0.0001
+I1028 03:56:55.406332  4830 solver.cpp:191] Iteration 59, loss = 0.00306767
+I1028 03:56:55.406376  4830 solver.cpp:404] Iteration 59, lr = 0.0001
+I1028 03:56:55.411378  4830 solver.cpp:247] Iteration 60, Testing net (#0)
+I1028 03:56:55.598305  4830 solver.cpp:286] Test loss: 0.453009
+I1028 03:56:55.598338  4830 solver.cpp:299]     Test net output #0: accuracy = 0.941176
+I1028 03:56:55.598345  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:56:55.598350  4830 solver.cpp:299]     Test net output #2: accuracy = 0.470588
+I1028 03:56:55.598353  4830 solver.cpp:299]     Test net output #3: accuracy = 0.842105
+I1028 03:56:56.029409  4830 solver.cpp:191] Iteration 60, loss = 0.00409622
+I1028 03:56:56.029450  4830 solver.cpp:404] Iteration 60, lr = 0.0001
+I1028 03:56:56.585829  4830 solver.cpp:191] Iteration 61, loss = 0.00262794
+I1028 03:56:56.585872  4830 solver.cpp:404] Iteration 61, lr = 0.0001
+I1028 03:56:57.142904  4830 solver.cpp:191] Iteration 62, loss = 0.00327383
+I1028 03:56:57.142933  4830 solver.cpp:404] Iteration 62, lr = 0.0001
+I1028 03:56:57.700706  4830 solver.cpp:191] Iteration 63, loss = 0.00204647
+I1028 03:56:57.700743  4830 solver.cpp:404] Iteration 63, lr = 0.0001
+I1028 03:56:58.257686  4830 solver.cpp:191] Iteration 64, loss = 0.00226097
+I1028 03:56:58.257738  4830 solver.cpp:404] Iteration 64, lr = 0.0001
+I1028 03:56:58.262651  4830 solver.cpp:247] Iteration 65, Testing net (#0)
+I1028 03:56:58.449424  4830 solver.cpp:286] Test loss: 0.507525
+I1028 03:56:58.449455  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:56:58.449460  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:56:58.449465  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:56:58.449470  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:56:58.880403  4830 solver.cpp:191] Iteration 65, loss = 0.00284091
+I1028 03:56:58.880446  4830 solver.cpp:404] Iteration 65, lr = 0.0001
+I1028 03:56:59.437738  4830 solver.cpp:191] Iteration 66, loss = 0.00182837
+I1028 03:56:59.437783  4830 solver.cpp:404] Iteration 66, lr = 0.0001
+I1028 03:56:59.994796  4830 solver.cpp:191] Iteration 67, loss = 0.0025328
+I1028 03:56:59.994828  4830 solver.cpp:404] Iteration 67, lr = 0.0001
+I1028 03:57:00.551823  4830 solver.cpp:191] Iteration 68, loss = 0.00173555
+I1028 03:57:00.551856  4830 solver.cpp:404] Iteration 68, lr = 0.0001
+I1028 03:57:01.108548  4830 solver.cpp:191] Iteration 69, loss = 0.00222782
+I1028 03:57:01.108592  4830 solver.cpp:404] Iteration 69, lr = 0.0001
+I1028 03:57:01.113548  4830 solver.cpp:247] Iteration 70, Testing net (#0)
+I1028 03:57:01.300628  4830 solver.cpp:286] Test loss: 0.449661
+I1028 03:57:01.300659  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:01.300665  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:01.300670  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:01.300674  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:01.732558  4830 solver.cpp:191] Iteration 70, loss = 0.00230661
+I1028 03:57:01.732604  4830 solver.cpp:404] Iteration 70, lr = 0.0001
+I1028 03:57:02.289067  4830 solver.cpp:191] Iteration 71, loss = 0.00186622
+I1028 03:57:02.289109  4830 solver.cpp:404] Iteration 71, lr = 0.0001
+I1028 03:57:02.845728  4830 solver.cpp:191] Iteration 72, loss = 0.00159407
+I1028 03:57:02.845760  4830 solver.cpp:404] Iteration 72, lr = 0.0001
+I1028 03:57:03.403424  4830 solver.cpp:191] Iteration 73, loss = 0.00273106
+I1028 03:57:03.403467  4830 solver.cpp:404] Iteration 73, lr = 0.0001
+I1028 03:57:03.960502  4830 solver.cpp:191] Iteration 74, loss = 0.00245808
+I1028 03:57:03.960546  4830 solver.cpp:404] Iteration 74, lr = 0.0001
+I1028 03:57:03.965509  4830 solver.cpp:247] Iteration 75, Testing net (#0)
+I1028 03:57:04.152498  4830 solver.cpp:286] Test loss: 0.470453
+I1028 03:57:04.152529  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:04.152535  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:04.152540  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:04.152544  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:04.582413  4830 solver.cpp:191] Iteration 75, loss = 0.00263553
+I1028 03:57:04.582456  4830 solver.cpp:404] Iteration 75, lr = 0.0001
+I1028 03:57:05.139020  4830 solver.cpp:191] Iteration 76, loss = 0.00128749
+I1028 03:57:05.139065  4830 solver.cpp:404] Iteration 76, lr = 0.0001
+I1028 03:57:05.695868  4830 solver.cpp:191] Iteration 77, loss = 0.00282051
+I1028 03:57:05.695912  4830 solver.cpp:404] Iteration 77, lr = 0.0001
+I1028 03:57:06.251698  4830 solver.cpp:191] Iteration 78, loss = 0.00188686
+I1028 03:57:06.251741  4830 solver.cpp:404] Iteration 78, lr = 0.0001
+I1028 03:57:06.808450  4830 solver.cpp:191] Iteration 79, loss = 0.00319938
+I1028 03:57:06.808495  4830 solver.cpp:404] Iteration 79, lr = 0.0001
+I1028 03:57:06.813380  4830 solver.cpp:247] Iteration 80, Testing net (#0)
+I1028 03:57:07.000203  4830 solver.cpp:286] Test loss: 0.466524
+I1028 03:57:07.000236  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:07.000241  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:07.000247  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:07.000262  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:07.430338  4830 solver.cpp:191] Iteration 80, loss = 0.00167812
+I1028 03:57:07.430382  4830 solver.cpp:404] Iteration 80, lr = 0.0001
+I1028 03:57:07.987704  4830 solver.cpp:191] Iteration 81, loss = 0.00189263
+I1028 03:57:07.987747  4830 solver.cpp:404] Iteration 81, lr = 0.0001
+I1028 03:57:08.543308  4830 solver.cpp:191] Iteration 82, loss = 0.0024864
+I1028 03:57:08.543351  4830 solver.cpp:404] Iteration 82, lr = 0.0001
+I1028 03:57:09.099606  4830 solver.cpp:191] Iteration 83, loss = 0.00217884
+I1028 03:57:09.099648  4830 solver.cpp:404] Iteration 83, lr = 0.0001
+I1028 03:57:09.656908  4830 solver.cpp:191] Iteration 84, loss = 0.00200945
+I1028 03:57:09.656940  4830 solver.cpp:404] Iteration 84, lr = 0.0001
+I1028 03:57:09.661941  4830 solver.cpp:247] Iteration 85, Testing net (#0)
+I1028 03:57:09.848738  4830 solver.cpp:286] Test loss: 0.505015
+I1028 03:57:09.848772  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:09.848778  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:09.848783  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:09.848786  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:10.279209  4830 solver.cpp:191] Iteration 85, loss = 0.00237603
+I1028 03:57:10.279253  4830 solver.cpp:404] Iteration 85, lr = 0.0001
+I1028 03:57:10.835865  4830 solver.cpp:191] Iteration 86, loss = 0.00198539
+I1028 03:57:10.835898  4830 solver.cpp:404] Iteration 86, lr = 0.0001
+I1028 03:57:11.393803  4830 solver.cpp:191] Iteration 87, loss = 0.00169525
+I1028 03:57:11.393848  4830 solver.cpp:404] Iteration 87, lr = 0.0001
+I1028 03:57:11.950615  4830 solver.cpp:191] Iteration 88, loss = 0.00288692
+I1028 03:57:11.950660  4830 solver.cpp:404] Iteration 88, lr = 0.0001
+I1028 03:57:12.507148  4830 solver.cpp:191] Iteration 89, loss = 0.002296
+I1028 03:57:12.507181  4830 solver.cpp:404] Iteration 89, lr = 0.0001
+I1028 03:57:12.512161  4830 solver.cpp:247] Iteration 90, Testing net (#0)
+I1028 03:57:12.699157  4830 solver.cpp:286] Test loss: 0.480102
+I1028 03:57:12.699190  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:12.699195  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:12.699200  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:12.699205  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:13.129636  4830 solver.cpp:191] Iteration 90, loss = 0.0027637
+I1028 03:57:13.129679  4830 solver.cpp:404] Iteration 90, lr = 0.0001
+I1028 03:57:13.686841  4830 solver.cpp:191] Iteration 91, loss = 0.00204034
+I1028 03:57:13.686885  4830 solver.cpp:404] Iteration 91, lr = 0.0001
+I1028 03:57:14.243145  4830 solver.cpp:191] Iteration 92, loss = 0.00209177
+I1028 03:57:14.243191  4830 solver.cpp:404] Iteration 92, lr = 0.0001
+I1028 03:57:14.800540  4830 solver.cpp:191] Iteration 93, loss = 0.00141298
+I1028 03:57:14.800585  4830 solver.cpp:404] Iteration 93, lr = 0.0001
+I1028 03:57:15.358033  4830 solver.cpp:191] Iteration 94, loss = 0.00172165
+I1028 03:57:15.358078  4830 solver.cpp:404] Iteration 94, lr = 0.0001
+I1028 03:57:15.363054  4830 solver.cpp:247] Iteration 95, Testing net (#0)
+I1028 03:57:15.549533  4830 solver.cpp:286] Test loss: 0.515815
+I1028 03:57:15.549564  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:15.549569  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:15.549576  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:15.549579  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:15.980031  4830 solver.cpp:191] Iteration 95, loss = 0.00209967
+I1028 03:57:15.980075  4830 solver.cpp:404] Iteration 95, lr = 0.0001
+I1028 03:57:16.537171  4830 solver.cpp:191] Iteration 96, loss = 0.00166626
+I1028 03:57:16.537215  4830 solver.cpp:404] Iteration 96, lr = 0.0001
+I1028 03:57:17.093828  4830 solver.cpp:191] Iteration 97, loss = 0.00147788
+I1028 03:57:17.093873  4830 solver.cpp:404] Iteration 97, lr = 0.0001
+I1028 03:57:17.650727  4830 solver.cpp:191] Iteration 98, loss = 0.00124959
+I1028 03:57:17.650769  4830 solver.cpp:404] Iteration 98, lr = 0.0001
+I1028 03:57:18.206979  4830 solver.cpp:191] Iteration 99, loss = 0.00190729
+I1028 03:57:18.207061  4830 solver.cpp:404] Iteration 99, lr = 0.0001
+I1028 03:57:18.211951  4830 solver.cpp:247] Iteration 100, Testing net (#0)
+I1028 03:57:18.398784  4830 solver.cpp:286] Test loss: 0.475895
+I1028 03:57:18.398816  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:18.398823  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:18.398828  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:18.398833  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:18.829495  4830 solver.cpp:191] Iteration 100, loss = 0.0020025
+I1028 03:57:18.829538  4830 solver.cpp:404] Iteration 100, lr = 0.0001
+I1028 03:57:19.386173  4830 solver.cpp:191] Iteration 101, loss = 0.00147603
+I1028 03:57:19.386216  4830 solver.cpp:404] Iteration 101, lr = 0.0001
+I1028 03:57:19.942638  4830 solver.cpp:191] Iteration 102, loss = 0.00151668
+I1028 03:57:19.942670  4830 solver.cpp:404] Iteration 102, lr = 0.0001
+I1028 03:57:20.499660  4830 solver.cpp:191] Iteration 103, loss = 0.00122556
+I1028 03:57:20.499691  4830 solver.cpp:404] Iteration 103, lr = 0.0001
+I1028 03:57:21.056254  4830 solver.cpp:191] Iteration 104, loss = 0.00275971
+I1028 03:57:21.056296  4830 solver.cpp:404] Iteration 104, lr = 0.0001
+I1028 03:57:21.061200  4830 solver.cpp:247] Iteration 105, Testing net (#0)
+I1028 03:57:21.248049  4830 solver.cpp:286] Test loss: 0.526762
+I1028 03:57:21.248080  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:21.248086  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:21.248091  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:21.248096  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:21.679325  4830 solver.cpp:191] Iteration 105, loss = 0.00219741
+I1028 03:57:21.679368  4830 solver.cpp:404] Iteration 105, lr = 0.0001
+I1028 03:57:22.236677  4830 solver.cpp:191] Iteration 106, loss = 0.00154836
+I1028 03:57:22.236721  4830 solver.cpp:404] Iteration 106, lr = 0.0001
+I1028 03:57:22.793624  4830 solver.cpp:191] Iteration 107, loss = 0.0013127
+I1028 03:57:22.793668  4830 solver.cpp:404] Iteration 107, lr = 0.0001
+I1028 03:57:23.350613  4830 solver.cpp:191] Iteration 108, loss = 0.00104548
+I1028 03:57:23.350658  4830 solver.cpp:404] Iteration 108, lr = 0.0001
+I1028 03:57:23.907017  4830 solver.cpp:191] Iteration 109, loss = 0.0014351
+I1028 03:57:23.907050  4830 solver.cpp:404] Iteration 109, lr = 0.0001
+I1028 03:57:23.912019  4830 solver.cpp:247] Iteration 110, Testing net (#0)
+I1028 03:57:24.098498  4830 solver.cpp:286] Test loss: 0.504542
+I1028 03:57:24.098530  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:24.098534  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:24.098541  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:24.098544  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:24.528341  4830 solver.cpp:191] Iteration 110, loss = 0.00147795
+I1028 03:57:24.528385  4830 solver.cpp:404] Iteration 110, lr = 0.0001
+I1028 03:57:25.083910  4830 solver.cpp:191] Iteration 111, loss = 0.00116215
+I1028 03:57:25.083956  4830 solver.cpp:404] Iteration 111, lr = 0.0001
+I1028 03:57:25.640247  4830 solver.cpp:191] Iteration 112, loss = 0.00139693
+I1028 03:57:25.640291  4830 solver.cpp:404] Iteration 112, lr = 0.0001
+I1028 03:57:26.197371  4830 solver.cpp:191] Iteration 113, loss = 0.00199903
+I1028 03:57:26.197414  4830 solver.cpp:404] Iteration 113, lr = 0.0001
+I1028 03:57:26.754706  4830 solver.cpp:191] Iteration 114, loss = 0.00096326
+I1028 03:57:26.754751  4830 solver.cpp:404] Iteration 114, lr = 0.0001
+I1028 03:57:26.759706  4830 solver.cpp:247] Iteration 115, Testing net (#0)
+I1028 03:57:26.946370  4830 solver.cpp:286] Test loss: 0.461854
+I1028 03:57:26.946403  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:26.946409  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:26.946414  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:26.946429  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:27.377426  4830 solver.cpp:191] Iteration 115, loss = 0.00257398
+I1028 03:57:27.377460  4830 solver.cpp:404] Iteration 115, lr = 0.0001
+I1028 03:57:27.934320  4830 solver.cpp:191] Iteration 116, loss = 0.00186591
+I1028 03:57:27.934365  4830 solver.cpp:404] Iteration 116, lr = 0.0001
+I1028 03:57:28.491277  4830 solver.cpp:191] Iteration 117, loss = 0.00271009
+I1028 03:57:28.491322  4830 solver.cpp:404] Iteration 117, lr = 0.0001
+I1028 03:57:29.048135  4830 solver.cpp:191] Iteration 118, loss = 0.00131496
+I1028 03:57:29.048178  4830 solver.cpp:404] Iteration 118, lr = 0.0001
+I1028 03:57:29.605171  4830 solver.cpp:191] Iteration 119, loss = 0.00147614
+I1028 03:57:29.605204  4830 solver.cpp:404] Iteration 119, lr = 0.0001
+I1028 03:57:29.610234  4830 solver.cpp:247] Iteration 120, Testing net (#0)
+I1028 03:57:29.797117  4830 solver.cpp:286] Test loss: 0.47174
+I1028 03:57:29.797150  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:29.797155  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:29.797161  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:29.797165  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:30.226760  4830 solver.cpp:191] Iteration 120, loss = 0.00126529
+I1028 03:57:30.226804  4830 solver.cpp:404] Iteration 120, lr = 0.0001
+I1028 03:57:30.783807  4830 solver.cpp:191] Iteration 121, loss = 0.0012917
+I1028 03:57:30.783849  4830 solver.cpp:404] Iteration 121, lr = 0.0001
+I1028 03:57:31.341114  4830 solver.cpp:191] Iteration 122, loss = 0.00119342
+I1028 03:57:31.341158  4830 solver.cpp:404] Iteration 122, lr = 0.0001
+I1028 03:57:31.898874  4830 solver.cpp:191] Iteration 123, loss = 0.00376423
+I1028 03:57:31.898918  4830 solver.cpp:404] Iteration 123, lr = 0.0001
+I1028 03:57:32.455299  4830 solver.cpp:191] Iteration 124, loss = 0.00124
+I1028 03:57:32.455343  4830 solver.cpp:404] Iteration 124, lr = 0.0001
+I1028 03:57:32.460335  4830 solver.cpp:247] Iteration 125, Testing net (#0)
+I1028 03:57:32.647498  4830 solver.cpp:286] Test loss: 0.479684
+I1028 03:57:32.647532  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:32.647538  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:32.647543  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:32.647547  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:33.077976  4830 solver.cpp:191] Iteration 125, loss = 0.0020293
+I1028 03:57:33.078021  4830 solver.cpp:404] Iteration 125, lr = 0.0001
+I1028 03:57:33.635349  4830 solver.cpp:191] Iteration 126, loss = 0.00203083
+I1028 03:57:33.635392  4830 solver.cpp:404] Iteration 126, lr = 0.0001
+I1028 03:57:34.191520  4830 solver.cpp:191] Iteration 127, loss = 0.00157076
+I1028 03:57:34.191565  4830 solver.cpp:404] Iteration 127, lr = 0.0001
+I1028 03:57:34.747795  4830 solver.cpp:191] Iteration 128, loss = 0.00208386
+I1028 03:57:34.747829  4830 solver.cpp:404] Iteration 128, lr = 0.0001
+I1028 03:57:35.304911  4830 solver.cpp:191] Iteration 129, loss = 0.00158758
+I1028 03:57:35.304956  4830 solver.cpp:404] Iteration 129, lr = 0.0001
+I1028 03:57:35.309850  4830 solver.cpp:247] Iteration 130, Testing net (#0)
+I1028 03:57:35.496695  4830 solver.cpp:286] Test loss: 0.533374
+I1028 03:57:35.496727  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:35.496733  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:35.496738  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:35.496742  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:35.927239  4830 solver.cpp:191] Iteration 130, loss = 0.00229627
+I1028 03:57:35.927283  4830 solver.cpp:404] Iteration 130, lr = 0.0001
+I1028 03:57:36.483907  4830 solver.cpp:191] Iteration 131, loss = 0.00228532
+I1028 03:57:36.483940  4830 solver.cpp:404] Iteration 131, lr = 0.0001
+I1028 03:57:37.040504  4830 solver.cpp:191] Iteration 132, loss = 0.00138295
+I1028 03:57:37.040549  4830 solver.cpp:404] Iteration 132, lr = 0.0001
+I1028 03:57:37.596477  4830 solver.cpp:191] Iteration 133, loss = 0.00135925
+I1028 03:57:37.596521  4830 solver.cpp:404] Iteration 133, lr = 0.0001
+I1028 03:57:38.152827  4830 solver.cpp:191] Iteration 134, loss = 0.00350875
+I1028 03:57:38.152873  4830 solver.cpp:404] Iteration 134, lr = 0.0001
+I1028 03:57:38.157786  4830 solver.cpp:247] Iteration 135, Testing net (#0)
+I1028 03:57:38.344717  4830 solver.cpp:286] Test loss: 0.486542
+I1028 03:57:38.344748  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:38.344753  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:38.344758  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:38.344763  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:38.774974  4830 solver.cpp:191] Iteration 135, loss = 0.00151457
+I1028 03:57:38.775018  4830 solver.cpp:404] Iteration 135, lr = 0.0001
+I1028 03:57:39.331828  4830 solver.cpp:191] Iteration 136, loss = 0.00125439
+I1028 03:57:39.331858  4830 solver.cpp:404] Iteration 136, lr = 0.0001
+I1028 03:57:39.886837  4830 solver.cpp:191] Iteration 137, loss = 0.00138793
+I1028 03:57:39.886883  4830 solver.cpp:404] Iteration 137, lr = 0.0001
+I1028 03:57:40.444051  4830 solver.cpp:191] Iteration 138, loss = 0.00136408
+I1028 03:57:40.444083  4830 solver.cpp:404] Iteration 138, lr = 0.0001
+I1028 03:57:41.001266  4830 solver.cpp:191] Iteration 139, loss = 0.00130185
+I1028 03:57:41.001307  4830 solver.cpp:404] Iteration 139, lr = 0.0001
+I1028 03:57:41.006304  4830 solver.cpp:247] Iteration 140, Testing net (#0)
+I1028 03:57:41.193126  4830 solver.cpp:286] Test loss: 0.506635
+I1028 03:57:41.193157  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:41.193162  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:41.193167  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:41.193172  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:41.623457  4830 solver.cpp:191] Iteration 140, loss = 0.00260635
+I1028 03:57:41.623502  4830 solver.cpp:404] Iteration 140, lr = 0.0001
+I1028 03:57:42.180346  4830 solver.cpp:191] Iteration 141, loss = 0.00134955
+I1028 03:57:42.180377  4830 solver.cpp:404] Iteration 141, lr = 0.0001
+I1028 03:57:42.736166  4830 solver.cpp:191] Iteration 142, loss = 0.0010054
+I1028 03:57:42.736209  4830 solver.cpp:404] Iteration 142, lr = 0.0001
+I1028 03:57:43.292423  4830 solver.cpp:191] Iteration 143, loss = 0.00205545
+I1028 03:57:43.292467  4830 solver.cpp:404] Iteration 143, lr = 0.0001
+I1028 03:57:43.848789  4830 solver.cpp:191] Iteration 144, loss = 0.00120929
+I1028 03:57:43.848834  4830 solver.cpp:404] Iteration 144, lr = 0.0001
+I1028 03:57:43.853808  4830 solver.cpp:247] Iteration 145, Testing net (#0)
+I1028 03:57:44.040684  4830 solver.cpp:286] Test loss: 0.548832
+I1028 03:57:44.040715  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:44.040720  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:44.040726  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:44.040730  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:44.470512  4830 solver.cpp:191] Iteration 145, loss = 0.00103165
+I1028 03:57:44.470556  4830 solver.cpp:404] Iteration 145, lr = 0.0001
+I1028 03:57:45.026506  4830 solver.cpp:191] Iteration 146, loss = 0.00146285
+I1028 03:57:45.026551  4830 solver.cpp:404] Iteration 146, lr = 0.0001
+I1028 03:57:45.582664  4830 solver.cpp:191] Iteration 147, loss = 0.00112358
+I1028 03:57:45.582697  4830 solver.cpp:404] Iteration 147, lr = 0.0001
+I1028 03:57:46.139169  4830 solver.cpp:191] Iteration 148, loss = 0.0035839
+I1028 03:57:46.139214  4830 solver.cpp:404] Iteration 148, lr = 0.0001
+I1028 03:57:46.696601  4830 solver.cpp:191] Iteration 149, loss = 0.000863331
+I1028 03:57:46.696653  4830 solver.cpp:404] Iteration 149, lr = 0.0001
+I1028 03:57:46.701591  4830 solver.cpp:247] Iteration 150, Testing net (#0)
+I1028 03:57:46.888835  4830 solver.cpp:286] Test loss: 0.515875
+I1028 03:57:46.888866  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:46.888872  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:46.888877  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:46.888881  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:47.319401  4830 solver.cpp:191] Iteration 150, loss = 0.00131537
+I1028 03:57:47.319445  4830 solver.cpp:404] Iteration 150, lr = 0.0001
+I1028 03:57:47.876121  4830 solver.cpp:191] Iteration 151, loss = 0.00193127
+I1028 03:57:47.876165  4830 solver.cpp:404] Iteration 151, lr = 0.0001
+I1028 03:57:48.432279  4830 solver.cpp:191] Iteration 152, loss = 0.00133177
+I1028 03:57:48.432363  4830 solver.cpp:404] Iteration 152, lr = 0.0001
+I1028 03:57:48.988898  4830 solver.cpp:191] Iteration 153, loss = 0.00161873
+I1028 03:57:48.988942  4830 solver.cpp:404] Iteration 153, lr = 0.0001
+I1028 03:57:49.545763  4830 solver.cpp:191] Iteration 154, loss = 0.0018334
+I1028 03:57:49.545809  4830 solver.cpp:404] Iteration 154, lr = 0.0001
+I1028 03:57:49.550750  4830 solver.cpp:247] Iteration 155, Testing net (#0)
+I1028 03:57:49.737614  4830 solver.cpp:286] Test loss: 0.490679
+I1028 03:57:49.737646  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:49.737653  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:49.737658  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:49.737661  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:50.167867  4830 solver.cpp:191] Iteration 155, loss = 0.0016689
+I1028 03:57:50.167912  4830 solver.cpp:404] Iteration 155, lr = 0.0001
+I1028 03:57:50.724159  4830 solver.cpp:191] Iteration 156, loss = 0.00105242
+I1028 03:57:50.724191  4830 solver.cpp:404] Iteration 156, lr = 0.0001
+I1028 03:57:51.279634  4830 solver.cpp:191] Iteration 157, loss = 0.00166336
+I1028 03:57:51.279678  4830 solver.cpp:404] Iteration 157, lr = 0.0001
+I1028 03:57:51.836699  4830 solver.cpp:191] Iteration 158, loss = 0.00138778
+I1028 03:57:51.836743  4830 solver.cpp:404] Iteration 158, lr = 0.0001
+I1028 03:57:52.392918  4830 solver.cpp:191] Iteration 159, loss = 0.0012392
+I1028 03:57:52.392961  4830 solver.cpp:404] Iteration 159, lr = 0.0001
+I1028 03:57:52.397955  4830 solver.cpp:247] Iteration 160, Testing net (#0)
+I1028 03:57:52.584345  4830 solver.cpp:286] Test loss: 0.516172
+I1028 03:57:52.584378  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:52.584384  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:52.584389  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:52.584393  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:53.014214  4830 solver.cpp:191] Iteration 160, loss = 0.000871433
+I1028 03:57:53.014258  4830 solver.cpp:404] Iteration 160, lr = 0.0001
+I1028 03:57:53.569785  4830 solver.cpp:191] Iteration 161, loss = 0.00147604
+I1028 03:57:53.569828  4830 solver.cpp:404] Iteration 161, lr = 0.0001
+I1028 03:57:54.125516  4830 solver.cpp:191] Iteration 162, loss = 0.00142356
+I1028 03:57:54.125561  4830 solver.cpp:404] Iteration 162, lr = 0.0001
+I1028 03:57:54.681185  4830 solver.cpp:191] Iteration 163, loss = 0.00154753
+I1028 03:57:54.681229  4830 solver.cpp:404] Iteration 163, lr = 0.0001
+I1028 03:57:55.237380  4830 solver.cpp:191] Iteration 164, loss = 0.00116374
+I1028 03:57:55.237424  4830 solver.cpp:404] Iteration 164, lr = 0.0001
+I1028 03:57:55.242410  4830 solver.cpp:247] Iteration 165, Testing net (#0)
+I1028 03:57:55.428925  4830 solver.cpp:286] Test loss: 0.588604
+I1028 03:57:55.428956  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:55.428961  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:55.428966  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:55.428971  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:55.858156  4830 solver.cpp:191] Iteration 165, loss = 0.00142123
+I1028 03:57:55.858199  4830 solver.cpp:404] Iteration 165, lr = 0.0001
+I1028 03:57:56.414835  4830 solver.cpp:191] Iteration 166, loss = 0.00147456
+I1028 03:57:56.414878  4830 solver.cpp:404] Iteration 166, lr = 0.0001
+I1028 03:57:56.970759  4830 solver.cpp:191] Iteration 167, loss = 0.00077078
+I1028 03:57:56.970804  4830 solver.cpp:404] Iteration 167, lr = 0.0001
+I1028 03:57:57.526944  4830 solver.cpp:191] Iteration 168, loss = 0.00136042
+I1028 03:57:57.526976  4830 solver.cpp:404] Iteration 168, lr = 0.0001
+I1028 03:57:58.083307  4830 solver.cpp:191] Iteration 169, loss = 0.00112858
+I1028 03:57:58.083350  4830 solver.cpp:404] Iteration 169, lr = 0.0001
+I1028 03:57:58.088315  4830 solver.cpp:247] Iteration 170, Testing net (#0)
+I1028 03:57:58.274940  4830 solver.cpp:286] Test loss: 0.529383
+I1028 03:57:58.274971  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:57:58.274977  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:57:58.274982  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:57:58.274986  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:57:58.704756  4830 solver.cpp:191] Iteration 170, loss = 0.00131595
+I1028 03:57:58.704799  4830 solver.cpp:404] Iteration 170, lr = 0.0001
+I1028 03:57:59.261040  4830 solver.cpp:191] Iteration 171, loss = 0.00174107
+I1028 03:57:59.261070  4830 solver.cpp:404] Iteration 171, lr = 0.0001
+I1028 03:57:59.817549  4830 solver.cpp:191] Iteration 172, loss = 0.00117179
+I1028 03:57:59.817594  4830 solver.cpp:404] Iteration 172, lr = 0.0001
+I1028 03:58:00.373404  4830 solver.cpp:191] Iteration 173, loss = 0.00119433
+I1028 03:58:00.373435  4830 solver.cpp:404] Iteration 173, lr = 0.0001
+I1028 03:58:00.929504  4830 solver.cpp:191] Iteration 174, loss = 0.000932835
+I1028 03:58:00.929548  4830 solver.cpp:404] Iteration 174, lr = 0.0001
+I1028 03:58:00.934545  4830 solver.cpp:247] Iteration 175, Testing net (#0)
+I1028 03:58:01.121176  4830 solver.cpp:286] Test loss: 0.483993
+I1028 03:58:01.121207  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:01.121213  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:01.121218  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:01.121222  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:01.553299  4830 solver.cpp:191] Iteration 175, loss = 0.00101946
+I1028 03:58:01.553340  4830 solver.cpp:404] Iteration 175, lr = 0.0001
+I1028 03:58:02.109431  4830 solver.cpp:191] Iteration 176, loss = 0.000929974
+I1028 03:58:02.109474  4830 solver.cpp:404] Iteration 176, lr = 0.0001
+I1028 03:58:02.665731  4830 solver.cpp:191] Iteration 177, loss = 0.00129995
+I1028 03:58:02.665776  4830 solver.cpp:404] Iteration 177, lr = 0.0001
+I1028 03:58:03.222076  4830 solver.cpp:191] Iteration 178, loss = 0.000787761
+I1028 03:58:03.222121  4830 solver.cpp:404] Iteration 178, lr = 0.0001
+I1028 03:58:03.778446  4830 solver.cpp:191] Iteration 179, loss = 0.00125011
+I1028 03:58:03.778491  4830 solver.cpp:404] Iteration 179, lr = 0.0001
+I1028 03:58:03.783504  4830 solver.cpp:247] Iteration 180, Testing net (#0)
+I1028 03:58:03.970299  4830 solver.cpp:286] Test loss: 0.523367
+I1028 03:58:03.970331  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:03.970337  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:03.970342  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:03.970346  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:04.399384  4830 solver.cpp:191] Iteration 180, loss = 0.00173337
+I1028 03:58:04.399427  4830 solver.cpp:404] Iteration 180, lr = 0.0001
+I1028 03:58:04.955209  4830 solver.cpp:191] Iteration 181, loss = 0.00119173
+I1028 03:58:04.955253  4830 solver.cpp:404] Iteration 181, lr = 0.0001
+I1028 03:58:05.511356  4830 solver.cpp:191] Iteration 182, loss = 0.00138026
+I1028 03:58:05.511400  4830 solver.cpp:404] Iteration 182, lr = 0.0001
+I1028 03:58:06.067391  4830 solver.cpp:191] Iteration 183, loss = 0.000854391
+I1028 03:58:06.067435  4830 solver.cpp:404] Iteration 183, lr = 0.0001
+I1028 03:58:06.623379  4830 solver.cpp:191] Iteration 184, loss = 0.00123761
+I1028 03:58:06.623425  4830 solver.cpp:404] Iteration 184, lr = 0.0001
+I1028 03:58:06.628386  4830 solver.cpp:247] Iteration 185, Testing net (#0)
+I1028 03:58:06.814898  4830 solver.cpp:286] Test loss: 0.512527
+I1028 03:58:06.814929  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:06.814935  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:06.814940  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:06.814944  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:07.244874  4830 solver.cpp:191] Iteration 185, loss = 0.00194094
+I1028 03:58:07.244918  4830 solver.cpp:404] Iteration 185, lr = 0.0001
+I1028 03:58:07.801009  4830 solver.cpp:191] Iteration 186, loss = 0.001508
+I1028 03:58:07.801048  4830 solver.cpp:404] Iteration 186, lr = 0.0001
+I1028 03:58:08.357089  4830 solver.cpp:191] Iteration 187, loss = 0.0011813
+I1028 03:58:08.357134  4830 solver.cpp:404] Iteration 187, lr = 0.0001
+I1028 03:58:08.912530  4830 solver.cpp:191] Iteration 188, loss = 0.00153656
+I1028 03:58:08.912575  4830 solver.cpp:404] Iteration 188, lr = 0.0001
+I1028 03:58:09.468677  4830 solver.cpp:191] Iteration 189, loss = 0.00105174
+I1028 03:58:09.468711  4830 solver.cpp:404] Iteration 189, lr = 0.0001
+I1028 03:58:09.473675  4830 solver.cpp:247] Iteration 190, Testing net (#0)
+I1028 03:58:09.660548  4830 solver.cpp:286] Test loss: 0.47391
+I1028 03:58:09.660579  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:09.660585  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:09.660591  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:09.660595  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:10.090227  4830 solver.cpp:191] Iteration 190, loss = 0.000793144
+I1028 03:58:10.090271  4830 solver.cpp:404] Iteration 190, lr = 0.0001
+I1028 03:58:10.647080  4830 solver.cpp:191] Iteration 191, loss = 0.00104037
+I1028 03:58:10.647125  4830 solver.cpp:404] Iteration 191, lr = 0.0001
+I1028 03:58:11.202734  4830 solver.cpp:191] Iteration 192, loss = 0.00143498
+I1028 03:58:11.202777  4830 solver.cpp:404] Iteration 192, lr = 0.0001
+I1028 03:58:11.759300  4830 solver.cpp:191] Iteration 193, loss = 0.00130488
+I1028 03:58:11.759343  4830 solver.cpp:404] Iteration 193, lr = 0.0001
+I1028 03:58:12.315337  4830 solver.cpp:191] Iteration 194, loss = 0.00070889
+I1028 03:58:12.315368  4830 solver.cpp:404] Iteration 194, lr = 0.0001
+I1028 03:58:12.320351  4830 solver.cpp:247] Iteration 195, Testing net (#0)
+I1028 03:58:12.506904  4830 solver.cpp:286] Test loss: 0.524825
+I1028 03:58:12.506935  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:12.506942  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:12.506947  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:12.506950  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:12.936343  4830 solver.cpp:191] Iteration 195, loss = 0.00142603
+I1028 03:58:12.936388  4830 solver.cpp:404] Iteration 195, lr = 0.0001
+I1028 03:58:13.492516  4830 solver.cpp:191] Iteration 196, loss = 0.00102334
+I1028 03:58:13.492558  4830 solver.cpp:404] Iteration 196, lr = 0.0001
+I1028 03:58:14.049693  4830 solver.cpp:191] Iteration 197, loss = 0.00145639
+I1028 03:58:14.049724  4830 solver.cpp:404] Iteration 197, lr = 0.0001
+I1028 03:58:14.605649  4830 solver.cpp:191] Iteration 198, loss = 0.0016884
+I1028 03:58:14.605695  4830 solver.cpp:404] Iteration 198, lr = 0.0001
+I1028 03:58:15.161422  4830 solver.cpp:191] Iteration 199, loss = 0.00126973
+I1028 03:58:15.161453  4830 solver.cpp:404] Iteration 199, lr = 0.0001
+I1028 03:58:15.166406  4830 solver.cpp:247] Iteration 200, Testing net (#0)
+I1028 03:58:15.353163  4830 solver.cpp:286] Test loss: 0.538203
+I1028 03:58:15.353193  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:15.353199  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:15.353204  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:15.353207  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:15.783124  4830 solver.cpp:191] Iteration 200, loss = 0.0014078
+I1028 03:58:15.783169  4830 solver.cpp:404] Iteration 200, lr = 0.0001
+I1028 03:58:16.339634  4830 solver.cpp:191] Iteration 201, loss = 0.00114154
+I1028 03:58:16.339679  4830 solver.cpp:404] Iteration 201, lr = 0.0001
+I1028 03:58:16.895774  4830 solver.cpp:191] Iteration 202, loss = 0.000895483
+I1028 03:58:16.895822  4830 solver.cpp:404] Iteration 202, lr = 0.0001
+I1028 03:58:17.452182  4830 solver.cpp:191] Iteration 203, loss = 0.00110731
+I1028 03:58:17.452226  4830 solver.cpp:404] Iteration 203, lr = 0.0001
+I1028 03:58:18.007624  4830 solver.cpp:191] Iteration 204, loss = 0.00137884
+I1028 03:58:18.007657  4830 solver.cpp:404] Iteration 204, lr = 0.0001
+I1028 03:58:18.012589  4830 solver.cpp:247] Iteration 205, Testing net (#0)
+I1028 03:58:18.198956  4830 solver.cpp:286] Test loss: 0.526349
+I1028 03:58:18.198987  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:18.198992  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:18.198998  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:18.199002  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:18.628696  4830 solver.cpp:191] Iteration 205, loss = 0.00150648
+I1028 03:58:18.628779  4830 solver.cpp:404] Iteration 205, lr = 0.0001
+I1028 03:58:19.185273  4830 solver.cpp:191] Iteration 206, loss = 0.000816739
+I1028 03:58:19.185317  4830 solver.cpp:404] Iteration 206, lr = 0.0001
+I1028 03:58:19.741732  4830 solver.cpp:191] Iteration 207, loss = 0.000860665
+I1028 03:58:19.741765  4830 solver.cpp:404] Iteration 207, lr = 0.0001
+I1028 03:58:20.297744  4830 solver.cpp:191] Iteration 208, loss = 0.0009747
+I1028 03:58:20.297786  4830 solver.cpp:404] Iteration 208, lr = 0.0001
+I1028 03:58:20.853790  4830 solver.cpp:191] Iteration 209, loss = 0.00139991
+I1028 03:58:20.853832  4830 solver.cpp:404] Iteration 209, lr = 0.0001
+I1028 03:58:20.858728  4830 solver.cpp:247] Iteration 210, Testing net (#0)
+I1028 03:58:21.045352  4830 solver.cpp:286] Test loss: 0.548467
+I1028 03:58:21.045384  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:21.045390  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:21.045395  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:21.045399  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:21.474370  4830 solver.cpp:191] Iteration 210, loss = 0.00138701
+I1028 03:58:21.474414  4830 solver.cpp:404] Iteration 210, lr = 0.0001
+I1028 03:58:22.030176  4830 solver.cpp:191] Iteration 211, loss = 0.000762792
+I1028 03:58:22.030220  4830 solver.cpp:404] Iteration 211, lr = 0.0001
+I1028 03:58:22.586494  4830 solver.cpp:191] Iteration 212, loss = 0.000627197
+I1028 03:58:22.586539  4830 solver.cpp:404] Iteration 212, lr = 0.0001
+I1028 03:58:23.141811  4830 solver.cpp:191] Iteration 213, loss = 0.000654409
+I1028 03:58:23.141855  4830 solver.cpp:404] Iteration 213, lr = 0.0001
+I1028 03:58:23.697381  4830 solver.cpp:191] Iteration 214, loss = 0.00152307
+I1028 03:58:23.697412  4830 solver.cpp:404] Iteration 214, lr = 0.0001
+I1028 03:58:23.702425  4830 solver.cpp:247] Iteration 215, Testing net (#0)
+I1028 03:58:23.889010  4830 solver.cpp:286] Test loss: 0.58548
+I1028 03:58:23.889040  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:23.889046  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:23.889051  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:23.889055  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:24.318017  4830 solver.cpp:191] Iteration 215, loss = 0.000707017
+I1028 03:58:24.318048  4830 solver.cpp:404] Iteration 215, lr = 0.0001
+I1028 03:58:24.874691  4830 solver.cpp:191] Iteration 216, loss = 0.000966506
+I1028 03:58:24.874735  4830 solver.cpp:404] Iteration 216, lr = 0.0001
+I1028 03:58:25.430796  4830 solver.cpp:191] Iteration 217, loss = 0.00152981
+I1028 03:58:25.430841  4830 solver.cpp:404] Iteration 217, lr = 0.0001
+I1028 03:58:25.987272  4830 solver.cpp:191] Iteration 218, loss = 0.000769169
+I1028 03:58:25.987301  4830 solver.cpp:404] Iteration 218, lr = 0.0001
+I1028 03:58:26.543017  4830 solver.cpp:191] Iteration 219, loss = 0.000801304
+I1028 03:58:26.543061  4830 solver.cpp:404] Iteration 219, lr = 0.0001
+I1028 03:58:26.548043  4830 solver.cpp:247] Iteration 220, Testing net (#0)
+I1028 03:58:26.734590  4830 solver.cpp:286] Test loss: 0.532391
+I1028 03:58:26.734618  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:26.734624  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:26.734629  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:26.734633  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:27.164250  4830 solver.cpp:191] Iteration 220, loss = 0.000877434
+I1028 03:58:27.164294  4830 solver.cpp:404] Iteration 220, lr = 0.0001
+I1028 03:58:27.720263  4830 solver.cpp:191] Iteration 221, loss = 0.00123285
+I1028 03:58:27.720301  4830 solver.cpp:404] Iteration 221, lr = 0.0001
+I1028 03:58:28.275465  4830 solver.cpp:191] Iteration 222, loss = 0.00137996
+I1028 03:58:28.275508  4830 solver.cpp:404] Iteration 222, lr = 0.0001
+I1028 03:58:28.830607  4830 solver.cpp:191] Iteration 223, loss = 0.00122636
+I1028 03:58:28.830648  4830 solver.cpp:404] Iteration 223, lr = 0.0001
+I1028 03:58:29.386557  4830 solver.cpp:191] Iteration 224, loss = 0.000929095
+I1028 03:58:29.386590  4830 solver.cpp:404] Iteration 224, lr = 0.0001
+I1028 03:58:29.391590  4830 solver.cpp:247] Iteration 225, Testing net (#0)
+I1028 03:58:29.577931  4830 solver.cpp:286] Test loss: 0.553872
+I1028 03:58:29.577963  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:29.577970  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:29.577975  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:29.577978  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:30.008112  4830 solver.cpp:191] Iteration 225, loss = 0.00113212
+I1028 03:58:30.008157  4830 solver.cpp:404] Iteration 225, lr = 0.0001
+I1028 03:58:30.564164  4830 solver.cpp:191] Iteration 226, loss = 0.000791579
+I1028 03:58:30.564209  4830 solver.cpp:404] Iteration 226, lr = 0.0001
+I1028 03:58:31.119894  4830 solver.cpp:191] Iteration 227, loss = 0.00119969
+I1028 03:58:31.119935  4830 solver.cpp:404] Iteration 227, lr = 0.0001
+I1028 03:58:31.677309  4830 solver.cpp:191] Iteration 228, loss = 0.000861793
+I1028 03:58:31.677351  4830 solver.cpp:404] Iteration 228, lr = 0.0001
+I1028 03:58:32.232632  4830 solver.cpp:191] Iteration 229, loss = 0.000738274
+I1028 03:58:32.232676  4830 solver.cpp:404] Iteration 229, lr = 0.0001
+I1028 03:58:32.237643  4830 solver.cpp:247] Iteration 230, Testing net (#0)
+I1028 03:58:32.424425  4830 solver.cpp:286] Test loss: 0.5116
+I1028 03:58:32.424455  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:32.424461  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:32.424466  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:32.424470  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:32.853896  4830 solver.cpp:191] Iteration 230, loss = 0.00110544
+I1028 03:58:32.853929  4830 solver.cpp:404] Iteration 230, lr = 0.0001
+I1028 03:58:33.409893  4830 solver.cpp:191] Iteration 231, loss = 0.000767721
+I1028 03:58:33.409935  4830 solver.cpp:404] Iteration 231, lr = 0.0001
+I1028 03:58:33.965994  4830 solver.cpp:191] Iteration 232, loss = 0.000886532
+I1028 03:58:33.966037  4830 solver.cpp:404] Iteration 232, lr = 0.0001
+I1028 03:58:34.522157  4830 solver.cpp:191] Iteration 233, loss = 0.000901132
+I1028 03:58:34.522200  4830 solver.cpp:404] Iteration 233, lr = 0.0001
+I1028 03:58:35.077932  4830 solver.cpp:191] Iteration 234, loss = 0.00145032
+I1028 03:58:35.077975  4830 solver.cpp:404] Iteration 234, lr = 0.0001
+I1028 03:58:35.082919  4830 solver.cpp:247] Iteration 235, Testing net (#0)
+I1028 03:58:35.269448  4830 solver.cpp:286] Test loss: 0.525696
+I1028 03:58:35.269479  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:35.269485  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:35.269490  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:35.269495  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:35.699882  4830 solver.cpp:191] Iteration 235, loss = 0.00101508
+I1028 03:58:35.699925  4830 solver.cpp:404] Iteration 235, lr = 0.0001
+I1028 03:58:36.255309  4830 solver.cpp:191] Iteration 236, loss = 0.000743363
+I1028 03:58:36.255354  4830 solver.cpp:404] Iteration 236, lr = 0.0001
+I1028 03:58:36.811194  4830 solver.cpp:191] Iteration 237, loss = 0.00095617
+I1028 03:58:36.811239  4830 solver.cpp:404] Iteration 237, lr = 0.0001
+I1028 03:58:37.366710  4830 solver.cpp:191] Iteration 238, loss = 0.000983316
+I1028 03:58:37.366754  4830 solver.cpp:404] Iteration 238, lr = 0.0001
+I1028 03:58:37.921350  4830 solver.cpp:191] Iteration 239, loss = 0.00129019
+I1028 03:58:37.921394  4830 solver.cpp:404] Iteration 239, lr = 0.0001
+I1028 03:58:37.926278  4830 solver.cpp:247] Iteration 240, Testing net (#0)
+I1028 03:58:38.112951  4830 solver.cpp:286] Test loss: 0.511061
+I1028 03:58:38.112992  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:38.112998  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:38.113003  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:38.113008  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:38.542986  4830 solver.cpp:191] Iteration 240, loss = 0.000757874
+I1028 03:58:38.543030  4830 solver.cpp:404] Iteration 240, lr = 0.0001
+I1028 03:58:39.099220  4830 solver.cpp:191] Iteration 241, loss = 0.000852496
+I1028 03:58:39.099252  4830 solver.cpp:404] Iteration 241, lr = 0.0001
+I1028 03:58:39.654467  4830 solver.cpp:191] Iteration 242, loss = 0.00149657
+I1028 03:58:39.654511  4830 solver.cpp:404] Iteration 242, lr = 0.0001
+I1028 03:58:40.209960  4830 solver.cpp:191] Iteration 243, loss = 0.000841957
+I1028 03:58:40.210005  4830 solver.cpp:404] Iteration 243, lr = 0.0001
+I1028 03:58:40.765460  4830 solver.cpp:191] Iteration 244, loss = 0.00110577
+I1028 03:58:40.765502  4830 solver.cpp:404] Iteration 244, lr = 0.0001
+I1028 03:58:40.770478  4830 solver.cpp:247] Iteration 245, Testing net (#0)
+I1028 03:58:40.957183  4830 solver.cpp:286] Test loss: 0.522661
+I1028 03:58:40.957214  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:40.957221  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:40.957226  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:40.957229  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:41.386904  4830 solver.cpp:191] Iteration 245, loss = 0.000707811
+I1028 03:58:41.386935  4830 solver.cpp:404] Iteration 245, lr = 0.0001
+I1028 03:58:41.942705  4830 solver.cpp:191] Iteration 246, loss = 0.00114683
+I1028 03:58:41.942749  4830 solver.cpp:404] Iteration 246, lr = 0.0001
+I1028 03:58:42.498293  4830 solver.cpp:191] Iteration 247, loss = 0.000882769
+I1028 03:58:42.498337  4830 solver.cpp:404] Iteration 247, lr = 0.0001
+I1028 03:58:43.054347  4830 solver.cpp:191] Iteration 248, loss = 0.00122642
+I1028 03:58:43.054389  4830 solver.cpp:404] Iteration 248, lr = 0.0001
+I1028 03:58:43.609688  4830 solver.cpp:191] Iteration 249, loss = 0.000667498
+I1028 03:58:43.609732  4830 solver.cpp:404] Iteration 249, lr = 0.0001
+I1028 03:58:43.614738  4830 solver.cpp:247] Iteration 250, Testing net (#0)
+I1028 03:58:43.801301  4830 solver.cpp:286] Test loss: 0.560572
+I1028 03:58:43.801333  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:43.801338  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:43.801344  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:43.801348  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:44.231302  4830 solver.cpp:191] Iteration 250, loss = 0.00104394
+I1028 03:58:44.231334  4830 solver.cpp:404] Iteration 250, lr = 0.0001
+I1028 03:58:44.786011  4830 solver.cpp:191] Iteration 251, loss = 0.000799379
+I1028 03:58:44.786056  4830 solver.cpp:404] Iteration 251, lr = 0.0001
+I1028 03:58:45.341308  4830 solver.cpp:191] Iteration 252, loss = 0.000657869
+I1028 03:58:45.341351  4830 solver.cpp:404] Iteration 252, lr = 0.0001
+I1028 03:58:45.896864  4830 solver.cpp:191] Iteration 253, loss = 0.00086592
+I1028 03:58:45.896908  4830 solver.cpp:404] Iteration 253, lr = 0.0001
+I1028 03:58:46.452697  4830 solver.cpp:191] Iteration 254, loss = 0.000804421
+I1028 03:58:46.452741  4830 solver.cpp:404] Iteration 254, lr = 0.0001
+I1028 03:58:46.457628  4830 solver.cpp:247] Iteration 255, Testing net (#0)
+I1028 03:58:46.643949  4830 solver.cpp:286] Test loss: 0.51737
+I1028 03:58:46.643980  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:46.643986  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:46.643991  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:46.643996  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:47.073875  4830 solver.cpp:191] Iteration 255, loss = 0.00111418
+I1028 03:58:47.073909  4830 solver.cpp:404] Iteration 255, lr = 0.0001
+I1028 03:58:47.632002  4830 solver.cpp:191] Iteration 256, loss = 0.000950174
+I1028 03:58:47.632035  4830 solver.cpp:404] Iteration 256, lr = 0.0001
+I1028 03:58:48.204406  4830 solver.cpp:191] Iteration 257, loss = 0.000686055
+I1028 03:58:48.204449  4830 solver.cpp:404] Iteration 257, lr = 0.0001
+I1028 03:58:48.778066  4830 solver.cpp:191] Iteration 258, loss = 0.000865203
+I1028 03:58:48.778154  4830 solver.cpp:404] Iteration 258, lr = 0.0001
+I1028 03:58:49.352107  4830 solver.cpp:191] Iteration 259, loss = 0.000948943
+I1028 03:58:49.352135  4830 solver.cpp:404] Iteration 259, lr = 0.0001
+I1028 03:58:49.357241  4830 solver.cpp:247] Iteration 260, Testing net (#0)
+I1028 03:58:49.550060  4830 solver.cpp:286] Test loss: 0.550944
+I1028 03:58:49.550091  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:49.550096  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:49.550101  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:49.550109  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:49.994745  4830 solver.cpp:191] Iteration 260, loss = 0.00118168
+I1028 03:58:49.994789  4830 solver.cpp:404] Iteration 260, lr = 0.0001
+I1028 03:58:50.568698  4830 solver.cpp:191] Iteration 261, loss = 0.00134638
+I1028 03:58:50.568742  4830 solver.cpp:404] Iteration 261, lr = 0.0001
+I1028 03:58:51.142673  4830 solver.cpp:191] Iteration 262, loss = 0.000975132
+I1028 03:58:51.142716  4830 solver.cpp:404] Iteration 262, lr = 0.0001
+I1028 03:58:51.717010  4830 solver.cpp:191] Iteration 263, loss = 0.00066973
+I1028 03:58:51.717053  4830 solver.cpp:404] Iteration 263, lr = 0.0001
+I1028 03:58:52.291604  4830 solver.cpp:191] Iteration 264, loss = 0.000887574
+I1028 03:58:52.291646  4830 solver.cpp:404] Iteration 264, lr = 0.0001
+I1028 03:58:52.296730  4830 solver.cpp:247] Iteration 265, Testing net (#0)
+I1028 03:58:52.489135  4830 solver.cpp:286] Test loss: 0.55358
+I1028 03:58:52.489167  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:52.489173  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:52.489178  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:52.489182  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:52.933091  4830 solver.cpp:191] Iteration 265, loss = 0.00132872
+I1028 03:58:52.933135  4830 solver.cpp:404] Iteration 265, lr = 0.0001
+I1028 03:58:53.507848  4830 solver.cpp:191] Iteration 266, loss = 0.000983143
+I1028 03:58:53.507892  4830 solver.cpp:404] Iteration 266, lr = 0.0001
+I1028 03:58:54.081655  4830 solver.cpp:191] Iteration 267, loss = 0.000607721
+I1028 03:58:54.081699  4830 solver.cpp:404] Iteration 267, lr = 0.0001
+I1028 03:58:54.655583  4830 solver.cpp:191] Iteration 268, loss = 0.000529236
+I1028 03:58:54.655628  4830 solver.cpp:404] Iteration 268, lr = 0.0001
+I1028 03:58:55.229434  4830 solver.cpp:191] Iteration 269, loss = 0.00134465
+I1028 03:58:55.229478  4830 solver.cpp:404] Iteration 269, lr = 0.0001
+I1028 03:58:55.234522  4830 solver.cpp:247] Iteration 270, Testing net (#0)
+I1028 03:58:55.427011  4830 solver.cpp:286] Test loss: 0.542537
+I1028 03:58:55.427043  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:55.427049  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:55.427054  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:55.427059  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:55.869369  4830 solver.cpp:191] Iteration 270, loss = 0.00120074
+I1028 03:58:55.869411  4830 solver.cpp:404] Iteration 270, lr = 0.0001
+I1028 03:58:56.442674  4830 solver.cpp:191] Iteration 271, loss = 0.000675974
+I1028 03:58:56.442718  4830 solver.cpp:404] Iteration 271, lr = 0.0001
+I1028 03:58:57.014503  4830 solver.cpp:191] Iteration 272, loss = 0.000628924
+I1028 03:58:57.014547  4830 solver.cpp:404] Iteration 272, lr = 0.0001
+I1028 03:58:57.581578  4830 solver.cpp:191] Iteration 273, loss = 0.00109648
+I1028 03:58:57.581622  4830 solver.cpp:404] Iteration 273, lr = 0.0001
+I1028 03:58:58.148942  4830 solver.cpp:191] Iteration 274, loss = 0.000906204
+I1028 03:58:58.148988  4830 solver.cpp:404] Iteration 274, lr = 0.0001
+I1028 03:58:58.154008  4830 solver.cpp:247] Iteration 275, Testing net (#0)
+I1028 03:58:58.344245  4830 solver.cpp:286] Test loss: 0.531138
+I1028 03:58:58.344275  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:58:58.344290  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:58:58.344295  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:58:58.344300  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:58:58.782122  4830 solver.cpp:191] Iteration 275, loss = 0.00092517
+I1028 03:58:58.782167  4830 solver.cpp:404] Iteration 275, lr = 0.0001
+I1028 03:58:59.349972  4830 solver.cpp:191] Iteration 276, loss = 0.000740545
+I1028 03:58:59.350002  4830 solver.cpp:404] Iteration 276, lr = 0.0001
+I1028 03:58:59.917930  4830 solver.cpp:191] Iteration 277, loss = 0.000864385
+I1028 03:58:59.917974  4830 solver.cpp:404] Iteration 277, lr = 0.0001
+I1028 03:59:00.484813  4830 solver.cpp:191] Iteration 278, loss = 0.000877565
+I1028 03:59:00.484856  4830 solver.cpp:404] Iteration 278, lr = 0.0001
+I1028 03:59:01.050858  4830 solver.cpp:191] Iteration 279, loss = 0.00086113
+I1028 03:59:01.050900  4830 solver.cpp:404] Iteration 279, lr = 0.0001
+I1028 03:59:01.055910  4830 solver.cpp:247] Iteration 280, Testing net (#0)
+I1028 03:59:01.244081  4830 solver.cpp:286] Test loss: 0.510696
+I1028 03:59:01.244112  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:01.244117  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:01.244122  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:01.244127  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:01.679487  4830 solver.cpp:191] Iteration 280, loss = 0.000618917
+I1028 03:59:01.679530  4830 solver.cpp:404] Iteration 280, lr = 0.0001
+I1028 03:59:02.240731  4830 solver.cpp:191] Iteration 281, loss = 0.00087534
+I1028 03:59:02.240775  4830 solver.cpp:404] Iteration 281, lr = 0.0001
+I1028 03:59:02.799758  4830 solver.cpp:191] Iteration 282, loss = 0.00134251
+I1028 03:59:02.799789  4830 solver.cpp:404] Iteration 282, lr = 0.0001
+I1028 03:59:03.360528  4830 solver.cpp:191] Iteration 283, loss = 0.000778875
+I1028 03:59:03.360559  4830 solver.cpp:404] Iteration 283, lr = 0.0001
+I1028 03:59:03.922126  4830 solver.cpp:191] Iteration 284, loss = 0.000908473
+I1028 03:59:03.922168  4830 solver.cpp:404] Iteration 284, lr = 0.0001
+I1028 03:59:03.927103  4830 solver.cpp:247] Iteration 285, Testing net (#0)
+I1028 03:59:04.115105  4830 solver.cpp:286] Test loss: 0.484369
+I1028 03:59:04.115138  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:04.115144  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:04.115149  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:04.115152  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:04.548792  4830 solver.cpp:191] Iteration 285, loss = 0.000862034
+I1028 03:59:04.548836  4830 solver.cpp:404] Iteration 285, lr = 0.0001
+I1028 03:59:05.109949  4830 solver.cpp:191] Iteration 286, loss = 0.000860923
+I1028 03:59:05.109992  4830 solver.cpp:404] Iteration 286, lr = 0.0001
+I1028 03:59:05.670596  4830 solver.cpp:191] Iteration 287, loss = 0.000962673
+I1028 03:59:05.670639  4830 solver.cpp:404] Iteration 287, lr = 0.0001
+I1028 03:59:06.231700  4830 solver.cpp:191] Iteration 288, loss = 0.000630179
+I1028 03:59:06.231745  4830 solver.cpp:404] Iteration 288, lr = 0.0001
+I1028 03:59:06.792997  4830 solver.cpp:191] Iteration 289, loss = 0.000749939
+I1028 03:59:06.793041  4830 solver.cpp:404] Iteration 289, lr = 0.0001
+I1028 03:59:06.797997  4830 solver.cpp:247] Iteration 290, Testing net (#0)
+I1028 03:59:06.986259  4830 solver.cpp:286] Test loss: 0.523223
+I1028 03:59:06.986291  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:06.986297  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:06.986302  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:06.986306  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:07.419253  4830 solver.cpp:191] Iteration 290, loss = 0.00139615
+I1028 03:59:07.419306  4830 solver.cpp:404] Iteration 290, lr = 0.0001
+I1028 03:59:07.979969  4830 solver.cpp:191] Iteration 291, loss = 0.00148346
+I1028 03:59:07.980011  4830 solver.cpp:404] Iteration 291, lr = 0.0001
+I1028 03:59:08.541324  4830 solver.cpp:191] Iteration 292, loss = 0.00103987
+I1028 03:59:08.541368  4830 solver.cpp:404] Iteration 292, lr = 0.0001
+I1028 03:59:09.102779  4830 solver.cpp:191] Iteration 293, loss = 0.000893546
+I1028 03:59:09.102823  4830 solver.cpp:404] Iteration 293, lr = 0.0001
+I1028 03:59:09.664993  4830 solver.cpp:191] Iteration 294, loss = 0.000600374
+I1028 03:59:09.665024  4830 solver.cpp:404] Iteration 294, lr = 0.0001
+I1028 03:59:09.670070  4830 solver.cpp:247] Iteration 295, Testing net (#0)
+I1028 03:59:09.858016  4830 solver.cpp:286] Test loss: 0.488338
+I1028 03:59:09.858047  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:09.858053  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:09.858059  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:09.858063  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:10.291621  4830 solver.cpp:191] Iteration 295, loss = 0.000801221
+I1028 03:59:10.291654  4830 solver.cpp:404] Iteration 295, lr = 0.0001
+I1028 03:59:10.853189  4830 solver.cpp:191] Iteration 296, loss = 0.00102097
+I1028 03:59:10.853222  4830 solver.cpp:404] Iteration 296, lr = 0.0001
+I1028 03:59:11.414311  4830 solver.cpp:191] Iteration 297, loss = 0.000749972
+I1028 03:59:11.414355  4830 solver.cpp:404] Iteration 297, lr = 0.0001
+I1028 03:59:11.975087  4830 solver.cpp:191] Iteration 298, loss = 0.00078414
+I1028 03:59:11.975132  4830 solver.cpp:404] Iteration 298, lr = 0.0001
+I1028 03:59:12.535987  4830 solver.cpp:191] Iteration 299, loss = 0.000822486
+I1028 03:59:12.536031  4830 solver.cpp:404] Iteration 299, lr = 0.0001
+I1028 03:59:12.541060  4830 solver.cpp:247] Iteration 300, Testing net (#0)
+I1028 03:59:12.729440  4830 solver.cpp:286] Test loss: 0.554733
+I1028 03:59:12.729471  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:12.729477  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:12.729483  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:12.729487  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:13.163540  4830 solver.cpp:191] Iteration 300, loss = 0.000746791
+I1028 03:59:13.163584  4830 solver.cpp:404] Iteration 300, lr = 0.0001
+I1028 03:59:13.724433  4830 solver.cpp:191] Iteration 301, loss = 0.000884027
+I1028 03:59:13.724465  4830 solver.cpp:404] Iteration 301, lr = 0.0001
+I1028 03:59:14.285327  4830 solver.cpp:191] Iteration 302, loss = 0.00106064
+I1028 03:59:14.285372  4830 solver.cpp:404] Iteration 302, lr = 0.0001
+I1028 03:59:14.846355  4830 solver.cpp:191] Iteration 303, loss = 0.00080197
+I1028 03:59:14.846398  4830 solver.cpp:404] Iteration 303, lr = 0.0001
+I1028 03:59:15.407088  4830 solver.cpp:191] Iteration 304, loss = 0.000515563
+I1028 03:59:15.407130  4830 solver.cpp:404] Iteration 304, lr = 0.0001
+I1028 03:59:15.412180  4830 solver.cpp:247] Iteration 305, Testing net (#0)
+I1028 03:59:15.600122  4830 solver.cpp:286] Test loss: 0.514235
+I1028 03:59:15.600153  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:15.600159  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:15.600164  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:15.600168  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:16.033634  4830 solver.cpp:191] Iteration 305, loss = 0.000725196
+I1028 03:59:16.033678  4830 solver.cpp:404] Iteration 305, lr = 0.0001
+I1028 03:59:16.595176  4830 solver.cpp:191] Iteration 306, loss = 0.00116124
+I1028 03:59:16.595219  4830 solver.cpp:404] Iteration 306, lr = 0.0001
+I1028 03:59:17.155737  4830 solver.cpp:191] Iteration 307, loss = 0.000763528
+I1028 03:59:17.155783  4830 solver.cpp:404] Iteration 307, lr = 0.0001
+I1028 03:59:17.716744  4830 solver.cpp:191] Iteration 308, loss = 0.000669466
+I1028 03:59:17.716783  4830 solver.cpp:404] Iteration 308, lr = 0.0001
+I1028 03:59:18.277575  4830 solver.cpp:191] Iteration 309, loss = 0.000553978
+I1028 03:59:18.277618  4830 solver.cpp:404] Iteration 309, lr = 0.0001
+I1028 03:59:18.282630  4830 solver.cpp:247] Iteration 310, Testing net (#0)
+I1028 03:59:18.471032  4830 solver.cpp:286] Test loss: 0.575835
+I1028 03:59:18.471062  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:18.471068  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:18.471074  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:18.471078  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:18.904718  4830 solver.cpp:191] Iteration 310, loss = 0.000990593
+I1028 03:59:18.904796  4830 solver.cpp:404] Iteration 310, lr = 0.0001
+I1028 03:59:19.471737  4830 solver.cpp:191] Iteration 311, loss = 0.000531008
+I1028 03:59:19.471776  4830 solver.cpp:404] Iteration 311, lr = 0.0001
+I1028 03:59:20.038379  4830 solver.cpp:191] Iteration 312, loss = 0.000783494
+I1028 03:59:20.038427  4830 solver.cpp:404] Iteration 312, lr = 0.0001
+I1028 03:59:20.606062  4830 solver.cpp:191] Iteration 313, loss = 0.000670959
+I1028 03:59:20.606093  4830 solver.cpp:404] Iteration 313, lr = 0.0001
+I1028 03:59:21.173990  4830 solver.cpp:191] Iteration 314, loss = 0.00118863
+I1028 03:59:21.174031  4830 solver.cpp:404] Iteration 314, lr = 0.0001
+I1028 03:59:21.179049  4830 solver.cpp:247] Iteration 315, Testing net (#0)
+I1028 03:59:21.369352  4830 solver.cpp:286] Test loss: 0.502229
+I1028 03:59:21.369384  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:21.369388  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:21.369395  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:21.369398  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:21.809082  4830 solver.cpp:191] Iteration 315, loss = 0.000724258
+I1028 03:59:21.809126  4830 solver.cpp:404] Iteration 315, lr = 0.0001
+I1028 03:59:22.377475  4830 solver.cpp:191] Iteration 316, loss = 0.000507315
+I1028 03:59:22.377508  4830 solver.cpp:404] Iteration 316, lr = 0.0001
+I1028 03:59:22.947381  4830 solver.cpp:191] Iteration 317, loss = 0.000830325
+I1028 03:59:22.947430  4830 solver.cpp:404] Iteration 317, lr = 0.0001
+I1028 03:59:23.517490  4830 solver.cpp:191] Iteration 318, loss = 0.000873056
+I1028 03:59:23.517534  4830 solver.cpp:404] Iteration 318, lr = 0.0001
+I1028 03:59:24.087237  4830 solver.cpp:191] Iteration 319, loss = 0.00044532
+I1028 03:59:24.087282  4830 solver.cpp:404] Iteration 319, lr = 0.0001
+I1028 03:59:24.092375  4830 solver.cpp:247] Iteration 320, Testing net (#0)
+I1028 03:59:24.283421  4830 solver.cpp:286] Test loss: 0.503227
+I1028 03:59:24.283452  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:24.283457  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:24.283463  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:24.283467  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:24.723215  4830 solver.cpp:191] Iteration 320, loss = 0.000756745
+I1028 03:59:24.723269  4830 solver.cpp:404] Iteration 320, lr = 0.0001
+I1028 03:59:25.292042  4830 solver.cpp:191] Iteration 321, loss = 0.000789249
+I1028 03:59:25.292076  4830 solver.cpp:404] Iteration 321, lr = 0.0001
+I1028 03:59:25.860544  4830 solver.cpp:191] Iteration 322, loss = 0.000958069
+I1028 03:59:25.860587  4830 solver.cpp:404] Iteration 322, lr = 0.0001
+I1028 03:59:26.429932  4830 solver.cpp:191] Iteration 323, loss = 0.000877295
+I1028 03:59:26.429981  4830 solver.cpp:404] Iteration 323, lr = 0.0001
+I1028 03:59:26.999245  4830 solver.cpp:191] Iteration 324, loss = 0.000641809
+I1028 03:59:26.999282  4830 solver.cpp:404] Iteration 324, lr = 0.0001
+I1028 03:59:27.004410  4830 solver.cpp:247] Iteration 325, Testing net (#0)
+I1028 03:59:27.194957  4830 solver.cpp:286] Test loss: 0.520217
+I1028 03:59:27.194989  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:27.194995  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:27.195000  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:27.195004  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+I1028 03:59:27.633561  4830 solver.cpp:191] Iteration 325, loss = 0.000846067
+I1028 03:59:27.633595  4830 solver.cpp:404] Iteration 325, lr = 0.0001
+I1028 03:59:28.201910  4830 solver.cpp:191] Iteration 326, loss = 0.000732899
+I1028 03:59:28.201943  4830 solver.cpp:404] Iteration 326, lr = 0.0001
+I1028 03:59:28.769857  4830 solver.cpp:191] Iteration 327, loss = 0.000620946
+I1028 03:59:28.769891  4830 solver.cpp:404] Iteration 327, lr = 0.0001
+I1028 03:59:29.337400  4830 solver.cpp:191] Iteration 328, loss = 0.000806515
+I1028 03:59:29.337445  4830 solver.cpp:404] Iteration 328, lr = 0.0001
+I1028 03:59:29.905066  4830 solver.cpp:191] Iteration 329, loss = 0.000485841
+I1028 03:59:29.905099  4830 solver.cpp:404] Iteration 329, lr = 0.0001
+I1028 03:59:29.910200  4830 solver.cpp:247] Iteration 330, Testing net (#0)
+I1028 03:59:30.100688  4830 solver.cpp:286] Test loss: 0.521685
+I1028 03:59:30.100718  4830 solver.cpp:299]     Test net output #0: accuracy = 0.970588
+I1028 03:59:30.100723  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
+I1028 03:59:30.100729  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
+I1028 03:59:30.100733  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
