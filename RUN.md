@@ -28,13 +28,24 @@ NEXT:
          as there are of bluebox positives
 	 -> ./setup.py --task=scrape --box=blue --learn=6-14
 
-2. train:
-   -> joint misaligned
-   -> inadequate clamping
-   -> 
+2. train: unsuit, misal, inadcl
+   -> how add redbox optimally?
+      -> assuming model learns P(label|data):
+      	 blur is deterministic function of data
+         so need P(label|blur) = 0.5
+         P(label|blur) = P(label & blur) / P(blur)
+	 so need P(label0 & blur) = P(label1 & blur)
+	 so need BALANCED REDBOX ADDITION
+	 
+      -> assuming model learns P(data|label) renormalised:
+      	 need P(blur|label) = ... ?
+         ?? Raz
+
+      -> if optimal for redbox class imbalance == blue imbalance, then
+         what does that mean?
 
 3. rebalanced gradient
-     
+   -> 
 
 4. data augmentation: rotations
    -> easy 1st step: vertical mirror
@@ -44,8 +55,9 @@ NEXT:
    -> modify run_classifier
 
    
-(6.) clamp train more with full finetune
-   -> plots show no overfitting
+(6.) clamp train better
+   -> more with full finetune since plots show no overfitting
+   -> more redbox since need balanced redbox addition
 
 
 (7.) train with or wout unsuitable merged?

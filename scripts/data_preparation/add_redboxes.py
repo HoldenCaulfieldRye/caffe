@@ -57,6 +57,7 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
     random.shuffle(notperf)
     print "Gathering completed."
 
+  print "Adding %i of them to %s"%(add_num,fn_train)
   newcomers, notperf_left = notperf[:add_num], notperf[add_num:]
   pickle.dump(notperf_left, open(pickle_fname,'w'))
   print "%s updated"%(pickle_fname)
@@ -72,7 +73,11 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
   
 def same_amount_as_bluebox(data_dir, task, pos_class):
   d = setup.get_label_dict_knowing(data_dir, task, pos_class)
-  return len(d[task]), len(d['Default'])
+  # ASSUMING MODEL LEARNS P(label|data) !
+  return len(d[task]), len(d[task])
+  # return len(d[task]), len(d['Default'])
+  ## that would assume need to keep Redbox imbalance == Blue imbalance
+  ## which one is true??
 
 
 def delete_some_files(fname, del_num):
