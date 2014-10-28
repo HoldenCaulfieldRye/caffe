@@ -19,7 +19,7 @@ def main(data_dir, data_info, task, pos_class,target_bad_min=None):
   Keep = get_label_dict_knowing(data_dir, task, pos_class)
   if target_bad_min is not None:
     print "target bad min: %s" %(target_bad_min)
-    Keep = rebalance(Keep, total_num_images, target_bad_min)
+    Keep = rebalance(Keep, target_bad_min)
   Keep = within_class_shuffle(Keep)
   print 'finished shuffling'
   dump_to_files(Keep, data_info, task, data_dir)
@@ -57,7 +57,7 @@ def get_label_dict_knowing(data_dir, task, pos_class):
 #   return Keep
 
 
-def rebalance(Keep, total_num_images, target_bad_min):
+def rebalance(Keep, target_bad_min):
   '''if target_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
   implemented either by downsizing all non-minority classes by the
@@ -66,33 +66,29 @@ def rebalance(Keep, total_num_images, target_bad_min):
   target_bad_min achieved. We can assume that we care mostly about 
   having as few small classes as possible, so the latter is 
   implemented.'''
-  if target_bad_min == 'N': return Keep
-  else: target_bad_min = float(target_bad_min)
+  target_bad_min = float(target_bad_min)
   # minc is class with minimum number of training cases
   ascending_classes = sorted([(key,len(Keep[key]))
                               for key in Keep.keys()],
                              key=lambda x:x[1])
   maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
   minc, len_minc = ascending_classes[0][0], ascending_classes[0][1]
+  total_num_images = sum([len(Keep[key]) for key in Keep.keys()])
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
   maxc_proportion = float(len_maxc)/total_num_images
-  if target_bad_min is None:
-    target_bad_min = raw_input("\nmax class currently takes up %.2f, what's your target? [num/N] "%(maxc_proportion))
-  if target_bad_min is not 'N':
-    target_bad_min = float(target_bad_min)
-    print 'maxc_proportion: %.2f, target_bad_min: %.2f'%(maxc_proportion, target_bad_min)
-    if maxc_proportion > target_bad_min:
-      delete_size = int((len_maxc - (target_bad_min*total_num_images))/(1-target_bad_min))
-      random.shuffle(Keep[maxc])
-      print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
-      del Keep[maxc][:delete_size]
-    elif maxc_proportion < target_bad_min:
-      print 'woah, you want to INCREASE class imbalance!'
-      delete_size = int(total_num_images - (len_maxc/float(target_bad_min)))
-      random.shuffle(Keep[minc])
-      print '%s has %i images so %i will be randomly removed'%(minc, len_minc, delete_size)
-      del Keep[minc][:delete_size]
+  print 'maxc_proportion: %.2f, target_bad_min: %.2f'%(maxc_proportion, target_bad_min)
+  if maxc_proportion > target_bad_min:
+    delete_size = int((len_maxc - (target_bad_min*total_num_images))/(1-target_bad_min))
+    random.shuffle(Keep[maxc])
+    print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
+    del Keep[maxc][:delete_size]
+  elif maxc_proportion < target_bad_min:
+    print 'woah, you want to INCREASE class imbalance!'
+    delete_size = int(total_num_images - (len_maxc/float(target_bad_min)))
+    random.shuffle(Keep[minc])
+    print '%s has %i images so %i will be randomly removed'%(minc, len_minc, delete_size)
+    del Keep[minc][:delete_size]
   assert target_bad_min == round(float(len(Keep[maxc])) / (len(Keep[maxc])+len(Keep[minc])), 2)
   return Keep
 
@@ -216,7 +212,7 @@ def flag_lookup(labels):
 
 def print_help():
   print '''Usage eg: 
-  ./setup.py ./setup.py --task=scrape --box=blue --learn=6-14'''
+  ./setup.py --task=scrape --box=blue --learn=6-14 --u-sample=0.9'''
   if os.path.exists('/homes/ad6813'):
     # print 'flags:', open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
     lines = open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
@@ -231,7 +227,7 @@ if __name__ == '__main__':
   if len(sys.argv) == 1:
     print_help()
   
-  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "target-bad-min="])
+  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "u-sample="])
   optDict = dict([(k[2:],v) for (k,v) in opts])
   print optDict
   
@@ -249,8 +245,8 @@ if __name__ == '__main__':
   pos_class = flag_lookup(optDict["learn"])
 
   target_bad_min = None
-  if "target-bad-min" in optDict:
-    target_bad_min = float(optDict["target-bad-min"])
+  if "u-sample" in optDict:
+    target_bad_min = float(optDict["u-sample"])
     
   # baseDir = os.path.abspath("../task/" + task) + "/"
 
