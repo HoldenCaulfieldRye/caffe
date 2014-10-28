@@ -260,7 +260,7 @@ if __name__ == '__main__':
   main(data_dir, data_info, task, pos_class, target_bad_min)
 
   # still need to automate this
-  # p = subprocess.Popen("./setup_rest.sh " + task + " " + str(num_output), shell=True)
+  # p = subprocess.Popen("./rest_setup.sh " + task), shell=True)
   # p.wait()
 
   # task = 'scrape' # have already
