@@ -19,17 +19,6 @@ echo "Running setup_rest with BASE_NAME:"$BASE_NAME" FULL_NAME:"$FULL_NAME" and 
 cd ../data_preparation
 
 
-# 2. download alexnet
-if [ -f /data2/ad6813/caffe/models/alexnet/caffe_alexnet_model ]
-then echo "alexnet already downloaded"
-else
-    cd /data2/ad6813/caffe/models/alexnet
-    ./get_caffe_alexnet_model.sh
-    echo "repeat to check correct download:"
-    ./get_caffe_alexnet_model.sh
-    echo "attention: look just above to check correct download"
-fi
-
 
 # 3. create leveldb inputs
 cd /data2/ad6813/caffe/models
