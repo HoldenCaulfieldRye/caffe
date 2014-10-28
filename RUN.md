@@ -49,8 +49,16 @@ NEXT:
          what does that mean?
 
    -> unsuit
+      -> 05
 
    -> misal
+      -> 06
+
+   -> inadcl
+      -> 07
+
+   -> water
+      -> 09
 
 3. rebalanced gradient
    -> 
