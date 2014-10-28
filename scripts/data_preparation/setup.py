@@ -212,11 +212,22 @@ def flag_lookup(labels):
       if line.split()[0] in labels:
         flags.append(line.split()[1])
   return flags
-        
+
+
+def print_help():
+  print '''Usage eg: 
+  ./setup.py ./setup.py --task=scrape --box=blue --learn=6-14'''
+  if os.path.exists('/homes/ad6813'):
+    print '''flags:
+    %s'''%(open('/homes/ad6813/data/flag_lookup.txt','r').readlines())
+  
   
 if __name__ == '__main__':
   import sys, getopt
 
+  if len(sys.argv) == 1:
+    print_help()
+  
   opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "target-bad-min="])
   optDict = dict([(k[2:],v) for (k,v) in opts])
   print optDict
