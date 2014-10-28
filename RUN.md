@@ -30,6 +30,9 @@ NEXT:
 
 2. train: unsuit, misal, inadcl
    -> how add redbox optimally?
+      -> atm pos class balanced red/blue
+             same num pos neg redboxes
+   
       -> assuming model learns P(label|data):
       	 blur is deterministic function of data
          so need P(label|blur) = 0.5
@@ -43,6 +46,10 @@ NEXT:
 
       -> if optimal for redbox class imbalance == blue imbalance, then
          what does that mean?
+
+   -> unsuit
+
+   -> misal
 
 3. rebalanced gradient
    -> 
