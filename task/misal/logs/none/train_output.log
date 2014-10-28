@@ -2090,6 +2090,7 @@ I1028 03:59:30.100718  4830 solver.cpp:299]     Test net output #0: accuracy = 0
 I1028 03:59:30.100723  4830 solver.cpp:299]     Test net output #1: accuracy = 2.93874e-39
 I1028 03:59:30.100729  4830 solver.cpp:299]     Test net output #2: accuracy = 0.485294
 I1028 03:59:30.100733  4830 solver.cpp:299]     Test net output #3: accuracy = 0.868421
+<<<<<<< HEAD
 I1028 03:59:30.538691  4830 solver.cpp:191] Iteration 330, loss = 0.000614722
 I1028 03:59:30.538735  4830 solver.cpp:404] Iteration 330, lr = 0.0001
 I1028 03:59:31.105196  4830 solver.cpp:191] Iteration 331, loss = 0.000859005

@@ -62,13 +62,11 @@ NEXT:
    -> modify run_classifier
 
    
-(6.) clamp train better
+(6.) other improvements
    -> more with full finetune since plots show no overfitting
    -> more redbox since need balanced redbox addition
-
-
-(7.) train with or wout unsuitable merged?
-
+   -> train with or wout unsuitable merged?
+   -> mirror true at val
    
 
 DATA ISSUES:
