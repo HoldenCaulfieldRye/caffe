@@ -30,7 +30,7 @@ $DIR/extract_seconds.py aux1.txt aux_sec.txt # aux3.txt aux4.txt
 
 # Generating
 # echo '#Iters Seconds TestAccuracy TestLoss'> $LOG.test
-echo '#Iters Seconds     TestLoss   Acc_0    Acc_1     PCAcc   Accuracy '> $LOG.test
+echo '#Iters      Seconds     TestLoss   Acc_0    Acc_1     PCAcc   Accuracy '> $LOG.test
 paste aux_iter.txt aux_sec.txt aux_tloss.txt aux_acc0.txt aux_acc1.txt aux_acc2.txt aux_acc3.txt | column -t >> $LOG.test
 rm aux.txt aux_iter.txt aux_sec.txt aux_tloss.txt aux_acc0.txt aux_acc1.txt aux_acc2.txt aux_acc3.txt
 

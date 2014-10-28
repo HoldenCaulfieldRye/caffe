@@ -143,7 +143,6 @@ if __name__ == '__main__':
     keys = Ys.keys()
     for i in range(1,len(tr_te_fields)):
       if len(Ys[tr_te_fields[i]]) != len(Ys[tr_te_fields[0]]):
-        print Ys[tr_te_fields[0]][0], Ys[tr_te_fields[i]][0]
         raise Exception('%i %s entries vs %i %s entries'%(len(Ys[tr_te_fields[i]]),tr_te_fields[i],len(Ys[tr_te_fields[0]]),tr_te_fields[0]))
              
     start, end = 0, len(Ys['TrainLoss'])
