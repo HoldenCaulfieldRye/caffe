@@ -25,9 +25,10 @@ def matplot(model_dir, Ys, start, end):
   # plt.show()
 
   
-def parse_log(model_dir):
+def already_parsed(model_dir):
   fnames = []
-  for fname in os.listdir(model_dir):
+  listdir = os.listdir(model_dir)
+  for fname in listdir:
     if 'train_output' in fname and fname.endswith('.log'):
       fnames.append(oj(model_dir,fname))
   if len(fnames) == 0:
@@ -36,12 +37,17 @@ def parse_log(model_dir):
     for elem in enumerate(fnames): print elem
     fname = oj(model_dir,fnames[int(raw_input("\nChoose index number from above: "))])
   else: fname = oj(model_dir,fnames[0])
-  cmd = "./parse_log.sh "+fname
+  if all([os.path.basename(fname)+'.train' in listdir,
+          os.path.basename(fname)+'.test' in listdir]):
+    return fname, 'Y' # found log and parsed
+  else: return fname, 'N' # found log but not parsed
+ 
+  
+  
+def parse_log(log_name):
+  cmd = "./parse_log.sh "+log_name
   p = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
   p.wait()
-  # return fname in case not typical 'train_output.log'; need to know
-  # filename for reading in data
-  return fname
 
 
 def get_train_dict(ltfname):
@@ -96,7 +102,11 @@ def stretch_time_series(test_dict, test_interval):
     stretch.append(test_dict[key][-1])
     test_dict[key] = stretch
   return test_dict
-    
+
+
+def print_help():
+  print '''Usage eg:
+  ./plot.py ../../task/scrape/conv1'''
 
 if __name__ == '__main__':
 
@@ -114,8 +124,10 @@ if __name__ == '__main__':
     
     model_dir = os.path.abspath(sys.argv[1])
 
-    log_fname = parse_log(model_dir)
-    lfname = oj(model_dir,log_fname)
+    log_fname, parsed = already_parsed(model_dir)
+    if parsed == 'N':
+      parse_log(log_fname)
+    lfname = oj(model_dir, log_fname)
 
     test_dict = get_test_dict(lfname+'.test')
     train_dict = get_train_dict(lfname+'.train')
