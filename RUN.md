@@ -48,6 +48,9 @@ NEXT:
       -> if optimal for redbox class imbalance == blue imbalance, then
          what does that mean?
 
+   -> scrape
+      -> 
+
    -> unsuit
       -> 98, 66, 82, 94
 
@@ -80,6 +83,12 @@ NEXT:
    -> more redbox since need balanced redbox addition
    -> train with or wout unsuitable merged?
    -> mirror true at val
+
+   
+7. OVERARCHING OBJECTIVES
+   -> train on oxford model
+   -> optimal redbox
+   -> optimal balance
    
 
 DATA ISSUES:

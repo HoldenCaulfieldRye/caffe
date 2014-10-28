@@ -5,7 +5,7 @@ from os.path import join as oj
 from PIL import Image
 from operator import itemgetter as ig
 import itertools 
-from datetime import date
+import datetime
 from shutil import rmtree
 import random, subprocess
 import add_redboxes as ar
@@ -253,7 +253,8 @@ if __name__ == '__main__':
     
   # save entire command
   if not os.path.isdir(data_info): os.mkdir(data_info)
-  with open(oj(data_info,'setup_history.txt'), 'w') as read_file:
+  date = '_'.join(str(datetime.datetime.now()).split('.')[0].split())
+  with open(''+task+'/setup_history_'+date+'.txt'), 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
