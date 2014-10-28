@@ -19,44 +19,39 @@ echo "Running setup_rest with BASE_NAME:"$BASE_NAME" FULL_NAME:"$FULL_NAME" and 
 cd ../data_preparation
 
 
-
-# 3. create leveldb inputs
-cd /data2/ad6813/caffe/models
-
 # first make sure exists reference dir from which to cp and sed
-if [ -d clampdetBase ]
+clampdetBad="../../task/clamp"
+if [ -d clampBase ]
 then
-    rm -rf $BASE_NAME
     mkdir $BASE_NAME
-    cd clampdetBase
+    cd clampBase
 
-    NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
+    NEEDED_FILES="solver.prototxt train_val.prototxt"
     for file in $NEEDED_FILES;
     do
 	if [ ! -f $file ]
 	then
 	    echo "$file not found"
-	    echo "need it to create leveldb inputs for $BASE_NAME"
+	    echo "need it to create task/$BASE_NAME"
 	    exit
 	else
 	    cp $file '../'$BASE_NAME'/'
 	fi
     done
 else
-    echo "directory clampdet not found"
-    echo "need it to create leveldb inputs for $BASE_NAME"
+    echo "../../task/clamp not found"
+    echo "need it to create task/$BASE_NAME"
     exit
 fi
 
 # now adapt files to taskname
 cd ../$BASE_NAME
 # rename files
-for file in *clampdet*;
-do mv $file ${file/clampdet/$BASE_NAME};
+for file in *clamp*;
+do mv $file ${file/clamp/$BASE_NAME};
 done
 # modify contents of files
-for file in *; do sed -i 's/clampdet/'$BASE_NAME'/g' $file; done
-'./create_'$BASE_NAME'.sh'
+for file in *; do sed -i 's/clamp/'$BASE_NAME'/g' $file; done
 
 
 # 4. compute mean image
