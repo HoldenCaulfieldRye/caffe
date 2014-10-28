@@ -218,9 +218,11 @@ def print_help():
   print '''Usage eg: 
   ./setup.py ./setup.py --task=scrape --box=blue --learn=6-14'''
   if os.path.exists('/homes/ad6813'):
-    print 'flags:', open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
-    # for line in open('/homes/ad6813/data/flag_lookup.txt','r').readlines():
-    #   print line
+    # print 'flags:', open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
+    lines = open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
+    lines = [line.strip() for line in lines]
+    for line in lines:
+      print line
   
   
 if __name__ == '__main__':
