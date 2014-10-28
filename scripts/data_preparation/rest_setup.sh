@@ -10,7 +10,7 @@
 
 # BASE and FULL name in case 2 models share same data & labels
 
-CAFFE=/data2/ad6813/caffe
+CAFFE=/data/ad6813/caffe
 BASE_NAME=$1
 NUM_OUTPUT=${2:-2}
 FULL_NAME=${3:-$BASE_NAME}

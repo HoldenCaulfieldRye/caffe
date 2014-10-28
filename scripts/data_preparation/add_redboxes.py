@@ -11,8 +11,8 @@ import setup
 # imbalance_multiple is more than by how much maj class is bigger than min class in redbox. it's a heuristic to speed up computation
 def bring_redbox_positives(task, flag, add_num, imbalance_multiple):
   here = os.getcwd()
-  os.chdir('/data2/ad6813/caffe/data/'+task)
-  cmd = "find /data2/ad6813/pipe-data/Redbox/raw_data/dump/ -name '*.dat' | tail -"+str(add_num*imbalance_multiple)+" | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
+  os.chdir('/data/ad6813/caffe/data/'+task)
+  cmd = "find /data/ad6813/pipe-data/Redbox/raw_data/dump/ -name '*.dat' | tail -"+str(add_num*imbalance_multiple)+" | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
   # print cmd
   p = subprocess.Popen(cmd, shell=True)
   p.wait()
@@ -50,7 +50,7 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
         if all([len(content) > 0,
                 len([flag for flag in content if flag in avoid_flags])==0,
                 total[i] not in c_already]):
-          notperf.append(data_dir+total[i][:-4]+'.jpg'+classification+'\n')
+          notperf.append(data_dir+total[i][:-4]+'.jpg'+neg_classification+'\n')
           count += 1
           if count > add_num: break
 
@@ -91,14 +91,13 @@ if __name__ == '__main__':
   avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
   using_pickle = False
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-  data_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
-  fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
-  classification = ' 0'
+  data_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
+  fn_train = '/data/ad6813/caffe/data/scrape/train.txt'
   imbalance_multiple = 10
   
   add_num = 20000
 
-  bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train, using_pickle)
+  bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, fn_train, using_pickle)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
   print 'bringing in redbox positives...'  

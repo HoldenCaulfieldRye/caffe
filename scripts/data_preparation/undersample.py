@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 
-# delete_some_files('/data2/ad6813/caffe/data/scrape/train_2.txt','0',5400)
+# delete_some_files('/data/ad6813/caffe/data/scrape/train_2.txt','0',5400)
 def delete_some_files(fname, class_num, del_num):
   count, new = 0, []
   content = open(fname, 'r').readlines()
@@ -12,7 +12,7 @@ def delete_some_files(fname, class_num, del_num):
 
 def print_help():
   print "Usage: ./undersample.py path/to/file class_num del_num"
-  print "Example: ./undersample.py /data2/ad6813/caffe/data/scrape/train_2.txt 0 5400"
+  print "Example: ./undersample.py /data/ad6813/caffe/data/scrape/train_2.txt 0 5400"
 
 if __name__ == '__main__':
   if len(sys.argv) < 4:

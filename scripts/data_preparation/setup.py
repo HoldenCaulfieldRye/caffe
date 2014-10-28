@@ -234,14 +234,14 @@ if __name__ == '__main__':
   if not "task" in optDict:
     raise Exception("Need to specify --task flag")
   task = optDict["task"]
-  data_info = "/data2/ad6813/caffe/data/" + task
+  data_info = "/data/ad6813/caffe/data/" + task
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
   if optDict['box'] == 'redblue':
-    data_dir = "/data2/ad6813/pipe-data/Bluebox/raw_data/dump"
+    data_dir = "/data/ad6813/pipe-data/Bluebox/raw_data/dump"
   else:
-    data_dir = "/data2/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
+    data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
@@ -268,8 +268,8 @@ if __name__ == '__main__':
     avoid_flags = ['JointMisaligned','UnsuitablePhoto']
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-    redbox_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
-    fn_train = '/data2/ad6813/caffe/data/'+task+'/train.txt'
+    redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
+    fn_train = '/data/ad6813/caffe/data/'+task+'/train.txt'
 
     add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class) # how many imgs to add
 
