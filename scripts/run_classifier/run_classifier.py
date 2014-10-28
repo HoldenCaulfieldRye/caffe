@@ -32,7 +32,7 @@ sys.path.insert(0, caffe_root + 'python')
 #   data-info needs a 'redbox' dir of classifications for all RB imgs
 #   data-dir needs a 'redbox' dir of symlinks to all rdbox images
 
-REDBOX_DIR = '/data2/ad6813/pipe-data/small' #Redbox/raw_data/dump'
+REDBOX_DIR = '/data/ad6813/pipe-data/small' #Redbox/raw_data/dump'
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
@@ -87,7 +87,7 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
 
 def augment_read(data_info):
   here = os.getcwd()
-  shutil.copy('/data2/ad6813/caffe/scripts/run_classifier/augment_read.sh', data_info)
+  shutil.copy('/data/ad6813/caffe/scripts/run_classifier/augment_read.sh', data_info)
   os.chdir(data_info)
   subprocess.call('chmod +x augment_read.sh', shell=True)
   subprocess.call('./augment_read.sh', shell=True)
@@ -175,7 +175,7 @@ def load_all_images_from_dir(d, test_dir, redbox=False):
   return imgs, d
 
 def create_dict_jname(data_dir):
-  file_multJoints = '/data2/ad6813/pipe-data/Redbox/multJoints.txt'
+  file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
   multJoints = {}
   if not os.path.exists(file_multJoints):
     cmd = "sshpass -p '9northerncighT!' scp graphic06.doc.ic.ac.uk:"+file_multJoints+' '+file_multJoints
