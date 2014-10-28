@@ -39,6 +39,7 @@ NEXT:
          P(label|blur) = P(label & blur) / P(blur)
 	 so need P(label0 & blur) = P(label1 & blur)
 	 so need BALANCED REDBOX ADDITION
+	 -> so no need pos class balanced red/blue??
 	 
       -> assuming model learns P(data|label) renormalised:
       	 need P(blur|label) = ... ?
