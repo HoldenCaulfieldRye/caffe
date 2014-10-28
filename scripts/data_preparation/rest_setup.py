@@ -10,21 +10,22 @@
 
 # BASE and FULL name in case 2 models share same data & labels
 
+CAFFE=/data2/ad6813/caffe
 BASE_NAME=$1
 NUM_OUTPUT=${2:-2}
 FULL_NAME=${3:-$BASE_NAME}
+clampBade=$CAFFE"/task/clamp/"
 
 echo "Running setup_rest with BASE_NAME:"$BASE_NAME" FULL_NAME:"$FULL_NAME" and NUM_OUTPUT:"$NUM_OUTPUT
 
-cd ../data_preparation
-
 
 # first make sure exists reference dir from which to cp and sed
-clampdetBad="../../task/clamp"
-if [ -d clampBase ]
+clampBase=$CAFFE"/task/clamp/"
+if [ -d $clampBase ]
 then
+    cd ../../task
     mkdir $BASE_NAME
-    cd clampBase
+    cd $clampBase
 
     NEEDED_FILES="solver.prototxt train_val.prototxt"
     for file in $NEEDED_FILES;
@@ -39,19 +40,18 @@ then
 	fi
     done
 else
-    echo "../../task/clamp not found"
+    echo "$clampBase not found"
     echo "need it to create task/$BASE_NAME"
     exit
 fi
 
 # now adapt files to taskname
 cd ../$BASE_NAME
-# rename files
-for file in *clamp*;
-do mv $file ${file/clamp/$BASE_NAME};
-done
 # modify contents of files
-for file in *; do sed -i 's/clamp/'$BASE_NAME'/g' $file; done
+for file in $NEEDED_FILES
+do
+    sed -i 's/clamp/'$BASE_NAME'/g' $file
+done
 
 
 # # 5. network definition

@@ -12,7 +12,7 @@ import add_redboxes as ar
 
 # expected input: ./setup.py --task= --box= --learn= [--target-bad-min=]
 
-# ./setup.py --task=clamp --box=blue --learn=3-10-14
+# ./setup.py --task=unsuit --box=blue --learn=3-10-14
 
 def main(data_dir, data_info, task, pos_class,target_bad_min=None):
   ''' This is the master function. data_dir: where raw data is. data_info: where to store .txt files. '''
@@ -259,9 +259,8 @@ if __name__ == '__main__':
   # do your shit
   main(data_dir, data_info, task, pos_class, target_bad_min)
 
-  # still need to automate this
-  # p = subprocess.Popen("./rest_setup.sh " + task), shell=True)
-  # p.wait()
+  p = subprocess.Popen("./rest_setup.sh " + task), shell=True)
+  p.wait()
 
   # task = 'scrape' # have already
 

@@ -1,4 +1,4 @@
-net: "task/clamp/train_val.prototxt"
+net: "task/unsuit/train_val.prototxt"
 test_iter: 16
 test_interval: 1
 test_compute_loss: 1
@@ -13,5 +13,5 @@ max_iter: 30000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 5000
-snapshot_prefix: "task/clamp/"
+snapshot_prefix: "task/unsuit/"
 solver_mode: GPU
