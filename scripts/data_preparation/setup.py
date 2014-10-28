@@ -196,7 +196,7 @@ def dump_to_files(Keep, data_info, task, data_dir):
     if os.path.isfile(oj(data_info,dump_fnames[i])):
       print "WARNING: overwriting", oj(data_info,dump_fnames[i])
     with open(oj(data_info,dump_fnames[i]),'w') as dfile:
-      dfile.writelines(["%s %i\n" % (oj(data_dir,f),num)
+      dfile.writelines(["%s  %i\n" % (oj(data_dir,f),num)
                         for (f,num) in dump[i]])
 
     

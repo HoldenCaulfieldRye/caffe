@@ -49,16 +49,20 @@ NEXT:
          what does that mean?
 
    -> unsuit
-      -> 05
+      -> 98, 66, 82, 94
 
    -> misal
-      -> 06
+      -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
+      -> overfit, train only top layer
 
    -> inadcl
-      -> 07
+      -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
+      -> overfit, train only top layer
 
    -> water
-      -> 09
+      -> 0 trainerr in 20 iter
+      -> 
+      -> maybe 0.6 PCA but looks like noise
 
 3. rebalanced gradient
    -> 
