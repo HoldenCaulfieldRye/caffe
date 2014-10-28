@@ -39,6 +39,7 @@ NEXT:
          P(label|blur) = P(label & blur) / P(blur)
 	 so need P(label0 & blur) = P(label1 & blur)
 	 so need BALANCED REDBOX ADDITION
+	 -> so no need pos class balanced red/blue??
 	 
       -> assuming model learns P(data|label) renormalised:
       	 need P(blur|label) = ... ?
@@ -48,8 +49,16 @@ NEXT:
          what does that mean?
 
    -> unsuit
+      -> 05
 
    -> misal
+      -> 06
+
+   -> inadcl
+      -> 07
+
+   -> water
+      -> 09
 
 3. rebalanced gradient
    -> 
@@ -62,13 +71,11 @@ NEXT:
    -> modify run_classifier
 
    
-(6.) clamp train better
+(6.) other improvements
    -> more with full finetune since plots show no overfitting
    -> more redbox since need balanced redbox addition
-
-
-(7.) train with or wout unsuitable merged?
-
+   -> train with or wout unsuitable merged?
+   -> mirror true at val
    
 
 DATA ISSUES:
