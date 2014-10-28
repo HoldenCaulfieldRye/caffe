@@ -266,7 +266,8 @@ if __name__ == '__main__':
 
   # GENERALISE THIS
   if optDict['box'] == 'redblue':
-    avoid_flags = ['JointMisaligned','UnsuitablePhoto']
+    avoid_flags = ['JointMisaligned','UnsuitablePhoto','Perfect']
+    flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
     redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
@@ -276,7 +277,6 @@ if __name__ == '__main__':
 
     ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
-    flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
 
     # NOT RANDOM! USING TAIL
     print 'bringing in redbox positives...'

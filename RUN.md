@@ -1,3 +1,10 @@
+0. how to setup and train
+   -> data setup:
+   cd scripts/data_preparation
+   ./setup.py
+
+
+
 
 1. train redbox positives
    -> scraping
@@ -56,17 +63,24 @@ NEXT:
 
    -> misal
       -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
-      -> overfit, train only top layer
+      -> try again:
+         -> fc7 only
+	 -> imbalance: max redbox st 80% class, 50% blur
 
    -> inadcl
       -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
-      -> overfit, train only top layer
+      -> try again:
+         -> fc7 only
+	 -> imbalance: max redbox st 50% class, 70% blur
+	 -> maybe inadcl semantically hard though
 
    -> water
-      -> 0 trainerr in 20 iter
-      -> 
-      -> maybe 0.6 PCA but looks like noise
+      -> 0 trainerr in 20 iter, maybe 0.6 PCA but looks like noise
+      -> try again:
+         -> fc7 only
+	 -> imbalance: max redbox st no imbalance anywhere
 
+	 
 3. rebalanced gradient
    -> 
 
