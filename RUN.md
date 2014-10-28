@@ -29,10 +29,19 @@ NEXT:
 	 -> ./setup.py --task=scrape --box=blue --learn=6-14
 
    -> training balance red&blue graphic05
+      -> 82, 69, 76, 80
    -> training balance blue graphic06
-         
+      -> 84, 62, 73, 82   
+
+2. visualise plots
+
+3. train:
+   -> joint misaligned
+   -> inadequate clamping
+   -> 
+
+4. rebalanced gradient
       
-2. train joint misaligned
 
 
 	 

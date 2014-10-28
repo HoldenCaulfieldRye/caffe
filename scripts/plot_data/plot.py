@@ -11,9 +11,17 @@ import subprocess
 # Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
 
 def get_test_interval(model_dir):
-  test = open(oj(model_dir,'train_output.log.test'),'r').readlines()
-  return int(test[2].split()[0])
-  # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
+  if not os.path.isfile(oj(model_dir,'train_output.log.test')):
+    print "ERROR: could not find file named 'train_output.log.test' in", model_dir
+    exit
+  else:
+    test = open(oj(model_dir,'train_output.log.test'),'r').readlines()
+    if len(test) == 1:
+      print "ERROR: no data in", oj(model_dir,'train_output.log.test')
+      exit
+    else:  
+      return int(test[2].split()[0])
+    # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
 
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
