@@ -54,23 +54,19 @@ done
 for file in *; do sed -i 's/clamp/'$BASE_NAME'/g' $file; done
 
 
-# 5. network definition
-# keeping batchsize 50
-for TYPE in train val;
-do
-    # change net name and num neurons in output layers
-    sed -i $BASE_NAME'_'$TYPE'.prototxt' -e '1s/Clamp/'$BASE_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
-done
+# # 5. network definition
+# # keeping batchsize 50
+# for TYPE in train val;
+# do
+#     # change net name and num neurons in output layers
+#     sed -i $BASE_NAME'_'$TYPE'.prototxt' -e '1s/Clamp/'$BASE_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
+# done
 
 
-# 6. solver
-sed -i $BASE_NAME'_solver.prototxt' -e '10s/20000/'$MAX_ITER'/' -e '13s/2000/'$SNAPSHOT'/'
+# # 6. solver
+# sed -i $BASE_NAME'_solver.prototxt' -e '10s/20000/'$MAX_ITER'/' -e '13s/2000/'$SNAPSHOT'/'
 
 
 # 7. go!
-chmod 755 ./fine_"$BASE_NAME".sh
 mkdir logs
-echo "you're ready!"
-echo "cd ../../models/"$BASE_NAME""
-echo "nohup ./fine_"$BASE_NAME".sh >> train_output.txt 2>&1 &"
-
+cd ../..
