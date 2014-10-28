@@ -37,7 +37,10 @@ NEXT:
 2. train joint misaligned
 
 3. data augmentation: rotations
+   -> easy 1st step: vertical mirror
 
+4. ROC curve for optimal threshold
+   -> modify run_classifier
 	 
 
 DATA ISSUES:

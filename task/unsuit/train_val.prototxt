@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/unsuit/val.txt"
-    batch_size: 126
+    batch_size: 103
     new_height: 256
     new_width: 256
   }

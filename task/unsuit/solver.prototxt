@@ -1,6 +1,6 @@
 net: "task/unsuit/train_val.prototxt"
-test_iter: 16
-test_interval: 1
+test_iter: 4
+test_interval: 50
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
 base_lr: 0.0001
