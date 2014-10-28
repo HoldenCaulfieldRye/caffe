@@ -1,5 +1,5 @@
-net: "task/clamp/train_val.prototxt"
-test_iter: 16
+net: "task/unsuit/train_val.prototxt"
+test_iter: 4
 test_interval: 50
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
@@ -13,5 +13,5 @@ max_iter: 30000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 5000
-snapshot_prefix: "task/clamp/"
+snapshot_prefix: "task/unsuit/"
 solver_mode: GPU

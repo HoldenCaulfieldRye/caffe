@@ -5,7 +5,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/clamp/train.txt"
+    source: "data/unsuit/train.txt"
     batch_size: 128
     new_height: 256
     new_width: 256
@@ -23,8 +23,8 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/clamp/val.txt"
-    batch_size: 126
+    source: "data/unsuit/val.txt"
+    batch_size: 103
     new_height: 256
     new_width: 256
   }
@@ -312,10 +312,10 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8_unsuit"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_clamp"
+  top: "fc8_unsuit"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -336,13 +336,13 @@ layers {
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc8_clamp"
+  bottom: "fc8_unsuit"
   bottom: "label"
 }
 layers {
   name: "accuracy"
   type: ACCURACY
-  bottom: "fc8_clamp"
+  bottom: "fc8_unsuit"
   bottom: "label"
   top: "accuracy"
   include: { phase: TEST }
