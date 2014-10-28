@@ -237,8 +237,11 @@ if __name__ == '__main__':
   data_info = "/data2/ad6813/caffe/data/" + task
   
   if not "box" in optDict:
-    raise Exception("Need to specify --box flag\nRed, Blue, RedBlue")
-  data_dir = "/data2/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
+    raise Exception("Need to specify --box flag\nred, blue, redblue")
+  if optDict['box'] == 'redblue':
+    data_dir = "/data2/ad6813/pipe-data/Bluebox/raw_data/dump"
+  else:
+    data_dir = "/data2/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
@@ -248,10 +251,7 @@ if __name__ == '__main__':
   if "u-sample" in optDict:
     target_bad_min = float(optDict["u-sample"])
     
-  # baseDir = os.path.abspath("../task/" + task) + "/"
-
-  # write to read file how to interpret values as classes and might
-  # as well save entire command
+  # save entire command
   if not os.path.isdir(data_info): os.mkdir(data_info)
   with open(oj(data_info,'setup_history.txt'), 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
@@ -259,27 +259,24 @@ if __name__ == '__main__':
   # do your shit
   main(data_dir, data_info, task, pos_class, target_bad_min)
 
-  p = subprocess.Popen("./rest_setup.sh " + task), shell=True)
+  p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
   p.wait()
 
-  # task = 'scrape' # have already
 
   # GENERALISE THIS
-  # avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones','UnsuitablePhoto']
-  # classification = ' 0'
+  avoid_flags = ['JointMisaligned','UnsuitablePhoto']
+  using_pickle = False
+  pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
+  redbox_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
+  fn_train = '/data2/ad6813/caffe/data/'+task+'/train.txt'
   
-  # using_pickle = False
-  # pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-  # redbox_dir = '/data2/ad6813/pipe-data/Redbox/raw_data/dump/'
-  # fn_train = '/data2/ad6813/caffe/data/scrape/train.txt'
+  add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class) # how many imgs to add
   
-  # add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class) # how many imgs to add
-  
-  # ar.bring_redbox_negatives(task, avoid_flags, classification, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
+  ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
-  # flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
+  flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
   
-  # # NOT RANDOM! USING TAIL
-  # print 'bringing in redbox positives...'
-  # ar.bring_redbox_positives(task, flag, add_num_pos, 10)
+  # NOT RANDOM! USING TAIL
+  print 'bringing in redbox positives...'
+  ar.bring_redbox_positives(task, flag, add_num_pos, 10)
 

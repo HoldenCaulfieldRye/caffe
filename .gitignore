@@ -44,6 +44,12 @@ python/caffe/proto/
 
 ## Caffe
 
+# Heavy python objects
+*.npy
+*.pickle
+*.yaml
+*.json
+
 # Training visualisations
 *.log.train
 *.log.test

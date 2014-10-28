@@ -39,9 +39,18 @@ NEXT:
 4. data augmentation: rotations
    -> easy 1st step: vertical mirror
 
+   
 5. ROC curve for optimal threshold
    -> modify run_classifier
-	 
+
+   
+(6.) clamp train more with full finetune
+   -> plots show no overfitting
+
+
+(7.) train with or wout unsuitable merged?
+
+   
 
 DATA ISSUES:
         scrape   ¬scrape | total

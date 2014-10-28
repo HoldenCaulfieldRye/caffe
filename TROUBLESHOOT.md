@@ -2,6 +2,10 @@
 TROUBLESHOOT
 ============
 
+switch from data2/ to data/:
+
+
+
 gradient checker: look inside caffe/test/
 
 

@@ -27,8 +27,8 @@ def shuffle_file(fname):
 
  
 # integrate bring in positives into this? 
-def bring_redbox_negatives(task, avoid_flags, classification, add_num, pickle_fname, data_dir, fn_train, using_pickle):
-
+def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, fn_train, using_pickle):
+  neg_classification = '0' # see dump_to_files [('Default',0),(task,1)]
   if os.path.isfile(oj(os.getcwd(),'redbox_vacant_'+task+'_negatives.pickle')) and using_pickle:
     print "Found pickle dump of vacant, non-perfect Redbox images without %s flag. Using it."%(task)
     notperf = pickle.load(open(pickle_fname,'r'))
