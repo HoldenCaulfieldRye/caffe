@@ -54,15 +54,6 @@ done
 for file in *; do sed -i 's/clamp/'$BASE_NAME'/g' $file; done
 
 
-# 4. compute mean image
-echo "computing mean image..."
-'./make_'$BASE_NAME'_mean.sh'
-if [ ! -f '../../data/'$BASE_NAME'/'$BASE_NAME'_mean.binaryproto' ]
-then
-    scp graphic06.doc.ic.ac.uk:/data2/ad6813/caffe/data/clampdet/clampdet_mean.binaryproto '../../data/'$BASE_NAME'/'$BASE_NAME'_mean.binaryproto'
-fi
-
-
 # 5. network definition
 # keeping batchsize 50
 for TYPE in train val;
