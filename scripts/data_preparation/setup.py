@@ -5,7 +5,7 @@ from os.path import join as oj
 from PIL import Image
 from operator import itemgetter as ig
 import itertools 
-from datetime import date
+import datetime
 from shutil import rmtree
 import random, subprocess
 import add_redboxes as ar
@@ -196,7 +196,7 @@ def dump_to_files(Keep, data_info, task, data_dir):
     if os.path.isfile(oj(data_info,dump_fnames[i])):
       print "WARNING: overwriting", oj(data_info,dump_fnames[i])
     with open(oj(data_info,dump_fnames[i]),'w') as dfile:
-      dfile.writelines(["%s %i\n" % (oj(data_dir,f),num)
+      dfile.writelines(["%s  %i\n" % (oj(data_dir,f),num)
                         for (f,num) in dump[i]])
 
     
@@ -253,7 +253,8 @@ if __name__ == '__main__':
     
   # save entire command
   if not os.path.isdir(data_info): os.mkdir(data_info)
-  with open(oj(data_info,'setup_history.txt'), 'w') as read_file:
+  date = '_'.join(str(datetime.datetime.now()).split('.')[0].split())
+  with open(''+task+'/setup_history_'+date+'.txt'), 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
@@ -265,7 +266,8 @@ if __name__ == '__main__':
 
   # GENERALISE THIS
   if optDict['box'] == 'redblue':
-    avoid_flags = ['JointMisaligned','UnsuitablePhoto']
+    avoid_flags = ['JointMisaligned','UnsuitablePhoto','Perfect']
+    flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
     redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
@@ -275,7 +277,6 @@ if __name__ == '__main__':
 
     ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
-    flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
 
     # NOT RANDOM! USING TAIL
     print 'bringing in redbox positives...'

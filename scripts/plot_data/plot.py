@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from os.path import join as oj
 import subprocess
 
-# Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
+# Usage: python plot.py path/to/model test-inter=.. [--start-iter=..] [--end-iter==..]
 
 
 def matplot(model_dir, Ys, start, end):  
@@ -106,7 +106,8 @@ def stretch_time_series(test_dict, test_interval):
 
 def print_help():
   print '''Usage eg:
-  ./plot.py ../../task/scrape/conv1'''
+  ./plot.py ../../task/scrape/conv1 --end-iter=8000'''
+  
 
 if __name__ == '__main__':
 
@@ -143,14 +144,13 @@ if __name__ == '__main__':
     keys = Ys.keys()
     for i in range(1,len(tr_te_fields)):
       if len(Ys[tr_te_fields[i]]) != len(Ys[tr_te_fields[0]]):
-        print Ys[tr_te_fields[0]][0], Ys[tr_te_fields[i]][0]
         raise Exception('%i %s entries vs %i %s entries'%(len(Ys[tr_te_fields[i]]),tr_te_fields[i],len(Ys[tr_te_fields[0]]),tr_te_fields[0]))
              
     start, end = 0, len(Ys['TrainLoss'])
     for arg in sys.argv:
-      if arg.startswith("start-iter="):
+      if arg.startswith("--start-iter="):
         start = int(arg.split('=')[-1])
-      if arg.startswith("end-iter="):
+      if arg.startswith("--end-iter="):
         end = int(arg.split('=')[-1])
     
     matplot(model_dir, Ys, start, end)

@@ -1,3 +1,10 @@
+0. how to setup and train
+   -> data setup:
+   cd scripts/data_preparation
+   ./setup.py
+
+
+
 
 1. train redbox positives
    -> scraping
@@ -48,18 +55,32 @@ NEXT:
       -> if optimal for redbox class imbalance == blue imbalance, then
          what does that mean?
 
+   -> scrape
+      -> 
+
    -> unsuit
-      -> 05
+      -> 98, 66, 82, 94
 
    -> misal
-      -> 06
+      -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
+      -> try again:
+         -> fc7 only
+	 -> imbalance: max redbox st 80% class, 50% blur
 
    -> inadcl
-      -> 07
+      -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
+      -> try again:
+         -> fc7 only
+	 -> imbalance: max redbox st 50% class, 70% blur
+	 -> maybe inadcl semantically hard though
 
    -> water
-      -> 09
+      -> 0 trainerr in 20 iter, maybe 0.6 PCA but looks like noise
+      -> try again:
+         -> fc7 only
+	 -> imbalance: max redbox st no imbalance anywhere
 
+	 
 3. rebalanced gradient
    -> 
 
@@ -76,6 +97,12 @@ NEXT:
    -> more redbox since need balanced redbox addition
    -> train with or wout unsuitable merged?
    -> mirror true at val
+
+   
+7. OVERARCHING OBJECTIVES
+   -> train on oxford model
+   -> optimal redbox
+   -> optimal balance
    
 
 DATA ISSUES:
