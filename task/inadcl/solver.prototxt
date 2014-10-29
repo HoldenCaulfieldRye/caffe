@@ -1,4 +1,4 @@
-net: "task/misal/train_val.prototxt"
+net: "task/inadcl/train_val.prototxt"
 test_iter: 1
 test_interval: 5
 test_compute_loss: 1
@@ -13,5 +13,5 @@ max_iter: 30000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 5000
-snapshot_prefix: "task/misal/"
+snapshot_prefix: "task/inadcl/"
 solver_mode: GPU

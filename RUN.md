@@ -74,6 +74,7 @@ NEXT:
 	 -> imbalance: max redbox st no imbalance anywhere
 
 	 
+	 
 3. rebalanced gradient
    -> 
 
