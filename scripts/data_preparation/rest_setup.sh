@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -e
+set -e
 # any subsequent command that fails will exit the script
 
 

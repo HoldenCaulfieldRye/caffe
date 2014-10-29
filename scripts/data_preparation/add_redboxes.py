@@ -71,6 +71,20 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
   f_train.writelines(c_train)
 
   
+def what_redbox_numbers(c_imb, b_imb, data_dir, task, pos_class,
+                        b_pos, b_neg):
+  d = setup.get_label_dict_knowing(data_dir, task, pos_class)
+  red_c_imb=float(len(d['Default']))/(len(d[task])+len(d['Default']))
+  if red_c_imb >= c_imb:
+    r_pos = len(d[task])
+    r_neg = r_pos * (b_imb/(1-b_imb)) * (r_pos/(r_pos))
+    return r_pos, r_neg
+    # if red_c_imb lower, would have to 
+  elif red_c_imb <= c_imb:
+    print "class imbalance going to decrease! :D"
+    return len(d[task]), len(d['Default'])*(c_imb/red_c_imb)
+  
+
 def same_amount_as_bluebox(data_dir, task, pos_class):
   d = setup.get_label_dict_knowing(data_dir, task, pos_class)
   # ASSUMING MODEL LEARNS P(label|data) !

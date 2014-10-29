@@ -3,7 +3,7 @@ TROUBLESHOOT
 ============
 
 switch from data2/ to data/:
-find {task,scripts,data} -type f \( -iname \*.py -o -iname \*.sh -o -iname \*.prototxt \) | xargs -i sed -i 's/\/data2\//\/data\//g' {}
+find {task,scripts,data} -type f \( -iname \*.py -o -iname \*.sh -o -iname \*.prototxt -o -iname \*.txt\) | xargs -i sed -i 's/\/data2\//\/data\//g' {}
 
 gradient checker: look inside caffe/test/
 

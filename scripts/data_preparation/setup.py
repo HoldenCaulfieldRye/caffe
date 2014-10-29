@@ -210,9 +210,24 @@ def flag_lookup(labels):
   return flags
 
 
+def add_redboxes(target_bad_min, b_imbal, pos_class, task,
+                 avoid_flags, add_num_neg, pickle_fname, redbox_dir,
+                 fn_train, using_pickle):
+  c_imbal = target_bad_min
+  add_num_pos, add_num_neg = ar.what_redbox_numbers(c_imbal, b_imbal, data_dir, task, pos_class) 
+  ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
+
+
+  # NOT RANDOM! USING TAIL
+  print 'bringing in redbox positives...'
+  ar.bring_redbox_positives(task, flag, add_num_pos, 10)
+  
+
+
+
 def print_help():
   print '''Usage eg: 
-  ./setup.py --task=scrape --box=blue --learn=6-14 --u-sample=0.9'''
+  ./setup.py --task=scrape --box=blue --learn=6-14 --u-sample=0.9 [--b-imbal=0.5]'''
   if os.path.exists('/homes/ad6813'):
     # print 'flags:', open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
     lines = open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
@@ -238,9 +253,6 @@ if __name__ == '__main__':
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
-  if optDict['box'] == 'redblue':
-    data_dir = "/data/ad6813/pipe-data/Bluebox/raw_data/dump"
-  else:
     data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
   
   if not "learn" in optDict:
@@ -254,14 +266,15 @@ if __name__ == '__main__':
   # save entire command
   if not os.path.isdir(data_info): os.mkdir(data_info)
   date = '_'.join(str(datetime.datetime.now()).split('.')[0].split())
-  with open(''+task+'/setup_history_'+date+'.txt'), 'w') as read_file:
+  with open('../../data/'+task+'/setup_history_'+date+'.txt', 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
   main(data_dir, data_info, task, pos_class, target_bad_min)
 
   # GENERALISE THIS
-  if optDict['box'] == 'redblue':
+  if 'b-imbal' in optDict:
+    b_imbal = float(optDict["b-imbal"])
     avoid_flags = ['JointMisaligned','UnsuitablePhoto','Perfect']
     flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
     using_pickle = False
@@ -269,15 +282,18 @@ if __name__ == '__main__':
     redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
     fn_train = '/data/ad6813/caffe/data/'+task+'/train.txt'
 
-    add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class) # how many imgs to add
-
-    ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
-
-
-    # NOT RANDOM! USING TAIL
-    print 'bringing in redbox positives...'
-    ar.bring_redbox_positives(task, flag, add_num_pos, 10)
-
+    # How many redboxes to add:
+    # add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class)
+      if not target_bad_min in locals():
+        message = '''ERROR: no target_bad_min given to maintain  
+        class imbalance after redbox additions. 
+        If you don't want any undersampling and still want to add 
+        redbox st imbalance unchanged, then yeah, you need to 
+        implement that.'''
+        raise Exception(message)
+      add_redboxes(target_bad_min, b_imbal, pos_class, task, 
+                   avoid_flags, add_num_neg, pickle_fname, 
+                   redbox_dir, fn_train, using_pickle)
  
   # setup task/etc
   p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
