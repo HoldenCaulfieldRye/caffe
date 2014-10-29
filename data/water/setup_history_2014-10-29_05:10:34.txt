@@ -1,0 +1,1 @@
+./setup.py --task=water --box=blue --learn=16-17 --u-sample=0.7 --b-imbal=0.5

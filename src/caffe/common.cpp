@@ -1,4 +1,9 @@
 #include <glog/logging.h>
+<<<<<<< HEAD
+=======
+#include <gflags/gflags.h>
+
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 #include <cstdio>
 #include <ctime>
 

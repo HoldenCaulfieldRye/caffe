@@ -180,7 +180,11 @@ Layer<Dtype>* GetLayer(const LayerParameter& param) {
   const LayerParameter_LayerType& type = param.type();
   switch (type) {
   case LayerParameter_LayerType_ACCURACY:
+<<<<<<< HEAD
     return new AccuracyLayer<Dtype>(param);
+=======
+    return new PerClassAccuracyLayer<Dtype>(param);
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   case LayerParameter_LayerType_ABSVAL:
     return new AbsValLayer<Dtype>(param);
   case LayerParameter_LayerType_ARGMAX:
@@ -226,9 +230,17 @@ Layer<Dtype>* GetLayer(const LayerParameter& param) {
   case LayerParameter_LayerType_MVN:
     return new MVNLayer<Dtype>(param);
   case LayerParameter_LayerType_MULTINOMIAL_LOGISTIC_LOSS:
+<<<<<<< HEAD
     return new MultinomialLogisticLossLayer<Dtype>(param);
   case LayerParameter_LayerType_POOLING:
     return GetPoolingLayer<Dtype>(name, param);
+=======
+    return new SoftmaxWithRebalancedLossLayer<Dtype>(param);
+  case LayerParameter_LayerType_POOLING:
+    return GetPoolingLayer<Dtype>(name, param);
+  case LayerParameter_LayerType_PER_CLASS_ACCURACY:
+    return new PerClassAccuracyLayer<Dtype>(param);
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   case LayerParameter_LayerType_POWER:
     return new PowerLayer<Dtype>(param);
   case LayerParameter_LayerType_RELU:
@@ -245,6 +257,11 @@ Layer<Dtype>* GetLayer(const LayerParameter& param) {
     return GetSoftmaxLayer<Dtype>(name, param);
   case LayerParameter_LayerType_SOFTMAX_LOSS:
     return new SoftmaxWithLossLayer<Dtype>(param);
+<<<<<<< HEAD
+=======
+  case LayerParameter_LayerType_SOFTMAX_REBALANCED_LOSS:
+    return new SoftmaxWithRebalancedLossLayer<Dtype>(param);
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   case LayerParameter_LayerType_SPLIT:
     return new SplitLayer<Dtype>(param);
   case LayerParameter_LayerType_TANH:

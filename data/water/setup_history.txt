@@ -1,0 +1,1 @@
+./setup.py --task=water --box=redblue --learn=16-17 --u-sample=0.9
