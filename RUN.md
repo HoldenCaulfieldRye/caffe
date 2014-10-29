@@ -1,11 +1,3 @@
-0. how to setup and train
-   -> data setup:
-   cd scripts/data_preparation
-   ./setup.py
-
-
-
-
 1. train redbox positives
    -> scraping
       -> does zones help scraping?
@@ -65,6 +57,7 @@ NEXT:
       -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
       -> try again:
          -> fc7 only
+	 -> last time only 4 pos in val! make 15
 	 -> imbalance: max redbox st 80% class, 50% blur
 
    -> inadcl

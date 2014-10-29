@@ -7835,3 +7835,7 @@ I1023 03:19:37.856637 30579 solver.cpp:299]     Test net output #0: accuracy = 0
 I1023 03:19:37.856647 30579 solver.cpp:299]     Test net output #1: accuracy = 0.691033
 I1023 03:19:37.856655 30579 solver.cpp:299]     Test net output #2: accuracy = 0.735527
 I1023 03:19:37.856663 30579 solver.cpp:299]     Test net output #3: accuracy = 0.770833
+Redbox positives: 2677
+Redbox negatives: 2813
+Bluebox positives: 2543
+Bluebox negatives: 2813

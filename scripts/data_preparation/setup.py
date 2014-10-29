@@ -260,10 +260,6 @@ if __name__ == '__main__':
   # do your shit
   main(data_dir, data_info, task, pos_class, target_bad_min)
 
-  p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
-  p.wait()
-
-
   # GENERALISE THIS
   if optDict['box'] == 'redblue':
     avoid_flags = ['JointMisaligned','UnsuitablePhoto','Perfect']
@@ -283,3 +279,7 @@ if __name__ == '__main__':
     ar.bring_redbox_positives(task, flag, add_num_pos, 10)
 
  
+  # setup task/etc
+  p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
+  p.wait()
+
