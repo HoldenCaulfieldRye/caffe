@@ -219,7 +219,7 @@ def add_redboxes(target_bad_min, b_imbal, pos_class, task,
   ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
   # NOT RANDOM! USING TAIL
-  print 'bringing in redbox positives...'
+  print 'bringing in %i redbox positives...'%(add_num_pos)
   ar.bring_redbox_positives(task, flag, add_num_pos, 10)
   
 
@@ -275,8 +275,8 @@ if __name__ == '__main__':
   # GENERALISE THIS
   if 'b-imbal' in optDict:
     b_imbal = float(optDict["b-imbal"])
-    avoid_flags = ['JointMisaligned','UnsuitablePhoto']
-    flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
+    avoid_flags = ['UnsuitablePhoto']
+    flag = 'InadequateOrIncorrectClamping'
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
     redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'

@@ -57,7 +57,7 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
     random.shuffle(notperf)
     print "Gathering completed."
 
-  print "Adding %i of them to %s"%(add_num,fn_train)
+  print "Adding %i negatives to %s"%(add_num,fn_train)
   newcomers, notperf_left = notperf[:add_num], notperf[add_num:]
   pickle.dump(notperf_left, open(pickle_fname,'w'))
   print "%s updated"%(pickle_fname)
@@ -145,7 +145,7 @@ if __name__ == '__main__':
   bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, fn_train, using_pickle)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
-  print 'bringing in redbox positives...'  
+  print 'bringing in %i redbox positives...'%(add_num)
   bring_redbox_positives(task, flag, add_num, imbalance_multiple)
 
 
