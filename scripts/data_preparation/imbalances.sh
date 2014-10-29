@@ -20,8 +20,8 @@ done
 sed -i -e '$a\' $2
 sed -i -e '$a\' $2
 
-grep 'Redbox.*1$' $1 | wc -l | xargs -i echo "Redbox positives: {}" >> $2
-grep 'Redbox.*0$' $1 | wc -l | xargs -i echo "Redbox negatives: {}" >> $2
-grep 'Bluebox.*1$' $1 | wc -l | xargs -i echo "Bluebox positives: {}" >> $2
-grep 'Redbox.*0$' $1 | wc -l | xargs -i echo "Bluebox negatives: {}" >> $2
+grep 'Red.*1$' $1 | wc -l | xargs -i echo "Redbox positives: {}" >> $2
+grep 'Red.*0$' $1 | wc -l | xargs -i echo "Redbox negatives: {}" >> $2
+grep 'Blue.*1$' $1 | wc -l | xargs -i echo "Bluebox positives: {}" >> $2
+grep 'Blue.*0$' $1 | wc -l | xargs -i echo "Bluebox negatives: {}" >> $2
 

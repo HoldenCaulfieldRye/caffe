@@ -1,1 +1,0 @@
-./setup.py --task=misal --box=redblue --learn=2 --u-sample=0.9

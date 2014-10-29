@@ -31,7 +31,7 @@ layers {
   transform_param {
     crop_size: 227
     mean_file: "/homes/ad6813/data/controlpoint_mean_256-227.binaryproto"
-    mirror: false
+    mirror: true
   }
   include: { phase: TEST }
 }

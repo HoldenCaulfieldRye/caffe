@@ -76,19 +76,29 @@ def blur_no_infogain(blue_c_imb, data_dir, task, pos_class):
   blue_dir = data_dir.replace('Red','Blue')
   d_red = setup.get_label_dict_knowing(data_dir, task, pos_class)
   d_blue = setup.get_label_dict_knowing(blue_dir, task, pos_class)
-  red_c_imb=float(len(d['Default']))/(len(d[task])+len(d['Default']))
+  red_c_imb=float(len(d_red['Default']))/(len(d_red[task])+len(d_red['Default']))
+  blue_c_imb = float(blue_c_imb)
   if red_c_imb >= blue_c_imb:
     # can't add all negatives
     num_pos = len(d_red[task])
-    num_neg = num_neg * (len(d_blue['Default'])/len(d_blue[task]))
+    print "red positives:", num_pos
+    num_neg = num_pos * (blue_c_imb/float(1-blue_c_imb))
+    # num_neg = num_pos * (len(d_blue['Default'])/len(d_blue[task]))
   else:
+    # can't add all positives
     num_neg = len(d_red['Default'])
-    num_pos = num_pos * (len(d_blue[task])/len(d_blue['Default']))
-  return num_pos, num_neg
+    num_pos = num_neg * (1-blue_c_imb/blue_c_imb)
+    # num_pos = num_neg * (len(d_blue[task])/len(d_blue['Default']))
+  return int(num_pos), int(num_neg)
   
   
 def what_redbox_numbers(c_imb, b_imb, data_dir, task, pos_class,
                         b_pos, b_neg):
+  # big prob: after redbox sampling, imbalance has changed.
+  # so actually, redbox sampling and undersampling both need to be
+  # determined before either takes place.
+  # other prob: given b_imb, compute num_neg num_pos
+  # maybe easier is given info gain, compute num_neg num_pos
   d = setup.get_label_dict_knowing(data_dir, task, pos_class)
   red_c_imb=float(len(d['Default']))/(len(d[task])+len(d['Default']))
   if red_c_imb >= c_imb:

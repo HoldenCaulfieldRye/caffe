@@ -18,7 +18,6 @@ def main(data_dir, data_info, task, pos_class,target_bad_min=None):
   ''' This is the master function. data_dir: where raw data is. data_info: where to store .txt files. '''
   Keep = get_label_dict_knowing(data_dir, task, pos_class)
   if target_bad_min is not None:
-    print "target bad min: %s" %(target_bad_min)
     Keep = rebalance(Keep, target_bad_min)
   Keep = within_class_shuffle(Keep)
   print 'finished shuffling'
@@ -90,6 +89,7 @@ def rebalance(Keep, target_bad_min):
     print '%s has %i images so %i will be randomly removed'%(minc, len_minc, delete_size)
     del Keep[minc][:delete_size]
   assert target_bad_min == round(float(len(Keep[maxc])) / (len(Keep[maxc])+len(Keep[minc])), 2)
+  for key in Keep.keys(): print key, len(Keep[key])
   return Keep
 
 
@@ -183,7 +183,7 @@ def dump_to_files(Keep, data_info, task, data_dir):
   ''' This function "trusts" you. It will overwrite data lookup 
   files. '''
   dump = []
-  part = [0, 0.95, 1] # partition into train val test
+  part = [0, 0.85, 1] # partition into train val test
   dump_fnames = ['train.txt','val.txt'] #,'test.txt']
   for i in xrange(len(dump_fnames)):
     dump.append([])
@@ -211,13 +211,12 @@ def flag_lookup(labels):
 
 
 def add_redboxes(target_bad_min, b_imbal, pos_class, task,
-                 avoid_flags, add_num_neg, pickle_fname, redbox_dir,
+                 avoid_flags, pickle_fname, redbox_dir,
                  fn_train, using_pickle):
-  blue_c_imb = target_bad_min
+  blue_c_imb = float(target_bad_min)
   # GOING FOR NO INFO GAIN!
-  add_num_pos, add_num_neg = ar.blur_no_infogain(blue_c_imb, data_dir, task, pos_class)
+  add_num_pos, add_num_neg = ar.blur_no_infogain(blue_c_imb, redbox_dir, task, pos_class)
   ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
-
 
   # NOT RANDOM! USING TAIL
   print 'bringing in redbox positives...'
@@ -243,7 +242,7 @@ if __name__ == '__main__':
   if len(sys.argv) == 1:
     print_help()
   
-  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "u-sample="])
+  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "u-sample=", "b-imbal="])
   optDict = dict([(k[2:],v) for (k,v) in opts])
   print optDict
   
@@ -254,7 +253,7 @@ if __name__ == '__main__':
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
-    data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
+  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
@@ -285,16 +284,16 @@ if __name__ == '__main__':
 
     # How many redboxes to add:
     # add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class)
-      if not target_bad_min in locals():
-        message = '''ERROR: no target_bad_min given to maintain  
-        class imbalance after redbox additions. 
-        If you don't want any undersampling and still want to add 
-        redbox st imbalance unchanged, then yeah, you need to 
-        implement that.'''
-        raise Exception(message)
-      add_redboxes(target_bad_min, b_imbal, pos_class, task, 
-                   avoid_flags, add_num_neg, pickle_fname, 
-                   redbox_dir, fn_train, using_pickle)
+    if target_bad_min == None:
+      message = '''ERROR: no target_bad_min given to maintain  
+      class imbalance after redbox additions. 
+      If you don't want any undersampling and still want to add 
+      redbox st imbalance unchanged, then yeah, you need to 
+      implement that.'''
+      raise Exception(message)
+    add_redboxes(target_bad_min, b_imbal, pos_class, task, 
+                 avoid_flags, pickle_fname, 
+                 redbox_dir, fn_train, using_pickle)
  
   # setup task/etc
   p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
