@@ -70,6 +70,22 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
   # print "writing:", c_train
   f_train.writelines(c_train)
 
+
+def blur_no_infogain(blue_c_imb, data_dir, task, pos_class):
+  # assumed b_imb == 0.5
+  blue_dir = data_dir.replace('Red','Blue')
+  d_red = setup.get_label_dict_knowing(data_dir, task, pos_class)
+  d_blue = setup.get_label_dict_knowing(blue_dir, task, pos_class)
+  red_c_imb=float(len(d['Default']))/(len(d[task])+len(d['Default']))
+  if red_c_imb >= blue_c_imb:
+    # can't add all negatives
+    num_pos = len(d_red[task])
+    num_neg = num_neg * (len(d_blue['Default'])/len(d_blue[task]))
+  else:
+    num_neg = len(d_red['Default'])
+    num_pos = num_pos * (len(d_blue[task])/len(d_blue['Default']))
+  return num_pos, num_neg
+  
   
 def what_redbox_numbers(c_imb, b_imb, data_dir, task, pos_class,
                         b_pos, b_neg):

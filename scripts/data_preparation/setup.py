@@ -213,8 +213,9 @@ def flag_lookup(labels):
 def add_redboxes(target_bad_min, b_imbal, pos_class, task,
                  avoid_flags, add_num_neg, pickle_fname, redbox_dir,
                  fn_train, using_pickle):
-  c_imbal = target_bad_min
-  add_num_pos, add_num_neg = ar.what_redbox_numbers(c_imbal, b_imbal, data_dir, task, pos_class) 
+  blue_c_imb = target_bad_min
+  # GOING FOR NO INFO GAIN!
+  add_num_pos, add_num_neg = ar.blur_no_infogain(blue_c_imb, data_dir, task, pos_class)
   ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
 
@@ -275,7 +276,7 @@ if __name__ == '__main__':
   # GENERALISE THIS
   if 'b-imbal' in optDict:
     b_imbal = float(optDict["b-imbal"])
-    avoid_flags = ['JointMisaligned','UnsuitablePhoto','Perfect']
+    avoid_flags = ['JointMisaligned','UnsuitablePhoto']
     flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
