@@ -44,15 +44,24 @@ python/caffe/proto/
 
 ## Caffe
 
-# User's build configuration
-Makefile.config
+# Heavy python objects
+*.npy
+*.pickle
+*.yaml
+*.json
+
+# Training visualisations
+*.log.train
+*.log.test
+*.png
 
 # Data and models are either
 # 1. reference, and not casually committed
-# 2. custom, and live on their own unless they're deliberated contributed
-data/*
-models/*
+# 2. custom, and live on their own unless they're deliberated
+# contributed
+*.jpg
 *.caffemodel
+*wts
 *.solverstate
 *.binaryproto
 *leveldb
