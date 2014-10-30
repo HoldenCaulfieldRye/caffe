@@ -262,8 +262,12 @@ void Solver<Dtype>::Test(const int test_net_id) {
     if (param_.test_compute_loss()) {
       loss += iter_loss;
     }
+<<<<<<< HEAD
+    if (i == 0) {
+=======
     if (i == 0) { //test_net
       //multiple result vectors
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
       for (int j = 0; j < result.size(); ++j) {
         const Dtype* result_vec = result[j]->cpu_data();
         for (int k = 0; k < result[j]->count(); ++k) {
@@ -314,7 +318,11 @@ void Solver<Dtype>::Snapshot() {
   char iter_str_buffer[kBufferSize];
   snprintf(iter_str_buffer, kBufferSize, "_iter_%d", iter_);
   filename += iter_str_buffer;
+<<<<<<< HEAD
+  model_filename = filename + ".caffemodel";
+=======
   model_filename = filename + ".wts";
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   LOG(INFO) << "Snapshotting to " << model_filename;
   WriteProtoToBinaryFile(net_param, model_filename.c_str());
   SolverState state;

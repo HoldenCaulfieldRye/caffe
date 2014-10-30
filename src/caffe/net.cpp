@@ -524,7 +524,10 @@ Dtype Net<Dtype>::ForwardTo(int end) {
 
 template <typename Dtype>
 const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
+<<<<<<< HEAD
+=======
   
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   if (loss != NULL) {
     *loss = ForwardFromTo(0, layers_.size() - 1);
   } else {
@@ -536,14 +539,20 @@ const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
 template <typename Dtype>
 const vector<Blob<Dtype>*>& Net<Dtype>::Forward(
     const vector<Blob<Dtype>*> & bottom, Dtype* loss) {
+<<<<<<< HEAD
+=======
 
   // LOG(INFO) << "result[0][0] ie net_output_blobs_[0][0] before Net::Forward() " << net_input_blobs_[0][0];
   
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   // Copy bottom to internal bottom
   for (int i = 0; i < bottom.size(); ++i) {
     net_input_blobs_[i]->CopyFrom(*bottom[i]);
   }
+<<<<<<< HEAD
+=======
   
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   return ForwardPrefilled(loss);
 }
 

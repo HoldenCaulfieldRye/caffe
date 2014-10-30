@@ -80,6 +80,12 @@ class AccuracyLayer : public Layer<Dtype> {
       if (propagate_down[i]) { NOT_IMPLEMENTED; }
     }
   }
+<<<<<<< HEAD
+
+  int top_k_;
+};
+
+=======
   int top_k_;
 };
 
@@ -120,6 +126,7 @@ class PerClassAccuracyLayer: public Layer<Dtype> {
 };
   
 
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 /**
  * @brief An interface for Layer%s that take two Blob%s as input -- usually
  *        (1) predictions and (2) ground-truth labels -- and output a
@@ -799,6 +806,8 @@ class SoftmaxWithLossLayer : public LossLayer<Dtype> {
   vector<Blob<Dtype>*> softmax_top_vec_;
 };
 
+<<<<<<< HEAD
+=======
 
 template <typename Dtype>
 class SoftmaxWithRebalancedLossLayer : public LossLayer<Dtype> {
@@ -874,6 +883,7 @@ class SoftmaxWithRebalancedLossLayer : public LossLayer<Dtype> {
 };
 
   
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 }  // namespace caffe
 
 #endif  // CAFFE_LOSS_LAYERS_HPP_

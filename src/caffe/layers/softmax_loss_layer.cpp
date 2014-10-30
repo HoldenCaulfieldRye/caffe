@@ -1,14 +1,20 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
+<<<<<<< HEAD
+=======
 #include <cassert>
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 
 #include "caffe/layer.hpp"
 #include "caffe/util/math_functions.hpp"
 #include "caffe/vision_layers.hpp"
 
+<<<<<<< HEAD
+=======
 using std::max;
 
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 namespace caffe {
 
 template <typename Dtype>
@@ -40,6 +46,17 @@ void SoftmaxWithLossLayer<Dtype>::Forward_cpu(
   softmax_layer_->Forward(softmax_bottom_vec_, &softmax_top_vec_);
   const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
+<<<<<<< HEAD
+  int num = prob_.num();
+  int dim = prob_.count() / num;
+  int spatial_dim = prob_.height() * prob_.width();
+  Dtype loss = 0;
+  for (int i = 0; i < num; ++i) {
+    for (int j = 0; j < spatial_dim; j++) {
+      loss -= log(std::max(prob_data[i * dim +
+          static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j],
+                           Dtype(FLT_MIN)));
+=======
   int num = prob_.num(); 
   int dim = prob_.count() / num; 
   int spatial_dim = prob_.height() * prob_.width();
@@ -59,6 +76,7 @@ void SoftmaxWithLossLayer<Dtype>::Forward_cpu(
 				label[i * spatial_dim + j])
 				* spatial_dim + j],
                       Dtype(FLT_MIN)));
+>>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
     }
   }
   (*top)[0]->mutable_cpu_data()[0] = loss / num / spatial_dim;
