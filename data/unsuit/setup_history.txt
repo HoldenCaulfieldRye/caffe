@@ -1,1 +1,0 @@
-./setup.py --task=unsuit --box=blue --learn=14 --u-sample=0.9
