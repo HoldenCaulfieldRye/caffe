@@ -4,10 +4,6 @@
 
 #include <map>
 #include <string>
-<<<<<<< HEAD
-=======
-#include <iostream>
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 
 #include "caffe/common.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -456,10 +452,6 @@ bool UpgradeLayerParameter(const LayerParameter& v0_layer_connection,
 }
 
 LayerParameter_LayerType UpgradeV0LayerType(const string& type) {
-<<<<<<< HEAD
-=======
-   std::cout << "hello hello thisis upgrade_proto::UpgradeV0LayerType()" << std::endl << std::endl;
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   if (type == "accuracy") {
     return LayerParameter_LayerType_ACCURACY;
   } else if (type == "bnll") {
@@ -492,11 +484,8 @@ LayerParameter_LayerType UpgradeV0LayerType(const string& type) {
     return LayerParameter_LayerType_LRN;
   } else if (type == "multinomial_logistic_loss") {
     return LayerParameter_LayerType_MULTINOMIAL_LOGISTIC_LOSS;
-<<<<<<< HEAD
-=======
   } else if (type == "per_class_accuracy") {
     return LayerParameter_LayerType_PER_CLASS_ACCURACY;
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   } else if (type == "pool") {
     return LayerParameter_LayerType_POOLING;
   } else if (type == "relu") {
@@ -507,11 +496,8 @@ LayerParameter_LayerType UpgradeV0LayerType(const string& type) {
     return LayerParameter_LayerType_SOFTMAX;
   } else if (type == "softmax_loss") {
     return LayerParameter_LayerType_SOFTMAX_LOSS;
-<<<<<<< HEAD
-=======
   } else if (type == "softmax_rebalanced_loss") {
     return LayerParameter_LayerType_SOFTMAX_REBALANCED_LOSS;
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   } else if (type == "split") {
     return LayerParameter_LayerType_SPLIT;
   } else if (type == "tanh") {
@@ -638,10 +624,6 @@ void UpgradeNetAsNeeded(const string& param_file, NetParameter* param) {
 
 void ReadNetParamsFromTextFileOrDie(const string& param_file,
                                     NetParameter* param) {
-<<<<<<< HEAD
-=======
-  std::cout << "upgrade_proto.cpp::ReadNetParamsFromTextFileOrDie: "  << std::endl << std::endl ;  
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   CHECK(ReadProtoFromTextFile(param_file, param))
       << "Failed to parse NetParameter file: " << param_file;
   UpgradeNetAsNeeded(param_file, param);

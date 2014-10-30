@@ -82,10 +82,6 @@ void caffe_add_scalar(const int N, const double alpha, double* Y) {
   }
 }
 
-<<<<<<< HEAD
-=======
-//X source, Y destination
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 template <typename Dtype>
 void caffe_copy(const int N, const Dtype* X, Dtype* Y) {
   if (X != Y) {

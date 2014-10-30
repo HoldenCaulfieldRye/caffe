@@ -1,23 +1,12 @@
-<<<<<<< HEAD
-=======
-// Copyright 2014 BVLC and contributors.
-
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 #include <algorithm>
 #include <functional>
 #include <utility>
 #include <vector>
 
 #include "caffe/layer.hpp"
-<<<<<<< HEAD
 #include "caffe/util/io.hpp"
 #include "caffe/util/math_functions.hpp"
 #include "caffe/vision_layers.hpp"
-=======
-#include "caffe/vision_layers.hpp"
-#include "caffe/util/math_functions.hpp"
-#include "caffe/util/io.hpp"
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 
 namespace caffe {
 
@@ -48,10 +37,6 @@ void AccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   const Dtype* bottom_label = bottom[1]->cpu_data();
   int num = bottom[0]->num();
   int dim = bottom[0]->count() / bottom[0]->num();
-<<<<<<< HEAD
-=======
-  
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   vector<Dtype> maxval(top_k_+1);
   vector<int> max_id(top_k_+1);
   for (int i = 0; i < num; ++i) {

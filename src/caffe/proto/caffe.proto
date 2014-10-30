@@ -63,7 +63,7 @@ message NetParameter {
 // NOTE
 // Update the next available ID when you add a new SolverParameter field.
 //
-// SolverParameter next available ID: 33 (last added: test_initialization)
+// SolverParameter next available ID: 35 (last added: test_initialization)
 message SolverParameter {
   //////////////////////////////////////////////////////////////////////////////
   // Specifying the train and test networks
@@ -219,11 +219,7 @@ message LayerParameter {
   // line above the enum. Update the next available ID when you add a new
   // LayerType.
   //
-<<<<<<< HEAD
-  // LayerType next available ID: 38 (last added: CONTRASTIVE_LOSS)
-=======
   // LayerType next available ID: 40 (last added: SOFTMAX_REBALANCED_LOSS)
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
   enum LayerType {
     // "NONE" layer type is 0th enum element so that we don't cause confusion
     // by defaulting to an existent LayerType (instead, should usually error if
@@ -251,28 +247,18 @@ message LayerParameter {
     INNER_PRODUCT = 14;
     LRN = 15;
     MEMORY_DATA = 29;
-<<<<<<< HEAD
     MULTINOMIAL_LOGISTIC_LOSS = 16;
     MVN = 34;
+    PER_CLASS_ACCURACY = 38;
     POOLING = 17;
     POWER = 26;
-=======
-    SOFTMAX_REBALANCED_LOSS = 16;
-    MVN = 34;
-    PER_CLASS_ACCURACY = 26;
-    POOLING = 17;
-    POWER = 38;
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
     RELU = 18;
     SIGMOID = 19;
     SIGMOID_CROSS_ENTROPY_LOSS = 27;
     SILENCE = 36;
     SOFTMAX = 20;
     SOFTMAX_LOSS = 21;
-<<<<<<< HEAD
-=======
-    MULTINOMIAL_LOGISTIC_LOSS = 39;
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
+    SOFTMAX_REBALANCED_LOSS = 39;
     SPLIT = 22;
     SLICE = 33;
     TANH = 23;
@@ -664,19 +650,6 @@ message SoftmaxParameter {
   optional Engine engine = 1 [default = DEFAULT];
 }
 
-<<<<<<< HEAD
-=======
-// Message that stores parameters used by SoftmaxLayer, SoftMaxWithLossLayer
-message SoftmaxRebalancedParameter {
-  enum Engine {
-    DEFAULT = 0;
-    CAFFE = 1;
-    CUDNN = 2;
-  }
-  optional Engine engine = 1 [default = DEFAULT];
-}
-
->>>>>>> 29e8e1b5b69748cca1f64bcee5ed7a46fbe42b7a
 // Message that stores parameters used by SigmoidLayer
 message TanHParameter {
   enum Engine {

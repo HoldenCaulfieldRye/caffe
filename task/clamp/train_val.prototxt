@@ -5,7 +5,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/clamp/train.txt"
+    source: "/data/ad6813/caffe/data/clamp/train.txt"
     batch_size: 128
     new_height: 256
     new_width: 256
@@ -23,7 +23,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/clamp/val.txt"
+    source: "/data/ad6813/caffe/data/clamp/val.txt"
     batch_size: 126
     new_height: 256
     new_width: 256
@@ -335,13 +335,13 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_REBALANCED_LOSS
   bottom: "fc8_clamp"
   bottom: "label"
 }
 layers {
   name: "accuracy"
-  type: ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "fc8_clamp"
   bottom: "label"
   top: "accuracy"
