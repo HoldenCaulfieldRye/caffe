@@ -80,6 +80,7 @@ NEXT:
 
 4. data augmentation: rotations
    -> easy 1st step: vertical mirror
+   -> ON GRAPHIC07
 
    
 5. ROC curve for optimal threshold
