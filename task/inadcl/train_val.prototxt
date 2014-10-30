@@ -335,13 +335,13 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_REBALANCED_LOSS
   bottom: "fc8_inadcl"
   bottom: "label"
 }
 layers {
   name: "accuracy"
-  type: ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "fc8_inadcl"
   bottom: "label"
   top: "accuracy"
