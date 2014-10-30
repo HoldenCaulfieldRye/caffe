@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
-#include <iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/util/math_functions.hpp"
@@ -73,14 +72,8 @@ void SoftmaxWithLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     int spatial_dim = prob_.height() * prob_.width();
     for (int i = 0; i < num; ++i) {
       for (int j = 0; j < spatial_dim; ++j) {
-	
-	std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << prior[static_cast<int>(label[i*spatial_dim+j])] << " * " << dim << ") = " ;
-	
         bottom_diff[i * dim + static_cast<int>(label[i * spatial_dim + j])
-		    * spatial_dim + j] -= 1;
-
-	std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << "    ";	
-	
+            * spatial_dim + j] -= 1;
       }
     }
     // Scale gradient
