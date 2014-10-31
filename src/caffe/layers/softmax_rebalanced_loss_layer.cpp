@@ -44,45 +44,54 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
+  //const int count = prob_.count();
   const int dim = prob_.count() / num;
-  int spatial_dim = prob_.height() * prob_.width();
+  //int spatial_dim = prob_.height() * prob_.width();
   //prob_.count() := no entries in prob_data ?
   //prob_.num()   := batchsize ?
   //dim           := no classes ?
   //spatial_dim   := 1 ?
-  assert (spatial_dim == 1);
-
+  
   float prior[dim];
   std::fill_n(prior, dim, 0);
-  for (int i = 0; i < num; ++i) {
-    for (int j = 0; j < spatial_dim; j++) {
-      prior[static_cast<int>(label[i*spatial_dim+j])] += 1.0 / num;
-    }
-  }
+  for (int i = 0; i < num; ++i)
+      prior[static_cast<int>(label[i])] += 1.0 / num;
+
+  // std::cout << "batch priors: " ;
+  // for (int i = 0; i < dim; ++i)
+  //   std::cout << prior[i] << " ";
+  // std::cout << std::endl << std::endl;
+
   
   Dtype loss = 0;
-  
-  // std::cout << "Yes hello this is softmax rebalanced" << std::endl;
+  Dtype img_loss = 0;
 
+  // std::cout << "preds:" << std::endl;
+  // for (int i = 0; i < count; ++i) {
+  //   std::cout << prob_data[i] << " ";
+  //   if (i % 2 == 1)
+  //     std::cout << std::endl; 
+  // }
+  // std::cout << std::endl << std::endl;
+
+  // std::cout << "img_losses:" << std::endl;
   for (int i = 0; i < num; ++i) {
-  // std::cout << "loss: ";
-    //why the fuck 2 loops ?
-    //what's this crazy indexing of prob_data ??
-    //oh... unless spatial_dim == 1 ! then it's as before
-    for (int j = 0; j < spatial_dim; j++) {
-      loss -= log(max(prob_data[i * dim + static_cast<int>(
-				label[i * spatial_dim + j])
-				* spatial_dim + j]
-		      / (dim *
-			 prior[static_cast<int>(
-			       label[i * spatial_dim + j])]),
-                      Dtype(FLT_MIN)));
-    }
-    // std::cout << loss << ", ";
-  }
+    img_loss = log(max(prob_data[i * dim + static_cast<int>(label[i])],
+		       Dtype(FLT_MIN)))
+      / (dim*prior[static_cast<int>(label[i])]);
+    loss -= img_loss;
+    
+    // std::cout << "img " << i << " has label " << static_cast<int>(label[i]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i])] << " so loss for it is " << img_loss;
+    
+    img_loss /= dim * prior[static_cast<int>(label[i])];
+    
+    // std::cout << " and after rebalancing: " << img_loss << std::endl;
+  }  
+  // std::cout << std::endl;
+  
   
   // std::cout << std::endl;
-  (*top)[0]->mutable_cpu_data()[0] = loss / num / spatial_dim;
+  (*top)[0]->mutable_cpu_data()[0] = loss / num;
   if (top->size() == 2) {
     (*top)[1]->ShareData(prob_);
   }
