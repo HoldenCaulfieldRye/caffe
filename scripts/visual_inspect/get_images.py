@@ -29,7 +29,7 @@ def find_them():
   back = os.getcwd()
   img_dir = '*'
   while not os.path.exists(img_dir):
-    img_dir = 'data2/ad6813/pipe-data/Redbox/raw_data/dump'  # raw_input('path to Queries? ')
+    img_dir = 'data2/ad6813/pipe-data/Redbox'  # raw_input('path to Queries? ')
   os.chdir(img_dir)
   dirlist = os.listdir(os.getcwd())
   Queries = all_labels(dirlist)

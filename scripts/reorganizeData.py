@@ -5,7 +5,7 @@ import shutil
 def reorganize(baseDir):
   dirs = filter(lambda x: x.isdigit(), os.listdir(baseDir))
   print len(dirs), "joints found"
-  tdr = baseDir + "/raw_data/dump"
+  tdr = baseDir + ""
   if not os.path.exists(tdr):
     os.makedirs(tdr)
   for dr in dirs:

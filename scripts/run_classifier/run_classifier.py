@@ -32,7 +32,7 @@ sys.path.insert(0, caffe_root + 'python')
 #   data-info needs a 'redbox' dir of classifications for all RB imgs
 #   data-dir needs a 'redbox' dir of symlinks to all rdbox images
 
-REDBOX_DIR = '/data/ad6813/pipe-data/small' #Redbox/raw_data/dump'
+REDBOX_DIR = '/data/ad6813/pipe-data/small' #Redbox'
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 

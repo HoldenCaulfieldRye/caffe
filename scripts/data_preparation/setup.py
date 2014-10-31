@@ -253,7 +253,7 @@ if __name__ == '__main__':
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
-  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
+  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
@@ -279,7 +279,7 @@ if __name__ == '__main__':
     flag = 'InadequateOrIncorrectClamping'
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-    redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
+    redbox_dir = '/data/ad6813/pipe-data/Redbox/'
     fn_train = '/data/ad6813/caffe/data/'+task+'/train.txt'
 
     # How many redboxes to add:

@@ -8,7 +8,7 @@ from os.path import join as oj
 def reorganize(baseDir):
   dirs = filter(lambda x: x.isdigit(), os.listdir(baseDir))
   print len(dirs), "joints found"
-  tdr = baseDir + "/raw_data/dump"
+  tdr = baseDir + ""
   if not os.path.exists(tdr):
     os.makedirs(tdr)
   for dr in dirs:
@@ -30,7 +30,7 @@ def getUnsuitableFlags(tdr, name):
 
 if __name__ == "__main__":
   baseDir = sys.argv[1]
-  tdr = baseDir + "/raw_data/dump"
+  tdr = baseDir + ""
   if os.path.isdir(tdr):
     jpgs = filter(lambda x: "jpg" in x, os.listdir(tdr))
     for jpg in jpgs:

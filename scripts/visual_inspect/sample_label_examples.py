@@ -32,7 +32,7 @@ def get_label_dict(data_dir):
 
 if __name__ == '__main__':
   here = os.getcwd()
-  data_dir = '/data/ad6813/pipe-data/Bluebox/raw_data/dump'
+  data_dir = '/data/ad6813/pipe-data/Bluebox'
   os.chdir('../scripts/data_preparation')
   d = get_label_dict(data_dir)
   os.chdir(here)
