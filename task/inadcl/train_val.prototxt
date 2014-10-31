@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/inadcl/val.txt"
-    batch_size: 122
+    batch_size: 149
     new_height: 256
     new_width: 256
   }
