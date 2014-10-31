@@ -12,7 +12,7 @@ import subprocess
 
 
 def matplot(model_dir, Ys, start, end):  
-  plt.ylim([0,2])
+  plt.ylim([0,1.3])
   x = np.array(range(start,end))
   plt.xlabel('Iters')
   for key in Ys.keys():
