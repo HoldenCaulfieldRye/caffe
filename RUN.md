@@ -6,6 +6,19 @@ NEXT:
 	 -> last time only 4 pos in val! make 15
 	 -> imbalance: max redbox st 80% class, 50% blur	 
 	 
+   -> inadcl 06
+      -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
+      -> try again: 97, 52, 74, 88
+         -> fc7 only
+	 -> imbalance: max redbox st 50% class, 70% blur
+	 -> maybe inadcl semantically hard though
+
+   -> water 09
+      -> 0 trainerr in 20 iter, maybe 0.6 PCA but looks like noise
+      -> try again: 79, 77, 78, 78
+         -> fc7 only
+	 -> imbalance: max redbox st no imbalance anywhere
+
 2. rebalanced gradient
    -> 
 
