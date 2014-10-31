@@ -1,4 +1,8 @@
-NEXT:	 
+NEXT:
+
+   -> inadcl
+      -> takes 600 iters to get off the ground!!
+
    -> misal
       -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
       -> try again:

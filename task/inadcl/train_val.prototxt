@@ -335,7 +335,7 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_REBALANCED_LOSS
+  type: SOFTMAX_LOSS
   bottom: "fc8_inadcl"
   bottom: "label"
 }
