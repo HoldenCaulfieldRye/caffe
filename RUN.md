@@ -1,4 +1,8 @@
-NEXT:	 
+NEXT:
+
+   UPDATE flag_kookup.txt BECAUSE UNSUITABLE PHOTO MISSING!
+   -> then train with new additional data and rebalanced grad
+
    -> misal
       -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
       -> try again:
