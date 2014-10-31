@@ -12,13 +12,13 @@ import subprocess
 
 
 def matplot(model_dir, Ys, start, end):  
-  plt.ylim([0,1.2])
+  plt.ylim([0,2])
   x = np.array(range(start,end))
   plt.xlabel('Iters')
   for key in Ys.keys():
     Ys[key] = np.array([np.float(el) for el in Ys[key][start:end]])
     plt.plot(x, Ys[key], label=key)
-  plt.legend(loc='upper left')
+  plt.legend(loc='upper left',ncol=len(Ys)/2,prop={'size':10})
   # plt.title('Go on choose one')
   plt.grid(True)
   plt.savefig(oj(model_dir,'plot_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
@@ -111,7 +111,7 @@ def print_help():
 
 if __name__ == '__main__':
 
-  test_fields = ['TestLoss', 'Acc_0', 'Acc_1', 'PCAcc', 'Accuracy']
+  test_fields = ['ValLoss', 'ValAcc_0', 'ValAcc_1', 'ValPCAcc', 'ValAcc']
   train_fields = ['TrainLoss']
   
   try: 
