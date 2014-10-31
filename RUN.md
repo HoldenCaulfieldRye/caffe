@@ -18,6 +18,9 @@ NEXT:
       -> try again: 79, 77, 78, 78
          -> fc7 only
 	 -> imbalance: max redbox st no imbalance anywhere
+      -> improve:
+         -> max redbox 78% class imbalance
+	 -> fc7 then fc6?
 
 2. rebalanced gradient
    -> 

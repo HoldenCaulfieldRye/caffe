@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $1
-grep "JointId" *.met | tr ":=." " " | awk '{a[$4] = a[$4]" "$1}; END{for (val in a) print val"\t"a[val]}' > "MultJoints"
+grep "JointId" *.met | tr ":=." " " | awk '{a[$4] = a[$4]" "$1}; END{for (val in a) print val"\t"a[val]}' > "multJoints"
