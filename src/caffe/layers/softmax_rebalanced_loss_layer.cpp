@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
-#include <iostream>
+// #include <iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/vision_layers.hpp"
@@ -58,10 +58,10 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   for (int i = 0; i < num; ++i)
       prior[static_cast<int>(label[i])] += 1.0 / num;
 
-  std::cout << "batch priors: " ;
-  for (int i = 0; i < dim; ++i)
-    std::cout << prior[i] << " ";
-  std::cout << std::endl << std::endl;
+  // std::cout << "batch priors: " ;
+  // for (int i = 0; i < dim; ++i)
+  //   std::cout << prior[i] << " ";
+  // std::cout << std::endl << std::endl;
 
   
   Dtype loss = 0;
@@ -75,15 +75,6 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   }
   std::cout << std::endl << std::endl;
 
-  std::cout << "preds:" << std::endl;
-  for (int i = 0; i < num; ++i) {
-    for (int j = 0; j < dim; j++) {
-      std::cout << prob_data[i * dim + j] << " ";
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl << std::endl;
-
   // std::cout << "img_losses:" << std::endl;
   for (int i = 0; i < num; ++i) {
     img_loss = log(max(prob_data[i * dim + static_cast<int>(label[i])],
@@ -91,44 +82,14 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
       / (dim*prior[static_cast<int>(label[i])]);
     loss -= img_loss;
     
-    std::cout << "img " << i << " has label " << static_cast<int>(label[i]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i])] << " so loss for it is " << img_loss;
+    // std::cout << "img " << i << " has label " << static_cast<int>(label[i]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i])] << " so loss for it is " << img_loss;
     
     img_loss /= dim * prior[static_cast<int>(label[i])];
     
-    std::cout << " and after rebalancing: " << img_loss << std::endl;
+    // std::cout << " and after rebalancing: " << img_loss << std::endl;
   }  
-  std::cout << std::endl;
+  // std::cout << std::endl;
   
-  // for (int i = 0; i < num; ++i) {
-  //   for (int j = 0; j < spatial_dim; j++) {
-  //     img_loss = log(std::max(prob_data[i * dim +
-  //         static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j],
-  // 			      Dtype(FLT_MIN)));
-
-  //     // std::cout << "img " << i << " has label " << static_cast<int>(label[i * spatial_dim + j]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j] << " so loss for it is " << img_loss;
-
-  //     // img_loss /= dim * prior[];
-      
-  //     loss -= img_loss;
-  //   }
-  // }
-  
-  // for (int i = 0; i < num; ++i) {
-  // // std::cout << "loss: ";
-  //   //why the fuck 2 loops ?
-  //   //what's this crazy indexing of prob_data ??
-  //   //oh... unless spatial_dim == 1 ! then it's as before
-  //   for (int j = 0; j < spatial_dim; j++) {
-  //     loss -= log(max(prob_data[i * dim + static_cast<int>(
-  // 				label[i * spatial_dim + j])
-  // 				* spatial_dim + j]
-  // 		      / (dim *
-  // 			 prior[static_cast<int>(
-  // 			       label[i * spatial_dim + j])]),
-  //                     Dtype(FLT_MIN)));
-  //   }
-  //   // std::cout << loss << ", ";
-  // }
   
   // std::cout << std::endl;
   (*top)[0]->mutable_cpu_data()[0] = loss / num;
