@@ -275,8 +275,8 @@ if __name__ == '__main__':
   # GENERALISE THIS
   if 'b-imbal' in optDict:
     b_imbal = float(optDict["b-imbal"])
-    avoid_flags = ['JointMisaligned','UnsuitablePhoto']
-    flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
+    avoid_flags = ['UnsuitablePhoto']
+    flag = 'JointMisaligned'
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
     redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
