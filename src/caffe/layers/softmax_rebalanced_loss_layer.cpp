@@ -44,15 +44,14 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
-  const int count = prob_.count();
+  //const int count = prob_.count();
   const int dim = prob_.count() / num;
   //int spatial_dim = prob_.height() * prob_.width();
   //prob_.count() := no entries in prob_data ?
   //prob_.num()   := batchsize ?
   //dim           := no classes ?
   //spatial_dim   := 1 ?
-  assert (spatial_dim == 1);
-
+  
   float prior[dim];
   std::fill_n(prior, dim, 0);
   for (int i = 0; i < num; ++i)
@@ -67,13 +66,13 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   Dtype loss = 0;
   Dtype img_loss = 0;
 
-  std::cout << "preds:" << std::endl;
-  for (int i = 0; i < count; ++i) {
-    std::cout << prob_data[i] << " ";
-    if (i % 2 == 1)
-      std::cout << std::endl; 
-  }
-  std::cout << std::endl << std::endl;
+  // std::cout << "preds:" << std::endl;
+  // for (int i = 0; i < count; ++i) {
+  //   std::cout << prob_data[i] << " ";
+  //   if (i % 2 == 1)
+  //     std::cout << std::endl; 
+  // }
+  // std::cout << std::endl << std::endl;
 
   // std::cout << "img_losses:" << std::endl;
   for (int i = 0; i < num; ++i) {
