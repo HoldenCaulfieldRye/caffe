@@ -107,7 +107,7 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     int num = prob_.num();         //batchSize, num imgs
     const int dim = prob_.count() / num; //num neurons
     int spatial_dim = prob_.height() * prob_.width();
-
+    const int count = (*bottom)[0]->count();
         
     float prior[dim];
     std::fill_n(prior, dim, 0);
@@ -131,19 +131,20 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     for (int i = 0; i < count; ++i)
       std::cout << bottom_diff[i] << " ";
     std::cout << std::endl << std::endl;
-    
-    for (int k = 0; k < dim; ++k) {
+
+
+    for (int j = 0; j < dim; ++j) {
       for (int i = 0; i < num; ++i)
-	for (int j = 0; j < spatial_dim; j++) {
-	  if (prior[static_cast<int>(label[i*spatial_dim+j])] > 0) {
-	    // std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << prior[static_cast<int>(label[i*spatial_dim+j]] << " * " << dim << ")" << std::endl;
-				     
-	    bottom_diff[i * dim + static_cast<int>(
-		    label[i*spatial_dim + j])* spatial_dim + j] /=		 (prior[static_cast<int>(label[i*spatial_dim+j])] * dim);
-	  }
-	}
+	bottom_diff[i * dim + j] /= (static_cast<float>(prior[static_cast<int>(label[i])])*dim);
     }
-    
+
+    for (int i = 0; i < num; ++i) {
+      for (int j = 0; j < spatial_dim; ++j) {
+        bottom_diff[i * dim + static_cast<int>(label[i * spatial_dim + j])
+		    * spatial_dim + j] /= prior[static_cast<int>(label[i*spatial_dim+j])] * dim;
+      }
+    }
+        
     std::cout << "params after rebalance:" << std::endl;
     for (int i = 0; i < count; ++i)
       std::cout << bottom_diff[i] << " ";
