@@ -46,7 +46,7 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   int num = prob_.num();
   const int count = prob_.count();
   const int dim = prob_.count() / num;
-  int spatial_dim = prob_.height() * prob_.width();
+  //int spatial_dim = prob_.height() * prob_.width();
   //prob_.count() := no entries in prob_data ?
   //prob_.num()   := batchsize ?
   //dim           := no classes ?
@@ -84,14 +84,20 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   }
   std::cout << std::endl << std::endl;
 
-  std::cout << "img_losses:" << std::endl;
+  // std::cout << "img_losses:" << std::endl;
   for (int i = 0; i < num; ++i) {
     img_loss = log(max(prob_data[i * dim + static_cast<int>(label[i])],
 		       Dtype(FLT_MIN)))
       / (dim*prior[static_cast<int>(label[i])]);
-    loss -= img_loss; 
-    std::cout << static_cast<float>(img_loss) << ", ";
+    loss -= img_loss;
+    
+    std::cout << "img " << i << " has label " << static_cast<int>(label[i]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i])] << " so loss for it is " << img_loss;
+    
+    img_loss /= dim * prior[static_cast<int>(label[i])];
+    
+    std::cout << " and after rebalancing: " << img_loss << std::endl;
   }  
+  std::cout << std::endl;
   
   // for (int i = 0; i < num; ++i) {
   //   for (int j = 0; j < spatial_dim; j++) {
