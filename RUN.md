@@ -11,6 +11,7 @@ NEXT:
 	 -> imbalance: max redbox st 80% class, 50% blur	 
 	 
 2. rebalanced gradient
+   -> finetune from original
    -> 
 
 3. data augmentation: rotations
