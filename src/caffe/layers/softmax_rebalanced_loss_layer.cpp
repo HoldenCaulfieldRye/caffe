@@ -132,6 +132,12 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
       std::cout << bottom_diff[i] << " ";
     std::cout << std::endl << std::endl;
 
+    // std::cout << "params b4 rebalance:" << std::endl;
+    // for (int i = 0; i < num; ++i) {
+    //   for (int j = 0; j < spatial_dim; ++j) {
+    // 	std::cout << bottom_diff[] << " ";
+    // std::cout << std::endl << std::endl;
+
     std::cout << "batch priors: " ;
     for (int i = 0; i < dim; ++i)
       std::cout << prior[i] << " ";
@@ -150,14 +156,28 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     // 		    * spatial_dim + j] /= prior[static_cast<int>(label[i])] * dim;
     //   }
     // }
-        
-    //DOESNT WORK
+
+    //TRY
+    // for (int i = 0; i < num; ++i) {
+    //   for (int j = 0; j < spatial_dim; ++j) {
+    //     bottom_diff[i * spatial_dim + j] /= prior[static_cast<int>(label[i*spatial_dim+j])] * spatial_dim;
+    //   }
+    // }
+    
+    //TRY
     for (int i = 0; i < num; ++i) {
       for (int j = 0; j < spatial_dim; ++j) {
-        bottom_diff[i * spatial_dim + static_cast<int>(label[i * spatial_dim + j])
-    		    * spatial_dim + j] /= prior[static_cast<int>(label[i*spatial_dim+j])] * dim;
+        bottom_diff[i * spatial_dim + j] /= prior[static_cast<int>(label[i*spatial_dim+j])] * dim;
       }
     }
+    
+    //DOESNT WORK
+    // for (int i = 0; i < num; ++i) {
+    //   for (int j = 0; j < spatial_dim; ++j) {
+    //     bottom_diff[i * spatial_dim + static_cast<int>(label[i * spatial_dim + j])
+    // 		    * spatial_dim + j] /= prior[static_cast<int>(label[i*spatial_dim+j])] * dim;
+    //   }
+    // }
         
     std::cout << "params after rebalance:" << std::endl;
     for (int i = 0; i < count; ++i)
