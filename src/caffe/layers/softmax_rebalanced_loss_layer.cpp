@@ -126,19 +126,20 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     }
     // Scale down gradient
     caffe_scal(prob_.count(), Dtype(1) / num, bottom_diff);
-  
-    for (int i = 0; i < num; ++i) {
-      for (int j = 0; j < spatial_dim; ++j) {
-	if (prior[static_cast<int>(label[i*spatial_dim+j])] > 0) {
-	  std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << prior[static_cast<int>(label[i*spatial_dim+j])] << " * " << dim << ") = " ;
-				     
-	  bottom_diff[i * dim + static_cast<int>(
-						 label[i*spatial_dim + j])* spatial_dim + j] /=		 (prior[static_cast<int>(label[i*spatial_dim+j])] * dim);
 
-	  std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << "    ";
+    
+  
+    for (int k = 0; k < dim; ++k) {
+      for (int i = 0; i < num; ++i)
+	for (int j = 0; j < spatial_dim; j++) {
+	  if (prior[static_cast<int>(label[i*spatial_dim+j])] > 0) {
+	    // std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << std::endl;
+	    std::cout << bottom_diff[i * dim + static_cast<int>(label[i*spatial_dim + j])] << " / (" << prior[static_cast<int>(label[i*spatial_dim+j]] << " * " << dim << ")" << std::endl;
+				     
+	    bottom_diff[i * dim + static_cast<int>(
+		    label[i*spatial_dim + j])* spatial_dim + j] /=		 (prior[static_cast<int>(label[i*spatial_dim+j])] * dim);
+	  }
 	}
-      }
-      std::cout << std::endl;      
     }
   }
 }
