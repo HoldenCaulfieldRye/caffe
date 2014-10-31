@@ -6,7 +6,7 @@ layers {
   top: "label"
   image_data_param {
     source: "/data/ad6813/caffe/data/clamp/train.txt"
-    batch_size: 16
+    batch_size: 10
     new_height: 256
     new_width: 256
   }
@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "/data/ad6813/caffe/data/clamp/val.txt"
-    batch_size: 16
+    batch_size: 1 
     new_height: 256
     new_width: 256
   }
