@@ -44,6 +44,7 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
+  const int count = prob_.count();
   const int dim = prob_.count() / num;
   int spatial_dim = prob_.height() * prob_.width();
   //prob_.count() := no entries in prob_data ?
@@ -67,24 +68,29 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   Dtype img_loss = 0;
 
   std::cout << "preds:" << std::endl;
-  for (int i = 0; i < num; ++i)
+  for (int i = 0; i < count; ++i) {
     std::cout << prob_data[i] << " ";
+    if (i % 2 == 1)
+      std::cout << std::endl;
+  }
   std::cout << std::endl << std::endl;
 
   std::cout << "preds:" << std::endl;
   for (int i = 0; i < num; ++i) {
-    for (int j = 0; j < spatial_dim; j++) {
-      std::cout << prob_data[i * dim +static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j] << " ";
+    for (int j = 0; j < dim; j++) {
+      std::cout << prob_data[i * dim + j] << " ";
     }
+    std::cout << std::endl;
   }
   std::cout << std::endl << std::endl;
 
+  std::cout << "img_losses:" << std::endl;
   for (int i = 0; i < num; ++i) {
     img_loss = log(max(prob_data[i * dim + static_cast<int>(label[i])],
 		       Dtype(FLT_MIN)))
-      / (dim*num*prior[static_cast<int>(label[i])]);
+      / (dim*prior[static_cast<int>(label[i])]);
     loss -= img_loss; 
-    // std::cout << loss << ", ";
+    std::cout << static_cast<float>(img_loss) << ", ";
   }  
   
   // for (int i = 0; i < num; ++i) {
@@ -119,7 +125,7 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   // }
   
   // std::cout << std::endl;
-  (*top)[0]->mutable_cpu_data()[0] = loss / num / spatial_dim;
+  (*top)[0]->mutable_cpu_data()[0] = loss / num;
   if (top->size() == 2) {
     (*top)[1]->ShareData(prob_);
   }
