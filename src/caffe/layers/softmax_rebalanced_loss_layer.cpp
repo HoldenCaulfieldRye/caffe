@@ -132,6 +132,11 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
       std::cout << bottom_diff[i] << " ";
     std::cout << std::endl << std::endl;
 
+    std::cout << "batch priors: " ;
+    for (int i = 0; i < dim; ++i)
+      std::cout << prior[i] << " ";
+    std::cout << std::endl << std::endl;
+
     // //TRY
     // for (int j = 0; j < dim; ++j) {
     //   for (int i = 0; i < num; ++i)
