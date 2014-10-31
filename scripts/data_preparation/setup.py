@@ -219,7 +219,7 @@ def add_redboxes(target_bad_min, b_imbal, pos_class, task,
   ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
 
   # NOT RANDOM! USING TAIL
-  print 'bringing in redbox positives...'
+  print 'bringing in %i redbox positives...'%(add_num_pos)
   ar.bring_redbox_positives(task, flag, add_num_pos, 10)
   
 
@@ -253,7 +253,7 @@ if __name__ == '__main__':
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
-  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box/raw_data/dump"
+  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
@@ -276,10 +276,14 @@ if __name__ == '__main__':
   if 'b-imbal' in optDict:
     b_imbal = float(optDict["b-imbal"])
     avoid_flags = ['UnsuitablePhoto']
+<<<<<<< HEAD
     flag = 'JointMisaligned'
+=======
+    flag = 'InadequateOrIncorrectClamping'
+>>>>>>> f347f19e74d0615c4cd0c8346691099a7fcb4325
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-    redbox_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
+    redbox_dir = '/data/ad6813/pipe-data/Redbox/'
     fn_train = '/data/ad6813/caffe/data/'+task+'/train.txt'
 
     # How many redboxes to add:

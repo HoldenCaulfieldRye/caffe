@@ -6,7 +6,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/water/train.txt"
-    batch_size: 128
+    batch_size: 512
     new_height: 256
     new_width: 256
   }
@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/water/val.txt"
-    batch_size: 50
+    batch_size: 99
     new_height: 256
     new_width: 256
   }
@@ -335,13 +335,13 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_REBALANCED_LOSS
   bottom: "fc8_water"
   bottom: "label"
 }
 layers {
   name: "accuracy"
-  type: ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "fc8_water"
   bottom: "label"
   top: "accuracy"

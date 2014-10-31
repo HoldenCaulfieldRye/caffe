@@ -1,4 +1,4 @@
-name: "ClampCaffeNet"
+name: "InadclCaffeNet"
 layers {
   name: "data"
   type: IMAGE_DATA
@@ -6,7 +6,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/inadcl/train.txt"
-    batch_size: 128
+    batch_size: 256
     new_height: 256
     new_width: 256
   }
@@ -24,14 +24,14 @@ layers {
   top: "label"
   image_data_param {
     source: "data/inadcl/val.txt"
-    batch_size: 82
+    batch_size: 149
     new_height: 256
     new_width: 256
   }
   transform_param {
     crop_size: 227
     mean_file: "/homes/ad6813/data/controlpoint_mean_256-227.binaryproto"
-    mirror: false
+    mirror: true
   }
   include: { phase: TEST }
 }
@@ -40,9 +40,9 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -91,9 +91,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -143,9 +143,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -172,9 +172,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -202,9 +202,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -243,9 +243,9 @@ layers {
   type: INNER_PRODUCT
   bottom: "pool5"
   top: "fc6"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -280,9 +280,9 @@ layers {
   bottom: "fc6"
   top: "fc7"
   # Note that blobs_lr can be set to 0 to disable any fine-tuning of this, and any other, layer
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -335,13 +335,13 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_REBALANCED_LOSS
   bottom: "fc8_inadcl"
   bottom: "label"
 }
 layers {
   name: "accuracy"
-  type: ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "fc8_inadcl"
   bottom: "label"
   top: "accuracy"

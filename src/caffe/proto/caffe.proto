@@ -63,7 +63,7 @@ message NetParameter {
 // NOTE
 // Update the next available ID when you add a new SolverParameter field.
 //
-// SolverParameter next available ID: 33 (last added: test_initialization)
+// SolverParameter next available ID: 35 (last added: test_initialization)
 message SolverParameter {
   //////////////////////////////////////////////////////////////////////////////
   // Specifying the train and test networks
@@ -247,18 +247,18 @@ message LayerParameter {
     INNER_PRODUCT = 14;
     LRN = 15;
     MEMORY_DATA = 29;
-    SOFTMAX_REBALANCED_LOSS = 16;
+    MULTINOMIAL_LOGISTIC_LOSS = 16;
     MVN = 34;
-    PER_CLASS_ACCURACY = 26;
+    PER_CLASS_ACCURACY = 38;
     POOLING = 17;
-    POWER = 38;
+    POWER = 26;
     RELU = 18;
     SIGMOID = 19;
     SIGMOID_CROSS_ENTROPY_LOSS = 27;
     SILENCE = 36;
     SOFTMAX = 20;
     SOFTMAX_LOSS = 21;
-    MULTINOMIAL_LOGISTIC_LOSS = 39;
+    SOFTMAX_REBALANCED_LOSS = 39;
     SPLIT = 22;
     SLICE = 33;
     TANH = 23;
@@ -642,16 +642,6 @@ message SliceParameter {
 
 // Message that stores parameters used by SoftmaxLayer, SoftMaxWithLossLayer
 message SoftmaxParameter {
-  enum Engine {
-    DEFAULT = 0;
-    CAFFE = 1;
-    CUDNN = 2;
-  }
-  optional Engine engine = 1 [default = DEFAULT];
-}
-
-// Message that stores parameters used by SoftmaxLayer, SoftMaxWithLossLayer
-message SoftmaxRebalancedParameter {
   enum Engine {
     DEFAULT = 0;
     CAFFE = 1;

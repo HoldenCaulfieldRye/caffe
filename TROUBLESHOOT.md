@@ -3,7 +3,7 @@ TROUBLESHOOT
 ============
 
 switch from data2/ to data/:
-find {task,scripts,data} -type f \( -iname \*.py -o -iname \*.sh -o -iname \*.prototxt -o -iname \*.txt\) | xargs -i sed -i 's/\/data2\//\/data\//g' {}
+find {task,scripts,data} -type f \( -iname \*.py -o -iname \*.sh -o -iname \*.prototxt -o -iname \*.txt \) | xargs -i sed -i 's/\/data2\//\/data\//g' {}
 
 gradient checker: look inside caffe/test/
 
@@ -770,59 +770,3 @@ ANALYSE OLD class imbalance
 
 ======
 
-
-Next:
-
--> prepare all class imbalance prototxts
--> run them
-
--> transfer 
--> ANALYSE transfer learning TODOs
-
-- break -
-
--> check what has finished training
--> save solverstates in directories!
--> update TRAIN statuses
--> ANALYSE class imbalance TODOs
-
-
-====
-
-Ok, just realised even CI98 doesn't get bad min
-- but maybe that's thanks to tl, no reinit, large batch, small lr
-
-new path:
-- examine impact of class imbalance
-  -> different imbalance rates with nest arch until now
-     -> batchsize 128
-     -> lr 0.0001
-  
-- cure class imbalance:
-     
-  
-=====
-
-SHORT TERM
-
--> figure out which clampdet/none iter is best
--> delete the others
--> is best iter as alternative transfer model
-   -> soil_contam/none
-   -> soil_contam/noneC  # means transfer from clampdet task
-
--> get evidence for sbl intuition
-   -> clampdetCI98/none_bs256_lr4 (already trained?)
-   -> clampdetCI98/none_bs256_lr4_sbl (multi snapshots cos dunno
-      when to early stop cos inadequate val err)
-   -> run_classifier to see whether perf on positives better
-
--> benchmark SBL:
-   -> run_classifier threshold that maximises pca
-   -> under sampling:
-      need to remove min class to get target imbalance
-      and then under smaple to get target bad min
-
--> contam poolless      
-   that's for another time
-   

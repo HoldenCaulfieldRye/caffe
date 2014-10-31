@@ -80,9 +80,11 @@ class AccuracyLayer : public Layer<Dtype> {
       if (propagate_down[i]) { NOT_IMPLEMENTED; }
     }
   }
+
   int top_k_;
 };
 
+  
 template <typename Dtype>
 class PerClassAccuracyLayer: public Layer<Dtype> {
  public:
@@ -872,8 +874,8 @@ class SoftmaxWithRebalancedLossLayer : public LossLayer<Dtype> {
  private:
   Dtype* _prior;
 };
-
   
+
 }  // namespace caffe
 
 #endif  // CAFFE_LOSS_LAYERS_HPP_

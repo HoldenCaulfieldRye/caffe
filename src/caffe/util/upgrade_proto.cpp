@@ -4,7 +4,6 @@
 
 #include <map>
 #include <string>
-#include <iostream>
 
 #include "caffe/common.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -453,7 +452,6 @@ bool UpgradeLayerParameter(const LayerParameter& v0_layer_connection,
 }
 
 LayerParameter_LayerType UpgradeV0LayerType(const string& type) {
-   std::cout << "hello hello thisis upgrade_proto::UpgradeV0LayerType()" << std::endl << std::endl;
   if (type == "accuracy") {
     return LayerParameter_LayerType_ACCURACY;
   } else if (type == "bnll") {
@@ -626,7 +624,6 @@ void UpgradeNetAsNeeded(const string& param_file, NetParameter* param) {
 
 void ReadNetParamsFromTextFileOrDie(const string& param_file,
                                     NetParameter* param) {
-  std::cout << "upgrade_proto.cpp::ReadNetParamsFromTextFileOrDie: "  << std::endl << std::endl ;  
   CHECK(ReadProtoFromTextFile(param_file, param))
       << "Failed to parse NetParameter file: " << param_file;
   UpgradeNetAsNeeded(param_file, param);

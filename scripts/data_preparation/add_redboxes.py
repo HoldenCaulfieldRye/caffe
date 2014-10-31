@@ -12,7 +12,7 @@ import setup
 def bring_redbox_positives(task, flag, add_num, imbalance_multiple):
   here = os.getcwd()
   os.chdir('/data/ad6813/caffe/data/'+task)
-  cmd = "find /data/ad6813/pipe-data/Redbox/raw_data/dump/ -name '*.dat' | tail -"+str(add_num*imbalance_multiple)+" | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
+  cmd = "find /data/ad6813/pipe-data/Redbox/ -name '*.dat' | tail -"+str(add_num*imbalance_multiple)+" | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
   # print cmd
   p = subprocess.Popen(cmd, shell=True)
   p.wait()
@@ -57,7 +57,7 @@ def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, f
     random.shuffle(notperf)
     print "Gathering completed."
 
-  print "Adding %i of them to %s"%(add_num,fn_train)
+  print "Adding %i negatives to %s"%(add_num,fn_train)
   newcomers, notperf_left = notperf[:add_num], notperf[add_num:]
   pickle.dump(notperf_left, open(pickle_fname,'w'))
   print "%s updated"%(pickle_fname)
@@ -136,7 +136,7 @@ if __name__ == '__main__':
   avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
   using_pickle = False
   pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-  data_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump/'
+  data_dir = '/data/ad6813/pipe-data/Redbox/'
   fn_train = '/data/ad6813/caffe/data/scrape/train.txt'
   imbalance_multiple = 10
   
@@ -145,7 +145,7 @@ if __name__ == '__main__':
   bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, fn_train, using_pickle)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
-  print 'bringing in redbox positives...'  
+  print 'bringing in %i redbox positives...'%(add_num)
   bring_redbox_positives(task, flag, add_num, imbalance_multiple)
 
 
