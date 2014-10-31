@@ -139,8 +139,10 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
 
     //rebalance gradient by label prior
     for (int j = 0; j < dim; ++j) {
-      for (int i = 0; i < num; ++i)
-    	bottom_diff[i * dim + j] /= (static_cast<float>(prior[static_cast<int>(label[i])])*dim);
+      for (int i = 0; i < num; ++i) {
+	if (prior[static_cast<int>(label[i])] > 0)
+	  bottom_diff[i * dim + j] /= (static_cast<float>(prior[static_cast<int>(label[i])])*dim);
+      }
     }
         
     // std::cout << "params after rebalance:" << std::endl;
