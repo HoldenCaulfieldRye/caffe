@@ -54,11 +54,8 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
 
   float prior[dim];
   std::fill_n(prior, dim, 0);
-  for (int i = 0; i < num; ++i) {
-    for (int j = 0; j < spatial_dim; j++) {
-      prior[static_cast<int>(label[i*spatial_dim+j])] += 1.0 / num;
-    }
-  }
+  for (int i = 0; i < num; ++i)
+      prior[static_cast<int>(label[i])] += 1.0 / num;
 
   std::cout << "batch priors: " ;
   for (int i = 0; i < dim; ++i)
@@ -81,20 +78,28 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
     }
   }
   std::cout << std::endl << std::endl;
-  
+
   for (int i = 0; i < num; ++i) {
-    for (int j = 0; j < spatial_dim; j++) {
-      img_loss = log(std::max(prob_data[i * dim +
-          static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j],
-			      Dtype(FLT_MIN)));
+    img_loss = log(max(prob_data[i * dim + static_cast<int>(label[i])],
+		       Dtype(FLT_MIN)))
+      / (dim*num*prior[static_cast<int>(label[i])]);
+    loss -= img_loss; 
+    // std::cout << loss << ", ";
+  }  
+  
+  // for (int i = 0; i < num; ++i) {
+  //   for (int j = 0; j < spatial_dim; j++) {
+  //     img_loss = log(std::max(prob_data[i * dim +
+  //         static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j],
+  // 			      Dtype(FLT_MIN)));
 
-      // std::cout << "img " << i << " has label " << static_cast<int>(label[i * spatial_dim + j]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j] << " so loss for it is " << img_loss;
+  //     // std::cout << "img " << i << " has label " << static_cast<int>(label[i * spatial_dim + j]) << " and predicted prob for it is " << prob_data[i * dim + static_cast<int>(label[i * spatial_dim + j]) * spatial_dim + j] << " so loss for it is " << img_loss;
 
-      // img_loss /= dim * prior[];
+  //     // img_loss /= dim * prior[];
       
-      loss -= img_loss;
-    }
-  }
+  //     loss -= img_loss;
+  //   }
+  // }
   
   // for (int i = 0; i < num; ++i) {
   // // std::cout << "loss: ";
