@@ -133,10 +133,10 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype
     std::cout << std::endl << std::endl;
 
 
-    for (int j = 0; j < dim; ++j) {
-      for (int i = 0; i < num; ++i)
-	bottom_diff[i * dim + j] /= (static_cast<float>(prior[static_cast<int>(label[i])])*dim);
-    }
+    // for (int j = 0; j < dim; ++j) {
+    //   for (int i = 0; i < num; ++i)
+    // 	bottom_diff[i * dim + j] /= (static_cast<float>(prior[static_cast<int>(label[i])])*dim);
+    // }
 
     for (int i = 0; i < num; ++i) {
       for (int j = 0; j < spatial_dim; ++j) {
