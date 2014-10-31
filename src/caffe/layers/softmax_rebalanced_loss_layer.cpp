@@ -71,7 +71,7 @@ void SoftmaxWithRebalancedLossLayer<Dtype>::Forward_cpu(
   for (int i = 0; i < count; ++i) {
     std::cout << prob_data[i] << " ";
     if (i % 2 == 1)
-      std::cout << std::endl;
+      std::cout << std::endl; 
   }
   std::cout << std::endl << std::endl;
 
