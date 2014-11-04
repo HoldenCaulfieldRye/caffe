@@ -12,7 +12,7 @@ import setup
 def bring_redbox_positives(task, flag, add_num, imbalance_multiple):
   here = os.getcwd()
   os.chdir('/data/ad6813/caffe/data/'+task)
-  cmd = "find /data/ad6813/pipe-data/Redbox/ -name '*.dat' | tail -"+str(add_num*imbalance_multiple)+" | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
+  cmd = "find /data/ad6813/pipe-data/Redbox/ -name '*.dat' | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
   # print cmd
   p = subprocess.Popen(cmd, shell=True)
   p.wait()
