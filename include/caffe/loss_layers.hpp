@@ -814,7 +814,7 @@ class SoftmaxWithRebalancedLossLayer : public LossLayer<Dtype> {
       vector<Blob<Dtype>*>* top);
 
   virtual inline LayerParameter_LayerType type() const {
-    return LayerParameter_LayerType_MULTINOMIAL_LOGISTIC_LOSS;
+    return LayerParameter_LayerType_SOFTMAX_REBALANCED_LOSS;
   }
   virtual inline int ExactNumBottomBlobs() const { return -1; }
   virtual inline int MinBottomBlobs() const { return 2; }
