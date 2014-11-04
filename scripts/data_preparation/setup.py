@@ -229,8 +229,8 @@ def print_help():
   print '''Usage eg: 
   ./setup.py --task=scrape --box=blue --learn=6-14 --u-sample=0.9 [--b-imbal=0.5]'''
   if os.path.exists('/homes/ad6813'):
-    # print 'flags:', open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
-    lines = open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
+    # print 'flags:', open('/homes/ad6813/data2/flag_lookup.txt','r').readlines()
+    lines = open('/homes/ad6813/data2/flag_lookup.txt','r').readlines()
     lines = [line.strip() for line in lines]
     for line in lines:
       print line
@@ -249,11 +249,11 @@ if __name__ == '__main__':
   if not "task" in optDict:
     raise Exception("Need to specify --task flag")
   task = optDict["task"]
-  data_info = "/data/ad6813/caffe/data/" + task
+  data_info = "/data2/ad6813/caffe/data/" + task
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
-  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box"
+  data_dir = "/data2/ad6813/pipe-data/" + optDict["box"].capitalize() + "box"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
@@ -266,7 +266,7 @@ if __name__ == '__main__':
   # save entire command
   if not os.path.isdir(data_info): os.mkdir(data_info)
   date = '_'.join(str(datetime.datetime.now()).split('.')[0].split())
-  with open('../../data/'+task+'/setup_history_'+date+'.txt', 'w') as read_file:
+  with open('../../data2/'+task+'/setup_history_'+date+'.txt', 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
@@ -283,8 +283,8 @@ if __name__ == '__main__':
 >>>>>>> f347f19e74d0615c4cd0c8346691099a7fcb4325
     using_pickle = False
     pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-    redbox_dir = '/data/ad6813/pipe-data/Redbox/'
-    fn_train = '/data/ad6813/caffe/data/'+task+'/train.txt'
+    redbox_dir = '/data2/ad6813/pipe-data/Redbox/'
+    fn_train = '/data2/ad6813/caffe/data/'+task+'/train.txt'
 
     # How many redboxes to add:
     # add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class)

@@ -22,7 +22,7 @@ NEXT:
 	 -> imbalance: max redbox st 50% class, 70% blur
 	 -> maybe inadcl semantically hard though
       -> improve:
-         -> imbalance: 68% class, 50% blur
+         -> imbalance: 68% class, 50% blur, graphic06
 
    -> water 09
       -> 0 trainerr in 20 iter, maybe 0.6 PCA but looks like noise
@@ -32,6 +32,8 @@ NEXT:
       -> improve:
          -> max redbox 78% class imbalance
 	 -> fc7 then fc6?
+      -> improve: NOT low risk
+	
 
 2. rebalanced gradient
    -> finetune from original
