@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "/data/ad6813/caffe/data/clamp/clampVal.txt"
-    batch_size: 101
+    batch_size: 8
     new_height: 256
     new_width: 256
   }
@@ -335,7 +335,7 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_REBALANCED_LOSS
+  type: SOFTMAX_LOSS
   bottom: "fc8_clamp"
   bottom: "label"
 }
