@@ -25,6 +25,8 @@ NEXT:
       -> improve:
          -> max redbox 78% class imbalance
 	 -> fc7 then fc6?
+      -> improve: NOT low risk
+	
 
 2. rebalanced gradient
    -> 

@@ -1,6 +1,6 @@
 import os,sys
 
-# usage: python check.py data-dir=../../data/? data-info=../../data_info/?
+# usage: python check.py data-dir=../../data2/? data-info=../../data_info/?
 
 def check(data_dir, data_info):
   os.chdir(data_dir)

@@ -3,7 +3,7 @@
 if [ "$#" -lt 2 ]
 then
     echo "Usage:"
-    echo "./imbalances.sh ../../data/clamp/train.txt ../../task/clamp/none/train_output.log"
+    echo "./imbalances.sh ../../data2/clamp/train.txt ../../task/clamp/none/train_output.log"
     exit
 fi
 

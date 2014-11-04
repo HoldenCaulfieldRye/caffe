@@ -4,13 +4,13 @@ set -e
 
 
 # set variables below in order
-# to create caffe/data/$BASE_NAME
+# to create caffe/data2/$BASE_NAME
 #           caffe/data_info/$BASE_NAME
 #           caffe/models/$FULL_NAME
 
 # BASE and FULL name in case 2 models share same data & labels
 
-CAFFE=/data/ad6813/caffe
+CAFFE=/data2/ad6813/caffe
 BASE_NAME=$1
 NUM_OUTPUT=${2:-2}
 FULL_NAME=${3:-$BASE_NAME}
