@@ -12,5 +12,5 @@ max_iter: 3000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 5000
-snapshot_prefix: "task/clamp/conv1"
+snapshot_prefix: "task/clamp/conv1/"
 solver_mode: GPU
