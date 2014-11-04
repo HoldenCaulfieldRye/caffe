@@ -1,6 +1,9 @@
 NEXT:
-
+   -> inadcl
+      -> takes 600 iters to get off the ground!!
+      
    UPDATE flag_kookup.txt BECAUSE UNSUITABLE PHOTO MISSING!
+   
    -> then train with new additional data and rebalanced grad
 
    -> misal
@@ -8,7 +11,9 @@ NEXT:
       -> try again:
          -> fc7 only
 	 -> last time only 4 pos in val! make 15
-	 -> imbalance: max redbox st 80% class, 50% blur	 
+	 -> imbalance: max redbox st 80% class, 50% blur
+      -> try again:
+         -> 70% class imb
 	 
    -> inadcl 06
       -> 0 trainerr in 20 iter, 0.5 PCA, total imbalance stuck
@@ -16,6 +21,8 @@ NEXT:
          -> fc7 only
 	 -> imbalance: max redbox st 50% class, 70% blur
 	 -> maybe inadcl semantically hard though
+      -> improve:
+         -> imbalance: 68% class, 50% blur
 
    -> water 09
       -> 0 trainerr in 20 iter, maybe 0.6 PCA but looks like noise
@@ -29,6 +36,7 @@ NEXT:
 	
 
 2. rebalanced gradient
+   -> finetune from original
    -> 
 
 3. data augmentation: rotations
