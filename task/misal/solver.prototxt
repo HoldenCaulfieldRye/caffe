@@ -1,17 +1,15 @@
-net: "task/misal/train_val.prototxt"
+net: "task/inadcl/train_val.prototxt"
 test_iter: 1
-test_interval: 5
+test_interval: 30
 test_compute_loss: 1
-# lr for fine-tuning should be lower than when starting from scratch
-base_lr: 0.0001
+base_lr: 0.00001
 lr_policy: "step"
 gamma: 0.1
-# stepsize should also be lower, as we're closer to being done
 stepsize: 10000
 display: 1
-max_iter: 30000
+max_iter: 20000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 5000
-snapshot_prefix: "task/misal/"
+snapshot: 4000
+snapshot_prefix: "task/inadcl/fc7_rb/"
 solver_mode: GPU
