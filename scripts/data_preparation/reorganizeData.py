@@ -1,14 +1,14 @@
-import sys
-import os
-import shutil
+#!/usr/bin/env python
+import sys, os, glob, shutil
 from os.path import join as oj
 
-# expected input: python reorganizeData.py ../../../pipe-data/Bluebox
+# expected input: ./reorganizeData.py ../../../pipe-data/Bluebox
 
 def reorganize(baseDir):
+  print 'reorganising dirs'
   dirs = filter(lambda x: x.isdigit(), os.listdir(baseDir))
   print len(dirs), "joints found"
-  tdr = baseDir + ""
+  tdr = baseDir 
   if not os.path.exists(tdr):
     os.makedirs(tdr)
   for dr in dirs:
@@ -30,11 +30,14 @@ def getUnsuitableFlags(tdr, name):
 
 if __name__ == "__main__":
   baseDir = sys.argv[1]
-  tdr = baseDir + ""
-  if os.path.isdir(tdr):
-    jpgs = filter(lambda x: "jpg" in x, os.listdir(tdr))
-    for jpg in jpgs:
-      name = jpg.split(".")[0]
-      getUnsuitableFlags(tdr, name)
-  else: reorganize(baseDir)
+  tdr = os.path.abspath(baseDir)
+  print 'checking whether any joint dirs left...'
+  if any([os.path.isdir(oj(tdr,fd)) for fd in os.listdir(tdr)]):
+    print 'found some; reorganizing them'
+    reorganize(tdr)
+  print 'no more joint dirs left'
+  jpgs = filter(lambda x: "jpg" in x, os.listdir(tdr))
+  for jpg in jpgs:
+    name = jpg.split(".")[0]
+    getUnsuitableFlags(tdr, name)
 

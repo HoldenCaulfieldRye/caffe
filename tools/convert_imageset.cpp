@@ -136,8 +136,8 @@ int main(int argc, char** argv) {
       data_size_initialized = true;
     } else {
       const string& data = datum.data();
-      CHECK_EQ(data.size(), data_size) << "Incorrect data field size "
-          << data.size();
+      //CHECK_EQ(data.size(), data_size) << "Incorrect data field size "
+      //    << data.size();
     }
     // sequential
     snprintf(key_cstr, kMaxKeyLength, "%08d_%s", line_id,
