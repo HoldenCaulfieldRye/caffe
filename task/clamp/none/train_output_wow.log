@@ -7127,3 +7127,7 @@ I1104 13:05:04.962836 15255 solver.cpp:191] Iteration 1587, loss = 0.0875091
 I1104 13:05:04.962869 15255 solver.cpp:403] Iteration 1587, lr = 0.0001
 I1104 13:05:06.270364 15255 solver.cpp:191] Iteration 1588, loss = 0.151954
 I1104 13:05:06.270395 15255 solver.cpp:403] Iteration 1588, lr = 0.0001
+Redbox positives: 0
+Redbox negatives: 0
+Bluebox positives: 3173
+Bluebox negatives: 20322
