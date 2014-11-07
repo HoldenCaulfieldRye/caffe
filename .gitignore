@@ -16,9 +16,11 @@
 *.a
 
 # Compiled protocol buffers
-*.pb.h
-*.pb.cc
-*_pb2.py
+# actually lets try keeping them
+# actually you can't, it's saved under .build_release
+#*.pb.h
+#*.pb.cc
+#*_pb2.py
 
 # Compiled python
 *.pyc
@@ -43,6 +45,9 @@ python/caffe/proto/
 .ipynb_checkpoints
 
 ## Caffe
+
+# in case accident
+pipe-data
 
 # Heavy python objects
 *.npy

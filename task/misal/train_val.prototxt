@@ -1,12 +1,12 @@
-name: "ClampCaffeNet"
+name: "MisalCaffeNet"
 layers {
   name: "data"
   type: IMAGE_DATA
   top: "data"
   top: "label"
   image_data_param {
-    source: "/data/ad6813/caffe/data/clamp/clampTrain.txt"
-    batch_size: 32
+    source: "data/misal/train.txt"
+    batch_size: 128
     new_height: 256
     new_width: 256
   }
@@ -23,8 +23,8 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "/data/ad6813/caffe/data/clamp/clampVal.txt"
-    batch_size: 8
+    source: "data/misal/val.txt"
+    batch_size: 50
     new_height: 256
     new_width: 256
   }
@@ -40,9 +40,9 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -91,9 +91,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -143,9 +143,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -172,9 +172,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -202,9 +202,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -243,9 +243,9 @@ layers {
   type: INNER_PRODUCT
   bottom: "pool5"
   top: "fc6"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -280,9 +280,9 @@ layers {
   bottom: "fc6"
   top: "fc7"
   # Note that blobs_lr can be set to 0 to disable any fine-tuning of this, and any other, layer
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -312,10 +312,10 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8_misal"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_clamp"
+  top: "fc8_misal"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -336,13 +336,13 @@ layers {
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc8_clamp"
+  bottom: "fc8_misal"
   bottom: "label"
 }
 layers {
   name: "accuracy"
   type: PER_CLASS_ACCURACY
-  bottom: "fc8_clamp"
+  bottom: "fc8_misal"
   bottom: "label"
   top: "accuracy"
   include: { phase: TEST }
