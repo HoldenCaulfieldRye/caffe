@@ -6,7 +6,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/scrape_devC/train.txt"
-    batch_size: 32
+    batch_size: 128
     new_height: 256
     new_width: 256
   }
