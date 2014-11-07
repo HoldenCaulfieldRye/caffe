@@ -5,7 +5,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/clamp/train.txt"
+    source: "data/scrape_devC/train.txt"
     batch_size: 32
     new_height: 256
     new_width: 256
@@ -23,7 +23,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/clamp/val.txt"
+    source: "data/scrape_devC/val.txt"
     batch_size: 8
     new_height: 256
     new_width: 256
