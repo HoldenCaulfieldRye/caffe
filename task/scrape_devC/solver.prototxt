@@ -1,5 +1,6 @@
 net: "task/scrape/train_val.prototxt"
-test_iter: 247
+test_iter: 5
+# 247
 test_interval: 50
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
