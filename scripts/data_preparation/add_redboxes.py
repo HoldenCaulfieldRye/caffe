@@ -10,15 +10,24 @@ import setup
 # NOT RANDOM! USING TAIL
 # imbalance_multiple is more than by how much maj class is bigger than min class in redbox. it's a heuristic to speed up computation
 def bring_redbox_positives(task, flag, add_num, imbalance_multiple):
-  here = os.getcwd()
-  os.chdir('/data/ad6813/caffe/data/'+task)
-  cmd = "find /data/ad6813/pipe-data/Redbox/ -name '*.dat' | xargs -i grep -l '"+flag+"' {} | tail -"+str(add_num)+" | cut -d'.' -f 1 | xargs -i echo '{}.jpg 1' >> train.txt"
-  # print cmd
-  p = subprocess.Popen(cmd, shell=True)
-  p.wait()
-  shuffle_file('train.txt')
-  os.chdir(here)
+  added = []
+  for fl in random.shuffle(os.listdir("/data/ad6813/pipe-data/Redbox")):
+    pres = False
+    with open(fl, 'r') as f:
+      for line in f:
+        if line.strip() in flag:
+          pres = True
+          break
+    if pres:
+      added.append(fl)
+      if len(added) >= add_num:
+        break
 
+  with open("train.txt", 'a') as f:
+    for fl in added:
+      f.write("\n/data/ad6813/pipe-data/Redbox/" + fl + " 1")
+
+  shuffle_file('train.txt')
 
 def shuffle_file(fname):
   contents = open(fname, 'r').readlines()
