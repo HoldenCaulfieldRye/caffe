@@ -341,7 +341,7 @@ layers {
 }
 layers {
   name: "accuracy"
-  type: ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "fc8_scrape"
   bottom: "label"
   top: "accuracy"
