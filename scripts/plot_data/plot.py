@@ -12,7 +12,7 @@ import subprocess
 
 
 def matplot(model_dir, Ys, start, end):  
-  plt.ylim([0,2])
+  plt.ylim([0,1.3])
   x = np.array(range(start,end))
   plt.xlabel('Iters')
   for key in Ys.keys():
@@ -29,7 +29,7 @@ def already_parsed(model_dir):
   fnames = []
   listdir = os.listdir(model_dir)
   for fname in listdir:
-    if 'train_output' in fname and fname.endswith('.log'):
+    if 'train' in fname and fname.endswith('.log'):
       fnames.append(oj(model_dir,fname))
   if len(fnames) == 0:
     print "ERROR: no file containing 'train_output' and ending in '.log' found in", model_dir

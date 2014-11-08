@@ -1,4 +1,4 @@
-net: "task/scrape/train_val.prototxt"
+net: "task/scrape_devC/train_val.prototxt"
 test_iter: 247
 test_interval: 50
 test_compute_loss: 1
@@ -13,5 +13,5 @@ max_iter: 1200
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 200
-snapshot_prefix: "task/scrape/"
+snapshot_prefix: "task/scrape_devC/"
 solver_mode: GPU

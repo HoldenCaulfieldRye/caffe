@@ -1,1 +1,1 @@
-#Iters Seconds     TestLoss   Acc_0    Acc_1     PCAcc   Accuracy 
+#Iters      Seconds     ValLoss   ValAcc_0  ValAcc_1  ValPCAcc  ValAcc 
