@@ -1,0 +1,1 @@
+./setup.py --task=scrape_o --box=blue --learn=6 --u-sample=0.90 --o-sample=0.55 --b-imbal=0.5
