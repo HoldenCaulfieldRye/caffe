@@ -1,4 +1,4 @@
-net: "task/scrape_o/train_val.prototxt"
+net: "task/scrape_o/train_val2.prototxt"
 test_iter: 12
 test_interval: 10
 test_compute_loss: 1
