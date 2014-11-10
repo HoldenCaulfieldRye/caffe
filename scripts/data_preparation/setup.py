@@ -278,15 +278,14 @@ if __name__ == '__main__':
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
-  num_pos, num_neg = main(data_dir, data_info, task, pos_class, u_bad_min)
-
-  fn_train = data_info+'/train.txt'
+  main(data_dir, data_info, task, pos_class, u_bad_min)
 
   # GENERALISE THIS
   if 'b-imbal' in optDict:
     b_imbal = float(optDict["b-imbal"])
     avoid_flags = [] # dont need cos Raz moved away unsuitables?
     redbox_dir = '/data/ad6813/pipe-data/Redbox'
+    fn_train = data_info+'/train.txt'
 
     # How many redboxes to add:
     # add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class)
@@ -299,7 +298,6 @@ if __name__ == '__main__':
       raise Exception(message)
 
     num_pos, num_neg = add_redboxes(u_bad_min, b_imbal, pos_class, task,avoid_flags, redbox_dir, fn_train)
-    
 
   # oversampling
   if "o-sample" in optDict:
@@ -310,9 +308,4 @@ if __name__ == '__main__':
   # setup task/etc
   p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
   p.wait()
-
-
-
-
-
 
