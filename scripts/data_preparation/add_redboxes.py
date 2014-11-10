@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os, random, shutil
 from os.path import join as oj
-import cPickle as pickle
 import subprocess, random
 import setup
 
@@ -9,67 +8,68 @@ import setup
 # why separate from bring in negatives?
 # NOT RANDOM! USING TAIL
 # imbalance_multiple is more than by how much maj class is bigger than min class in redbox. it's a heuristic to speed up computation
-def bring_redbox_positives(task, flag, add_num, imbalance_multiple):
+def bring_redbox_positives(task, flags, add_num, redbox_dir, fn_train):
   added = []
-  for fl in random.shuffle(os.listdir("/data/ad6813/pipe-data/Redbox")):
-    pres = False
-    with open(fl, 'r') as f:
-      for line in f:
-        if line.strip() in flag:
-          pres = True
+  listdir = os.listdir(redbox_dir)
+  random.shuffle(listdir)
+  for fl in listdir:
+    if fl.endswith('.dat'):
+      pres = False
+      with open(oj(redbox_dir,fl), 'r') as f:
+        for line in f:
+          if line.strip() in flags:
+            pres = True
+            break
+      if pres:
+        added.append(fl)
+        if len(added) >= add_num:
           break
-    if pres:
-      added.append(fl)
-      if len(added) >= add_num:
-        break
 
-  with open("train.txt", 'a') as f:
+  with open(fn_train, 'a') as f:
     for fl in added:
-      f.write("\n/data/ad6813/pipe-data/Redbox/" + fl + " 1")
-
-  shuffle_file('train.txt')
+      fl = fl.replace('dat','jpg')
+      f.write("\n"+oj(redbox_dir,fl)+ " 1")
+  
 
 def shuffle_file(fname):
+  num_pos, num_neg = 0, 0
   contents = open(fname, 'r').readlines()
+  for line in contents:
+    if line.endswith('1\n'): num_pos += 1
+    elif line.endswith('0\n'): num_neg += 1
   random.shuffle(contents)
   open(fname, 'w').writelines(contents)
+  # print "there are now %i positives"
+  return num_pos, num_neg
 
  
 # integrate bring in positives into this? 
-def bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, fn_train, using_pickle):
+def bring_redbox_negatives(task, avoid_flags, add_num, data_dir, fn_train):
   neg_classification = ' 0' # see dump_to_files [('Default',0),(task,1)]
-  if os.path.isfile(oj(os.getcwd(),'redbox_vacant_'+task+'_negatives.pickle')) and using_pickle:
-    print "Found pickle dump of vacant, non-perfect Redbox images without %s flag. Using it."%(task)
-    notperf = pickle.load(open(pickle_fname,'r'))
+  notperf, total = [], []
+  for fname in os.listdir(data_dir):
+    if fname.endswith('.dat'):
+      total.append(fname)
 
-  else:
-    notperf, total = [], []
-    for fname in os.listdir(data_dir):
-      if fname.endswith('.dat'):
-        total.append(fname)
+  print "Gathering vacant Redbox images without %s's flags..."%(task)
+  count = 0
+  with open(fn_train,'r') as f_already:
+    c_already = f_already.readlines()
+    c_already = [line.split(' ')[0] for line in c_already]
+    for i in range(len(total)):
+      content = open(oj(data_dir,total[i]),'r').readlines()
+      content = [line.strip() for line in content]
+      if all([len([flag for flag in content if flag in avoid_flags])==0,
+              total[i] not in c_already]):
+        notperf.append(oj(data_dir,total[i][:-4])+'.jpg'+neg_classification+'\n')
+        count += 1
+        if count > add_num: break
 
-    print 'Gathering vacant, non-perfect Redbox images without %s flag...'%(task)
-    count = 0
-    with open(fn_train,'r') as f_already:
-      c_already = f_already.readlines()
-      c_already = [line.split(' ')[0] for line in c_already]
-      for i in range(len(total)):
-        content = open(oj(data_dir,total[i]),'r').readlines()
-        content = [line.strip() for line in content]
-        if all([len(content) > 0,
-                len([flag for flag in content if flag in avoid_flags])==0,
-                total[i] not in c_already]):
-          notperf.append(data_dir+total[i][:-4]+'.jpg'+neg_classification+'\n')
-          count += 1
-          if count > add_num: break
-
-    random.shuffle(notperf)
-    print "Gathering completed."
+  random.shuffle(notperf)
+  print "Gathering completed."
 
   print "Adding %i negatives to %s"%(add_num,fn_train)
   newcomers, notperf_left = notperf[:add_num], notperf[add_num:]
-  pickle.dump(notperf_left, open(pickle_fname,'w'))
-  print "%s updated"%(pickle_fname)
 
   with open(fn_train,'r') as f_train:
     c_train = f_train.readlines()
@@ -90,13 +90,18 @@ def blur_no_infogain(blue_c_imb, data_dir, task, pos_class):
   if red_c_imb >= blue_c_imb:
     # can't add all negatives
     num_pos = len(d_red[task])
-    print "red positives:", num_pos
     num_neg = num_pos * (blue_c_imb/float(1-blue_c_imb))
     # num_neg = num_pos * (len(d_blue['Default'])/len(d_blue[task]))
   else:
     # can't add all positives
+    k = ((1-blue_c_imb)/float(blue_c_imb))
+    print k
+    for key in d_red.keys():
+      try:
+        print len(d_red[key]), key
+      except: pass
     num_neg = len(d_red['Default'])
-    num_pos = num_neg * (1-blue_c_imb/blue_c_imb)
+    num_pos = num_neg * k
     # num_pos = num_neg * (len(d_blue[task])/len(d_blue['Default']))
   return int(num_pos), int(num_neg)
   
@@ -143,28 +148,16 @@ if __name__ == '__main__':
 
   task = 'scrape'
   avoid_flags = ['NoVisibleEvidenceOfScrapingOrPeeling','PhotoDoesNotShowEnoughOfScrapeZones']
-  using_pickle = False
-  pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
   data_dir = '/data/ad6813/pipe-data/Redbox/'
   fn_train = '/data/ad6813/caffe/data/scrape/train.txt'
   imbalance_multiple = 10
   
   add_num = 20000
 
-  bring_redbox_negatives(task, avoid_flags, add_num, pickle_fname, data_dir, fn_train, using_pickle)
+  bring_redbox_negatives(task, avoid_flags, add_num, data_dir, fn_train)
 
   flag = 'NoVisibleEvidenceOfScrapingOrPeeling'
-  print 'bringing in %i redbox positives...'%(add_num)
+  print "Adding %i positives to %s..."%(add_num,fn_train)
+  print task, flag, add_num, imbalance_multiple
   bring_redbox_positives(task, flag, add_num, imbalance_multiple)
-
-
-
-
-
-
-
-
-
-
-
 
