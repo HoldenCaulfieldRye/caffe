@@ -26,6 +26,4 @@ echo "shuffling train file..."
 sort -R $1 > tempf
 mv tempf $1
 
-# rm {full_copy, last_copy}
-
 

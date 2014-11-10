@@ -1,0 +1,1 @@
+./setup.py --task=scrape_blue --box=blue --learn=6 --u-sample=0.90 --o-sample=0.5
