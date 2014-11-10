@@ -147,7 +147,11 @@ if __name__ == '__main__':
     for key in train_fields:
       Ys[key] = train_dict[key]
     for key in test_fields:
-      Ys[key] = test_dict[key]
+      try:
+        Ys[key] = test_dict[key]
+      except:
+        print "WARNING: found no %s fields"%(key)
+        tr_te_fields.remove(key)
 
     # assert all time series same length
     keys = Ys.keys()
