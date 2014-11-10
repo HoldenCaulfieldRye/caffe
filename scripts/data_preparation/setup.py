@@ -14,14 +14,15 @@ import add_redboxes as ar
 
 # ./setup.py --task=unsuit --box=blue --learn=3-10-14
 
-def main(data_dir, data_info, task, pos_class,target_bad_min=None):
+def main(data_dir, data_info, task, pos_class, u_bad_min=None):
   ''' This is the master function. data_dir: where raw data is. data_info: where to store .txt files. '''
   Keep = get_label_dict_knowing(data_dir, task, pos_class)
-  if target_bad_min is not None:
-    Keep = rebalance(Keep, target_bad_min)
+  if u_bad_min is not None:
+    Keep = under_sample(Keep, u_bad_min)
   Keep = within_class_shuffle(Keep)
   print 'finished shuffling'
   dump_to_files(Keep, data_info, task, data_dir)
+  return len(Keep[task]), len(Keep['Default'])
 
 
 def get_label_dict_knowing(data_dir, task, pos_class):
@@ -30,7 +31,7 @@ def get_label_dict_knowing(data_dir, task, pos_class):
   task is the name of what we're learning to detect,
   pos_class is a list of the actual flag names to look for. '''
   d = {'Default': [], task: []}
-  print 'generating specific dict of class:files from %s...'%(data_dir)
+  print 'generating specific dict of class:files from %s with pos class %s...'%(data_dir,pos_class)
   for filename in os.listdir(data_dir):
     if not filename.endswith('.dat'): continue
     with open(oj(data_dir, filename)) as f:
@@ -43,29 +44,18 @@ def get_label_dict_knowing(data_dir, task, pos_class):
   return d
 
 
-# def classes_to_learn(lab_to_learn):
-#   classes = lab_to_learn.split(' ')
-#   Keep = {}
-#   print ''
-#   for elem in enumerate(sorted(All.keys())): print elem
-#   read_labels = [sorted(All.keys())[int(num)] for num in raw_input("\nNumbers of labels to learn, separated by ' ': ").split()]
-#   # if 'Perfect' in All.keys():
-#   #   Keep['Perfect'] = All['Perfect']
-#   for label in read_labels:
-#     Keep[label] = All[label]
-#   return Keep
 
 
-def rebalance(Keep, target_bad_min):
-  '''if target_bad_min not given, prompts user for one; 
+def under_sample(Keep, u_bad_min):
+  '''if u_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
   implemented either by downsizing all non-minority classes by the
   same factor in order to maintain their relative proportions, or 
   by downsizing as few majority classes as possible until
-  target_bad_min achieved. We can assume that we care mostly about 
+  u_bad_min achieved. We can assume that we care mostly about 
   having as few small classes as possible, so the latter is 
   implemented.'''
-  target_bad_min = float(target_bad_min)
+  u_bad_min = float(u_bad_min)
   # minc is class with minimum number of training cases
   ascending_classes = sorted([(key,len(Keep[key]))
                               for key in Keep.keys()],
@@ -76,21 +66,40 @@ def rebalance(Keep, target_bad_min):
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
   maxc_proportion = float(len_maxc)/total_num_images
-  print 'maxc_proportion: %.2f, target_bad_min: %.2f'%(maxc_proportion, target_bad_min)
-  if maxc_proportion > target_bad_min:
-    delete_size = int((len_maxc - (target_bad_min*total_num_images))/(1-target_bad_min))
+  print 'maxc_proportion: %.2f, u_bad_min: %.2f'%(maxc_proportion, u_bad_min)
+  if maxc_proportion > u_bad_min:
+    delete_size = int((len_maxc - (u_bad_min*total_num_images))/(1-u_bad_min))
     random.shuffle(Keep[maxc])
     print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
     del Keep[maxc][:delete_size]
-  elif maxc_proportion < target_bad_min:
+  elif maxc_proportion < u_bad_min:
     print 'woah, you want to INCREASE class imbalance!'
-    delete_size = int(total_num_images - (len_maxc/float(target_bad_min)))
+    delete_size = int(total_num_images - (len_maxc/float(u_bad_min)))
     random.shuffle(Keep[minc])
     print '%s has %i images so %i will be randomly removed'%(minc, len_minc, delete_size)
     del Keep[minc][:delete_size]
-  assert target_bad_min == round(float(len(Keep[maxc])) / (len(Keep[maxc])+len(Keep[minc])), 2)
+  assert u_bad_min == round(float(len(Keep[maxc])) / (len(Keep[maxc])+len(Keep[minc])), 2)
   for key in Keep.keys(): print key, len(Keep[key])
   return Keep
+
+
+def o_sample_how_many(num_pos, num_neg, o_bad_min):
+  o_bad_min = float(o_bad_min)
+  print 'o_bad_min, num_pos, num_neg', o_bad_min, num_pos, num_neg
+  full_copies = (1-o_bad_min)/o_bad_min
+  full_copies *= float(num_neg)
+  last_copy = int(full_copies) % int(num_pos)
+  full_copies /= float(num_pos)
+  # last_copy = (full_copies - int(full_copies)) * num_neg
+  full_copies, last_copy = int(full_copies)-1, int(last_copy)
+  print "oversample positives %i times plus %i extras"%(full_copies,last_copy)
+  return int(full_copies), last_copy
+
+
+def over_sample(fn_train, full_copies, last_copy):
+  cmd = "./over_sample.sh " + fn_train + " " + str(full_copies) + " " + str(last_copy)
+  p = subprocess.Popen(cmd, shell=True)
+  p.wait()
 
 
 def default_class(All, Keep):
@@ -196,7 +205,7 @@ def dump_to_files(Keep, data_info, task, data_dir):
     if os.path.isfile(oj(data_info,dump_fnames[i])):
       print "WARNING: overwriting", oj(data_info,dump_fnames[i])
     with open(oj(data_info,dump_fnames[i]),'w') as dfile:
-      dfile.writelines(["%s  %i\n" % (oj(data_dir,f),num)
+      dfile.writelines(["%s %i\n" % (oj(data_dir,f),num)
                         for (f,num) in dump[i]])
 
     
@@ -211,26 +220,25 @@ def flag_lookup(labels):
 
 
 def add_redboxes(target_bad_min, b_imbal, pos_class, task,
-                 avoid_flags, pickle_fname, redbox_dir,
-                 fn_train, using_pickle):
+                 avoid_flags, redbox_dir, fn_train):
   blue_c_imb = float(target_bad_min)
   # GOING FOR NO INFO GAIN!
   add_num_pos, add_num_neg = ar.blur_no_infogain(blue_c_imb, redbox_dir, task, pos_class)
-  ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, pickle_fname, redbox_dir, fn_train, using_pickle)
+  ar.bring_redbox_negatives(task, avoid_flags, add_num_neg, redbox_dir, fn_train)
 
   # NOT RANDOM! USING TAIL
   print 'bringing in %i redbox positives...'%(add_num_pos)
-  ar.bring_redbox_positives(task, flag, add_num_pos, 10)
-  
-
+  ar.bring_redbox_positives(task, pos_class, add_num_pos, redbox_dir, fn_train)
+  num_pos, num_neg = ar.shuffle_file(fn_train)
+  return num_pos, num_neg
 
 
 def print_help():
   print '''Usage eg: 
-  ./setup.py --task=scrape --box=blue --learn=6-14 --u-sample=0.9 [--b-imbal=0.5]'''
+  ./setup.py --task=scrape --box=blue --learn=6-14 --u-sample=0.90 --o-sample=0.55 --b-imbal=0.5'''
   if os.path.exists('/homes/ad6813'):
-    # print 'flags:', open('/homes/ad6813/data2/flag_lookup.txt','r').readlines()
-    lines = open('/homes/ad6813/data2/flag_lookup.txt','r').readlines()
+    # print 'flags:', open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
+    lines = open('/homes/ad6813/data/flag_lookup.txt','r').readlines()
     lines = [line.strip() for line in lines]
     for line in lines:
       print line
@@ -242,63 +250,61 @@ if __name__ == '__main__':
   if len(sys.argv) == 1:
     print_help()
   
-  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "u-sample=", "b-imbal="])
+  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["task=", "box=", "learn=", "u-sample=", "o-sample=", "b-imbal="])
   optDict = dict([(k[2:],v) for (k,v) in opts])
   print optDict
   
   if not "task" in optDict:
     raise Exception("Need to specify --task flag")
   task = optDict["task"]
-  data_info = "/data2/ad6813/caffe/data/" + task
+  data_info = os.path.abspath("../../data") +'/'+task
   
   if not "box" in optDict:
     raise Exception("Need to specify --box flag\nred, blue, redblue")
-  data_dir = "/data2/ad6813/pipe-data/" + optDict["box"].capitalize() + "box"
+  data_dir = "/data/ad6813/pipe-data/" + optDict["box"].capitalize() + "box"
   
   if not "learn" in optDict:
     raise Exception("Need to specify --learn flag\nlabNum1-labNum2-...-labNumk")
   pos_class = flag_lookup(optDict["learn"])
 
-  target_bad_min = None
+  u_bad_min = None
   if "u-sample" in optDict:
-    target_bad_min = float(optDict["u-sample"])
+    u_bad_min = float(optDict["u-sample"])
     
   # save entire command
-  if not os.path.isdir(data_info): os.mkdir(data_info)
+  if not os.path.isdir('../../data/'+task): os.mkdir('../../data/'+task)
   date = '_'.join(str(datetime.datetime.now()).split('.')[0].split())
-  with open('../../data2/'+task+'/setup_history_'+date+'.txt', 'w') as read_file:
+  with open(data_info+'/setup_history_'+date+'.txt', 'w') as read_file:
     read_file.write(" ".join(sys.argv)+'\n')
 
   # do your shit
-  main(data_dir, data_info, task, pos_class, target_bad_min)
+  main(data_dir, data_info, task, pos_class, u_bad_min)
 
   # GENERALISE THIS
   if 'b-imbal' in optDict:
     b_imbal = float(optDict["b-imbal"])
-    avoid_flags = ['UnsuitablePhoto']
-<<<<<<< HEAD
-    flag = 'JointMisaligned'
-=======
-    flag = 'InadequateOrIncorrectClamping'
->>>>>>> f347f19e74d0615c4cd0c8346691099a7fcb4325
-    using_pickle = False
-    pickle_fname = 'redbox_vacant_'+task+'_negatives.pickle'
-    redbox_dir = '/data2/ad6813/pipe-data/Redbox/'
-    fn_train = '/data2/ad6813/caffe/data/'+task+'/train.txt'
+    avoid_flags = [] # dont need cos Raz moved away unsuitables?
+    redbox_dir = '/data/ad6813/pipe-data/Redbox'
+    fn_train = data_info+'/train.txt'
 
     # How many redboxes to add:
     # add_num_pos, add_num_neg = ar.same_amount_as_bluebox(data_dir, task, pos_class)
-    if target_bad_min == None:
-      message = '''ERROR: no target_bad_min given to maintain  
+    if u_bad_min == None:
+      message = '''ERROR: no u_bad_min given to maintain  
       class imbalance after redbox additions. 
       If you don't want any undersampling and still want to add 
       redbox st imbalance unchanged, then yeah, you need to 
       implement that.'''
       raise Exception(message)
-    add_redboxes(target_bad_min, b_imbal, pos_class, task, 
-                 avoid_flags, pickle_fname, 
-                 redbox_dir, fn_train, using_pickle)
- 
+
+    num_pos, num_neg = add_redboxes(u_bad_min, b_imbal, pos_class, task,avoid_flags, redbox_dir, fn_train)
+
+  # oversampling
+  if "o-sample" in optDict:
+    o_bad_min = float(optDict["o-sample"])
+    full_copies, last_copy = o_sample_how_many(num_pos, num_neg, o_bad_min)
+    over_sample(fn_train, full_copies, last_copy)
+    
   # setup task/etc
   p = subprocess.Popen("./rest_setup.sh " + task, shell=True)
   p.wait()
