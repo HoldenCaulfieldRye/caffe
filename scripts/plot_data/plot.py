@@ -11,17 +11,23 @@ import subprocess
 # Usage: python plot.py path/to/model test-inter=.. [--start-iter=..] [--end-iter==..]
 
 
-def matplot(model_dir, Ys, start, end):  
-  plt.ylim([0,1.3])
+def matplot(model_dir, Ys, start, end):
+  col = {'TrainLoss': '0.5',
+         'ValLoss' : '#000066',
+         'ValAcc_0': '#00CC00',
+         'ValAcc_1': '#ff4d4d',
+         'ValPCAcc': 'k',
+         'ValAcc'  : 'y'}
+  plt.ylim([0,1.2])
   x = np.array(range(start,end))
   plt.xlabel('Iters')
   for key in Ys.keys():
     Ys[key] = np.array([np.float(el) for el in Ys[key][start:end]])
-    plt.plot(x, Ys[key], label=key)
+    plt.plot(x, Ys[key], label=key, color=col[key])
   plt.legend(loc='upper left',ncol=len(Ys)/2,prop={'size':10})
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(oj(model_dir,'plot_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
+  plt.savefig(oj(model_dir,'plot_'+model_dir.split('/')[-2]+'.png'))
   # plt.show()
 
   
@@ -89,8 +95,11 @@ def columns_to_dict(fname):
     
 def get_test_interval(ltfname):
   test = open(ltfname,'r').readlines()
-  return int(test[2].split()[0])
-  # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
+  train = open(ltfname.replace('test','train'),'r').readlines()
+  # print test[2].split()[0], train[2].split()[0]
+  test_interval = int(test[2].split()[0])/int(train[2].split()[0])
+  # print "test_interval:", test_interval
+  return test_interval
 
 
 def stretch_time_series(test_dict, test_interval):

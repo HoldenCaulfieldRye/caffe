@@ -1,6 +1,6 @@
 net: "task/scrape_o/train_val.prototxt"
 test_iter: 4
-test_interval: 10
+test_interval: 20
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
 base_lr: 0.00001
@@ -13,5 +13,5 @@ max_iter: 5000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 1000
-snapshot_prefix: "task/scrape/conv2_blue/"
+snapshot_prefix: "task/scrape_o/non_fullTrain/"
 solver_mode: GPU

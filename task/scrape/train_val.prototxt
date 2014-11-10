@@ -5,7 +5,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/scrape/train_balanced_blue.txt"
+    source: "data/scrape_o/train.txt"
     batch_size: 128
     new_height: 256
     new_width: 256
@@ -23,7 +23,7 @@ layers {
   top: "data"
   top: "label"
   image_data_param {
-    source: "data/scrape/val_blue.txt"
+    source: "data/scrape_o/val.txt"
     batch_size: 120
     new_height: 256
     new_width: 256

@@ -1,0 +1,1 @@
+./setup.py --task=water_high_o --box=blue --learn=16 --u-sample=0.90 --o-sample=0.55 --b-imbal=0.5
