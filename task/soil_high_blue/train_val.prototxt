@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/soil_high_blue/val.txt"
-    batch_size: 105
+    batch_size: 150
     new_height: 256
     new_width: 256
   }
