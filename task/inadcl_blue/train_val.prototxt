@@ -24,7 +24,7 @@ layers {
   top: "label"
   image_data_param {
     source: "data/scrape_blue/val.txt"
-    batch_size: 111
+    batch_size: 105
     new_height: 256
     new_width: 256
   }

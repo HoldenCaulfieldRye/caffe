@@ -1,6 +1,6 @@
 net: "task/inadcl_blue/train_val.prototxt"
 test_iter: 3
-test_interval: 20
+test_interval: 10
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
 base_lr: 0.0001
@@ -9,9 +9,9 @@ lr_policy: "fixed"
 # stepsize should also be lower, as we're closer to being done
 # stepsize: 1000
 display: 1
-max_iter: 8000
+max_iter: 100
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 1000
-snapshot_prefix: "task/inadcl_blue/none/"
+snapshot: 10
+snapshot_prefix: "task/inadcl_blue/none/fine"
 solver_mode: GPU
