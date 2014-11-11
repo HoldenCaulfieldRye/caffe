@@ -1,17 +1,18 @@
-net: "task/scrape_blue/train_val.prototxt"
-test_iter: 247
+net: "task/water_high_blue/train_val.prototxt"
+test_iter: 5
+# 247
 test_interval: 50
 test_compute_loss: 1
 # lr for fine-tuning should be lower than when starting from scratch
 base_lr: 0.0001
-lr_policy: "fixed"
-# gamma: 0.1
+lr_policy: "step"
+gamma: 0.1
 # stepsize should also be lower, as we're closer to being done
-# stepsize: 400
+stepsize: 400
 display: 1
-max_iter: 1000
+max_iter: 1200 
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 100
-snapshot_prefix: "task/scrape_blue/none/fine_"
+snapshot: 200
+snapshot_prefix: "task/water_high_blue/"
 solver_mode: GPU
